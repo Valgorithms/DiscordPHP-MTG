@@ -80,6 +80,22 @@ class SetRepository extends AbstractRepository
     }
 
     /**
+     * Counts the sets a search matches, ignoring `page` and `pageSize`.
+     *
+     * @param array $params The same filters as {@see getSets()}.
+     *
+     * @return PromiseInterface<int>
+     *
+     * @since 1.1.0
+     */
+    public function countSets(array $params = []): PromiseInterface
+    {
+        return $this->database->ready()->then(
+            fn () => (new SetQuery($this->database))->filter($params)->count()
+        );
+    }
+
+    /**
      * Loads every set into the repository.
      *
      * @param array $queryparams Unused.
@@ -113,6 +129,24 @@ class SetRepository extends AbstractRepository
         $code = strtoupper($set instanceof Set ? (string) $set->code : $set);
 
         return $this->database->ready()->then(fn () => (new Booster($this->database))->types($code));
+    }
+
+    /**
+     * How many preconstructed decks MTGJSON has for a set.
+     *
+     * @param Set|string $set A {@see Set} or a set code.
+     *
+     * @return PromiseInterface<int>
+     *
+     * @since 1.1.0
+     */
+    public function countDecks(Set|string $set): PromiseInterface
+    {
+        $code = strtoupper($set instanceof Set ? (string) $set->code : $set);
+
+        return $this->database->ready()->then(
+            fn () => (int) ($this->database->select('SELECT COUNT(*) AS "n" FROM "setDecks" WHERE "setCode" = ?', [$code])[0]['n'] ?? 0)
+        );
     }
 
     /**

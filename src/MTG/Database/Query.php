@@ -173,6 +173,26 @@ abstract class Query
     }
 
     /**
+     * How many rows match, ignoring the page.
+     *
+     * @return int
+     */
+    public function count(): int
+    {
+        $sql = "SELECT COUNT(*) AS \"n\" FROM \"{$this->table}\"";
+
+        if ($this->joins) {
+            $sql .= ' '.implode(' ', $this->joins);
+        }
+
+        if ($this->where) {
+            $sql .= ' WHERE '.implode(' AND ', $this->where);
+        }
+
+        return (int) ($this->database->select($sql, $this->bindings)[0]['n'] ?? 0);
+    }
+
+    /**
      * The select list.
      *
      * @return string

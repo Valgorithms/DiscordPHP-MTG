@@ -99,6 +99,48 @@ class CardRepository extends AbstractRepository
     }
 
     /**
+     * Counts the card printings (or, with `unique`, the cards) a search
+     * matches, ignoring `page` and `pageSize`.
+     *
+     * @param Card|array $params The same filters as {@see getCards()}.
+     *
+     * @return PromiseInterface<int>
+     *
+     * @since 1.1.0
+     */
+    public function countCards(Card|array $params = []): PromiseInterface
+    {
+        if ($params instanceof Card) {
+            $params = self::filtersFrom($params);
+        }
+
+        return $this->database->ready()->then(
+            fn () => (new CardQuery($this->database))->filter($params)->count()
+        );
+    }
+
+    /**
+     * Every printing of a card face, newest first: {uuid, setCode, setName,
+     * number, releaseDate}. For the printing picker.
+     *
+     * @param Card $card
+     *
+     * @return PromiseInterface<array[]>
+     *
+     * @since 1.1.0
+     */
+    public function getPrintings(Card $card): PromiseInterface
+    {
+        return $this->database->ready()->then(fn () => $this->database->select(
+            'SELECT "cards"."uuid", "cards"."setCode", "sets"."name" AS "setName", "cards"."number", "sets"."releaseDate"'
+            .' FROM "cards" LEFT JOIN "sets" ON "sets"."code" = "cards"."setCode"'
+            .' WHERE "cards"."name" = ? AND COALESCE("cards"."side", \'\') = ?'
+            .' ORDER BY "sets"."releaseDate" DESC, CAST("cards"."number" AS INTEGER), "cards"."number"',
+            [(string) $card->name, (string) ($card->side ?? '')]
+        ));
+    }
+
+    /**
      * Gets card printings by their MTGJSON uuids. Unknown uuids are skipped.
      *
      * @param string[] $uuids
@@ -207,6 +249,12 @@ class CardRepository extends AbstractRepository
 
                 $related[$uuid][$attribute][] = $row;
             }
+        }
+
+        // Prices are an extra: cards are complete without them while the
+        // price build downloads, or when it is turned off.
+        foreach ($this->discord->getPriceDatabase()?->prices($uuids) ?? [] as $uuid => $prices) {
+            $related[$uuid]['prices'] = $prices;
         }
 
         return $related;

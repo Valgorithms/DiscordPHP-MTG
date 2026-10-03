@@ -165,11 +165,12 @@ class CardQuery extends Query
         $pageSize = $filters['pageSize'] ?? 1;
         $orderBy = $filters['orderBy'] ?? null;
         $random = isset($filters['random']) && self::truthy($filters['random']);
+        $unique = isset($filters['unique']) && self::truthy($filters['unique']);
         $contains = $filters['contains'] ?? null;
 
         unset(
             $filters['name'], $filters['language'], $filters['gameFormat'], $filters['legality'],
-            $filters['page'], $filters['pageSize'], $filters['orderBy'], $filters['random'], $filters['contains'],
+            $filters['page'], $filters['pageSize'], $filters['orderBy'], $filters['random'], $filters['unique'], $filters['contains'],
         );
 
         foreach ($filters as $field => $value) {
@@ -184,6 +185,11 @@ class CardQuery extends Query
 
         if ($contains !== null) {
             $this->has($contains, $cards, $identifiers);
+        }
+
+        // Last, so the per-name pick sees every other condition.
+        if ($unique) {
+            $this->unique();
         }
 
         $this->paginate($page, $pageSize);
@@ -390,7 +396,13 @@ class CardQuery extends Query
             default => throw new \InvalidArgumentException("Cannot order by unknown field \"{$field}\"."),
         };
 
-        $this->orderBy("{$column} {$direction}");
+        // Collector numbers are text ("1", "10", "119a", "UMA-225"): numbers first, numerically.
+        if ($field === 'number') {
+            $this->orderBy("CAST({$column} AS INTEGER) {$direction}");
+        }
+
+        // A card without the value (no EDHREC rank, no power) goes last either way.
+        $this->orderBy("{$column} {$direction} NULLS LAST");
         $this->orderBy('"cards"."uuid"');
     }
 
@@ -409,16 +421,47 @@ class CardQuery extends Query
             $this->orderBy('length("cards"."name")');
         }
 
+        foreach (self::printingOrder() as $term) {
+            $this->orderBy($term);
+        }
+    }
+
+    /**
+     * The most regular printing first: English, from a regular set, not a
+     * promo, paper, not funny, newest, front face. No placeholders.
+     *
+     * @return string[] `ORDER BY` terms.
+     */
+    protected static function printingOrder(): array
+    {
         $regular = implode(', ', array_map(fn (string $type) => "'{$type}'", self::REGULAR_SET_TYPES));
 
-        $this->orderBy("CASE WHEN \"cards\".\"language\" = 'English' THEN 0 ELSE 1 END");
-        $this->orderBy("CASE WHEN \"sets\".\"type\" IN ({$regular}) THEN 0 ELSE 1 END");
-        $this->orderBy('COALESCE("cards"."isPromo", 0)');
-        $this->orderBy('COALESCE("cards"."isOnlineOnly", 0)');
-        $this->orderBy('COALESCE("cards"."isFunny", 0)');
-        $this->orderBy('"sets"."releaseDate" DESC');
-        $this->orderBy('COALESCE("cards"."side", \'\')');
-        $this->orderBy('"cards"."uuid"');
+        return [
+            "CASE WHEN \"cards\".\"language\" = 'English' THEN 0 ELSE 1 END",
+            "CASE WHEN \"sets\".\"type\" IN ({$regular}) THEN 0 ELSE 1 END",
+            'COALESCE("cards"."isPromo", 0)',
+            'COALESCE("cards"."isOnlineOnly", 0)',
+            'COALESCE("cards"."isFunny", 0)',
+            '"sets"."releaseDate" DESC',
+            'COALESCE("cards"."side", \'\')',
+            '"cards"."uuid"',
+        ];
+    }
+
+    /**
+     * Keeps one row per card name — its most regular printing (see
+     * {@see printingOrder()}) among the rows the other filters match — so a
+     * search lists cards rather than every printing and face of them.
+     */
+    protected function unique(): void
+    {
+        $joins = implode(' ', $this->joins);
+        $where = $this->where ? ' WHERE '.implode(' AND ', $this->where) : '';
+        $order = implode(', ', self::printingOrder());
+
+        // The picks already satisfy every filter, so they replace the
+        // conditions: the outer query only looks them up by uuid.
+        $this->where = ["\"cards\".\"uuid\" IN (SELECT \"uuid\" FROM (SELECT \"cards\".\"uuid\", ROW_NUMBER() OVER (PARTITION BY (\"cards\".\"name\" || '') ORDER BY {$order}) AS \"pick\" FROM \"cards\" {$joins}{$where}) WHERE \"pick\" = 1)"];
     }
 
     /**

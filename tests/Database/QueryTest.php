@@ -117,6 +117,31 @@ final class QueryTest extends TestCase
         }
     }
 
+    public function testUniqueKeepsOneRowPerCardAndCounts(): void
+    {
+        $query = (new CardQuery(database()))->filter(['name' => '"Black Lotus"', 'unique' => true, 'pageSize' => 100]);
+        $this->assertSame(1, $query->count());
+        $this->assertCount(1, $query->get());
+
+        // A card with a face of that name ("Emeritus of Conflict // Lightning Bolt") counts too, after the card itself.
+        $bolts = (new CardQuery(database()))->filter(['name' => '"Lightning Bolt"', 'unique' => true, 'pageSize' => 100])->get();
+        $this->assertSame('Lightning Bolt', $bolts[0]['name']);
+        $this->assertCount(count(array_unique(array_column($bolts, 'name'))), $bolts);
+
+        $all = (new CardQuery(database()))->filter(['name' => '"Lightning Bolt"', 'pageSize' => 100]);
+        $this->assertGreaterThan(10, $all->count(), 'Without unique, every printing.');
+
+        $faces = (new CardQuery(database()))->filter(['name' => '"Fire // Ice"', 'unique' => true]);
+        $this->assertSame(1, $faces->count(), 'Faces of one card are one card.');
+    }
+
+    public function testCollectorNumbersSortNumerically(): void
+    {
+        $numbers = array_column((new CardQuery(database()))->filter(['set' => 'KTK', 'orderBy' => 'number', 'pageSize' => 12])->get(), 'number');
+
+        $this->assertSame(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'], $numbers);
+    }
+
     public function testSetSearch(): void
     {
         $sets = (new SetQuery(database()))->filter(['code' => 'ktk|m19'])->get();
@@ -126,5 +151,8 @@ final class QueryTest extends TestCase
         $this->assertSame('KTK', $sets[0]['code']);
         $this->assertSame('Khans of Tarkir', $sets[0]['block']);
         $this->assertContains('Japanese', $sets[0]['languages']);
+
+        $years = array_unique(array_map(fn (array $set) => substr($set['releaseDate'], 0, 4), (new SetQuery(database()))->filter(['year' => 2014])->get()));
+        $this->assertSame(['2014'], array_values($years));
     }
 }

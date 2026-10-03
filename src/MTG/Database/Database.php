@@ -230,11 +230,11 @@ class Database
 
                 return resolve($this->pdo);
             } catch (\Throwable $e) {
-                $this->logger->warning("MTGJSON build at {$this->path} could not be opened, downloading a new one: {$e->getMessage()}");
+                $this->logger->warning("{$this->label()} at {$this->path} could not be opened, downloading a new one: {$e->getMessage()}");
             }
         }
 
-        $this->logger->info('Downloading the MTGJSON AllPrintings build to '.$this->path);
+        $this->logger->info("Downloading the {$this->label()} to {$this->path}");
 
         return $this->opening = $this->install()->then(function () {
             $this->opening = null;
@@ -262,17 +262,15 @@ class Database
             return $this->refreshing;
         }
 
-        return $this->refreshing = $this->http->get(new Endpoint(Endpoint::META))
-            ->then(function ($response) use ($force) {
-                $remote = $response->data->version ?? null;
-
+        return $this->refreshing = $this->remoteVersion()
+            ->then(function (?string $remote) use ($force) {
                 if (! $force && $remote !== null && $remote === $this->getVersion()) {
                     @touch($this->path);
 
                     return false;
                 }
 
-                $this->logger->info('Installing MTGJSON build '.($remote ?? 'of unknown version').' (have '.($this->getVersion() ?? 'none').')');
+                $this->logger->info("Installing {$this->label()} ".($remote ?? 'of unknown version').' (have '.($this->getVersion() ?? 'none').')');
 
                 return $this->install()->then(fn () => true);
             })
@@ -314,7 +312,7 @@ class Database
     public function select(string $sql, array $params = []): array
     {
         if ($this->pdo === null) {
-            throw new \LogicException('The MTGJSON build is not open; wait for Database::ready() first.');
+            throw new \LogicException("The {$this->label()} is not open; wait for ready() first.");
         }
 
         $statement = $this->pdo->prepare($sql);
@@ -477,6 +475,36 @@ class Database
     }
 
     /**
+     * What this build is called in logs and errors.
+     *
+     * @return string
+     */
+    protected function label(): string
+    {
+        return 'MTGJSON AllPrintings build';
+    }
+
+    /**
+     * Where the gzipped build is downloaded from.
+     *
+     * @return string
+     */
+    protected function source(): string
+    {
+        return Http::BASE_URL.'/'.Endpoint::ALL_PRINTINGS_SQLITE_GZ;
+    }
+
+    /**
+     * The version of the build currently published, from `Meta.json`.
+     *
+     * @return PromiseInterface<?string>
+     */
+    protected function remoteVersion(): PromiseInterface
+    {
+        return $this->http->get(new Endpoint(Endpoint::META))->then(fn ($response) => $response->data->version ?? null);
+    }
+
+    /**
      * Downloads, verifies and swaps in MTGJSON's current build.
      *
      * @return PromiseInterface<string> The installed version.
@@ -485,19 +513,19 @@ class Database
     {
         $directory = dirname($this->path);
         if (! is_dir($directory) && ! @mkdir($directory, 0777, true) && ! is_dir($directory)) {
-            return reject(new \RuntimeException("Cannot create the MTGJSON build directory {$directory}."));
+            return reject(new \RuntimeException("Cannot create the {$this->label()} directory {$directory}."));
         }
 
         $partial = $this->path.'.part';
 
-        return $this->download(Http::BASE_URL.'/'.Endpoint::ALL_PRINTINGS_SQLITE_GZ, $partial)
+        return $this->download($this->source(), $partial)
             ->then(function () use ($partial): string {
                 try {
                     $version = $this->prepare($partial);
                 } catch (\Throwable $e) {
                     @unlink($partial);
 
-                    throw new \RuntimeException('The downloaded MTGJSON build is not usable: '.$e->getMessage(), 0, $e);
+                    throw new \RuntimeException("The downloaded {$this->label()} is not usable: ".$e->getMessage(), 0, $e);
                 }
 
                 // The live file has to be closed before it can be replaced on Windows.
@@ -509,11 +537,11 @@ class Database
                         $this->open();
                     }
 
-                    throw new \RuntimeException("Cannot move the MTGJSON build into place at {$this->path}.");
+                    throw new \RuntimeException("Cannot move the {$this->label()} into place at {$this->path}.");
                 }
 
                 $this->open();
-                $this->logger->info("MTGJSON build {$version} installed at {$this->path}");
+                $this->logger->info("{$this->label()} {$version} installed at {$this->path}");
 
                 return $version;
             });
@@ -540,7 +568,7 @@ class Database
             throw new \RuntimeException('It has no meta version.');
         }
 
-        foreach (self::INDEXES as $index) {
+        foreach (static::INDEXES as $index) {
             $pdo->exec($index);
         }
 
@@ -562,7 +590,7 @@ class Database
     {
         $file = @fopen($target, 'wb');
         if ($file === false) {
-            return reject(new \RuntimeException("Cannot write the MTGJSON build to {$target}."));
+            return reject(new \RuntimeException("Cannot write the {$this->label()} to {$target}."));
         }
 
         $cleanup = function () use (&$file, $target): void {
@@ -611,14 +639,14 @@ class Database
             $bytes = @inflate_add($inflate, $chunk, ZLIB_SYNC_FLUSH);
 
             if ($bytes === false) {
-                $deferred->reject(new \RuntimeException('The MTGJSON download is not valid gzip.'));
+                $deferred->reject(new \RuntimeException("The {$this->label()} download is not valid gzip."));
                 $body->close();
 
                 return;
             }
 
             if ($bytes !== '' && fwrite($file, $bytes) !== strlen($bytes)) {
-                $deferred->reject(new \RuntimeException('Writing the MTGJSON build failed (disk full?).'));
+                $deferred->reject(new \RuntimeException("Writing the {$this->label()} failed (disk full?)."));
                 $body->close();
 
                 return;
@@ -626,18 +654,18 @@ class Database
 
             if ($total > 0 && ($percent = intdiv($received * 100, $total)) >= $logged + 10) {
                 $logged = $percent - $percent % 10;
-                $this->logger->debug("MTGJSON download {$logged}%");
+                $this->logger->debug("{$this->label()} download {$logged}%");
             }
         });
 
         $body->on('end', function () use ($deferred, $inflate): void {
             inflate_get_status($inflate) === ZLIB_STREAM_END
                 ? $deferred->resolve(null)
-                : $deferred->reject(new \RuntimeException('The MTGJSON download ended early.'));
+                : $deferred->reject(new \RuntimeException("The {$this->label()} download ended early."));
         });
 
         $body->on('error', fn (\Throwable $e) => $deferred->reject($e));
-        $body->on('close', fn () => $deferred->reject(new \RuntimeException('The MTGJSON download was cut off.')));
+        $body->on('close', fn () => $deferred->reject(new \RuntimeException("The {$this->label()} download was cut off.")));
 
         return $deferred->promise();
     }
@@ -666,7 +694,7 @@ class Database
     protected function refreshQuietly(): void
     {
         $this->refresh()->then(null, function (\Throwable $e): void {
-            $this->logger->warning('MTGJSON refresh failed, keeping build '.($this->getVersion() ?? 'none').': '.$e->getMessage());
+            $this->logger->warning("{$this->label()} refresh failed, keeping version ".($this->getVersion() ?? 'none').': '.$e->getMessage());
         });
     }
 }

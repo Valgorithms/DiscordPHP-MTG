@@ -119,6 +119,7 @@ use MTG\MTG;
  * @property int|null      $count                   The count of how many of this card exists in a relevant deck (Card (Deck) only).
  * @property bool|null     $isFoil                  If the card is foil in a deck, or came from a foil booster sheet.
  * @property bool|null     $isEtched                If the card is etched in a deck (Card (Deck) only).
+ * @property array|null    $prices                  Today's prices, `medium → provider → {currency, retail|buylist → finish → price}`, when the price build is available.
  *
  * @property-read ExCollectionInterface<ForeignData> $foreignData         The card's printed names and text in other languages.
  * @property-read Identifiers|null                   $identifiers         The card's identifiers on other services.
@@ -259,12 +260,57 @@ class Card extends Part
         'count',
         'isFoil',
         'isEtched',
+
+        // From the price build, when it is available.
+        'prices',
     ];
 
     /**
      * @inheritDoc
      */
     protected $visible = ['image_url'];
+
+    /**
+     * Today's price at one store, or null when it has none.
+     *
+     * @param string $provider `tcgplayer`, `cardkingdom`, `cardmarket`, `manapool` or `cardhoarder` (MTGO).
+     * @param string $finish   `normal`, `foil` or `etched`.
+     * @param string $kind     `retail`, or `buylist` (what the store pays).
+     *
+     * @return float|null
+     *
+     * @since 1.1.0
+     */
+    public function getPrice(string $provider = 'tcgplayer', string $finish = 'normal', string $kind = 'retail'): ?float
+    {
+        foreach ((array) ($this->attributes['prices'] ?? []) as $providers) {
+            if (isset($providers[$provider][$kind][$finish])) {
+                return (float) $providers[$provider][$kind][$finish];
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * The currency a store prices in (`USD`, `EUR`), or null when it has no price.
+     *
+     * @param string $provider
+     *
+     * @return string|null
+     *
+     * @since 1.1.0
+     */
+    public function getPriceCurrency(string $provider): ?string
+    {
+        foreach ((array) ($this->attributes['prices'] ?? []) as $providers) {
+            if (isset($providers[$provider])) {
+                return $providers[$provider]['currency'] ?? null;
+            }
+        }
+
+        return null;
+    }
 
     /**
      * Gets the card's printed names and text in other languages.
@@ -433,6 +479,8 @@ class Card extends Part
      * @return Container|null
      *
      * @since 0.3.0
+     *
+     * @deprecated 1.1.0 Use {@see \MTG\Builders\CardMessageBuilder::card()}, whose buttons survive restarts.
      */
     public function toContainer(?Interaction $interaction = null): ?Container
     {
@@ -457,6 +505,8 @@ class Card extends Part
      * @return Container
      *
      * @since 0.4.0
+     *
+     * @deprecated 1.1.0 Use {@see \MTG\Builders\CardMessageBuilder::card()}, whose buttons survive restarts.
      */
     public function normalLayoutContainer(?Interaction $interaction = null): Container
     {
@@ -516,6 +566,8 @@ class Card extends Part
      * @return Button
      *
      * @since 0.5.0
+     *
+     * @deprecated 1.1.0 Use {@see \MTG\Builders\CardMessageBuilder::card()} (its JSON button), whose buttons survive restarts.
      */
     public function getJsonButton(Interaction $interaction): Button
     {
@@ -540,6 +592,8 @@ class Card extends Part
      * @return Button|null
      *
      * @since 0.5.0
+     *
+     * @deprecated 1.1.0 Use {@see \MTG\Builders\CardMessageBuilder::card()} (its Image button), whose buttons survive restarts.
      */
     public function getViewImageButton(Interaction $interaction): ?Button
     {
@@ -565,6 +619,8 @@ class Card extends Part
      * @return Button|null
      *
      * @since 0.5.0
+     *
+     * @deprecated 1.1.0 Use {@see \MTG\Builders\CardMessageBuilder::card()} (its Set button), whose buttons survive restarts.
      */
     public function getSetButton(?Interaction $interaction = null): ?Button
     {
@@ -602,6 +658,8 @@ class Card extends Part
      * @return Button|null
      *
      * @since 0.7.0
+     *
+     * @deprecated 1.1.0 Use {@see \MTG\Builders\CardMessageBuilder::foreignNames()}, whose buttons survive restarts.
      */
     public function getForeignNamesButton(Interaction $interaction): ?Button
     {
@@ -634,6 +692,8 @@ class Card extends Part
      * @return Button|null
      *
      * @since 0.6.0
+     *
+     * @deprecated 1.1.0 Use {@see \MTG\Builders\CardMessageBuilder::legalities()}, whose buttons survive restarts.
      */
     public function getLegalitiesButton(Interaction $interaction): ?Button
     {
@@ -663,6 +723,8 @@ class Card extends Part
      * @param Interaction $interaction The interaction the button will belong to.
      *
      * @return Button|null
+     *
+     * @deprecated 1.1.0 Use {@see \MTG\Builders\CardMessageBuilder::rulings()}, whose buttons survive restarts.
      */
     public function getRulingsButton(Interaction $interaction): ?Button
     {

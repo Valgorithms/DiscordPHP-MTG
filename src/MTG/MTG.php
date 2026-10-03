@@ -13,13 +13,21 @@ declare(strict_types=1);
 
 namespace MTG;
 
+use Discord\Builders\CommandBuilder;
 use Discord\MessageCommandClient;
 use Discord\Http\Drivers\React;
+use Discord\Parts\Interactions\Command\Command;
 use Discord\Parts\User\Client as DiscordClient;
+use Discord\Repository\Interaction\GlobalCommandRepository;
 use Discord\Stats;
 use MTG\Database\Database;
+use MTG\Database\PriceDatabase;
+use MTG\Database\Suggestions;
+use MTG\Helpers\CommandSignature;
+use MTG\Helpers\SearchCache;
 use MTG\Http\Endpoint;
 use MTG\Http\Http;
+use MTG\Modules\Module;
 use MTG\Repository\CardRepository;
 use MTG\Repository\DeckRepository;
 use MTG\Repository\SetRepository;
@@ -30,8 +38,12 @@ use React\Socket\Connector;
 /**
  * The MTG client class — a DiscordPHP {@see MessageCommandClient} extended
  * with MTGJSON: an async HTTP client for the MTGJSON v5 API, a local copy of
- * its AllPrintings SQLite build for card and set searches, and the card, set
- * and deck repositories that read them.
+ * its AllPrintings SQLite build for card and set searches, today's card
+ * prices, and the card, set and deck repositories that read them.
+ *
+ * Bot features are {@see Module}s, as in Tutelar: each registers its own
+ * application commands and component handlers, and all of them boot once the
+ * gateway and the application are both ready, in the order they were added.
  *
  * @link https://mtgjson.com/
  *
@@ -69,6 +81,55 @@ class MTG extends MessageCommandClient
     protected $database;
 
     /**
+     * Today's card prices, or null when turned off.
+     *
+     * @var PriceDatabase|null
+     */
+    protected ?PriceDatabase $prices = null;
+
+    /**
+     * Autocomplete answers, read from the build.
+     *
+     * @var Suggestions
+     */
+    protected Suggestions $suggestions;
+
+    /**
+     * State behind message components (search filters, opened packs).
+     *
+     * @var SearchCache
+     */
+    protected SearchCache $searchCache;
+
+    /**
+     * The bot's features, in boot order.
+     *
+     * @var list<Module>
+     */
+    protected array $modules = [];
+
+    /**
+     * Whether the modules have booted.
+     *
+     * @var bool
+     */
+    protected bool $modulesBooted = false;
+
+    /**
+     * The registered global commands, read once for {@see defineCommand()}.
+     *
+     * @var PromiseInterface<GlobalCommandRepository>|null
+     */
+    protected ?PromiseInterface $commandRepository = null;
+
+    /**
+     * When the client was constructed, for uptime.
+     *
+     * @var int
+     */
+    protected int $startedAt;
+
+    /**
      * The extended Client class.
      *
      * @var Client Extended Discord client.
@@ -89,6 +150,11 @@ class MTG extends MessageCommandClient
      *                       - `preload` (bool): open (or download) the build
      *                       at startup rather than on the first search;
      *                       default true.
+     *                       - `prices` (bool|string): keep today's card prices
+     *                       (~5 MB download a day); a string is the URL of
+     *                       another `prices.sqlite.gz`. Default true.
+     *                       - `prices_database` (string): where the price
+     *                       build is kept; defaults to beside the card build.
      */
     public function __construct(array $options = [])
     {
@@ -105,21 +171,137 @@ class MTG extends MessageCommandClient
             $this->logger,
             new React($this->loop, $socketOptions),
         );
-        $this->database = new Database(
-            $this->loop,
-            $this->logger,
-            $this->mtg_http,
-            new Browser(new Connector($socketOptions, $this->loop), $this->loop),
-            (string) ($mtgjson['database'] ?? sys_get_temp_dir().DIRECTORY_SEPARATOR.'mtgjson'.DIRECTORY_SEPARATOR.Database::FILE),
-            (int) ($mtgjson['refresh_interval'] ?? Database::DEFAULT_REFRESH_INTERVAL),
-        );
+        $browser = new Browser(new Connector($socketOptions, $this->loop), $this->loop);
+        $path = (string) ($mtgjson['database'] ?? sys_get_temp_dir().DIRECTORY_SEPARATOR.'mtgjson'.DIRECTORY_SEPARATOR.Database::FILE);
+        $interval = (int) ($mtgjson['refresh_interval'] ?? Database::DEFAULT_REFRESH_INTERVAL);
+
+        $this->database = new Database($this->loop, $this->logger, $this->mtg_http, $browser, $path, $interval);
+
+        if (($mtgjson['prices'] ?? true) !== false) {
+            $this->prices = new PriceDatabase(
+                $this->loop,
+                $this->logger,
+                $this->mtg_http,
+                $browser,
+                (string) ($mtgjson['prices_database'] ?? dirname($path).DIRECTORY_SEPARATOR.PriceDatabase::FILE),
+                $interval,
+            );
+            if (is_string($mtgjson['prices'] ?? null)) {
+                $this->prices->setSource($mtgjson['prices']);
+            }
+        }
+
+        $this->suggestions = new Suggestions($this->database);
+        $this->searchCache = new SearchCache();
+        $this->startedAt = time();
         $this->client = $this->factory->part(Client::class, (array) $this->client);
         $this->stats = Stats::new($this);
 
         if ($mtgjson['preload'] ?? true) {
-            $this->loop->futureTick(fn () => $this->database->ready()->then(null, function (\Throwable $e): void {
-                $this->logger->error('The MTGJSON build is not available: '.$e->getMessage());
-            }));
+            $this->loop->futureTick(function (): void {
+                $this->database->ready()->then(null, function (\Throwable $e): void {
+                    $this->logger->error('The MTGJSON build is not available: '.$e->getMessage());
+                });
+                $this->prices?->ready()->then(null, function (\Throwable $e): void {
+                    $this->logger->warning('Card prices are not available: '.$e->getMessage());
+                });
+            });
+        }
+
+        $ready = false;
+        $applicationReady = false;
+        $boot = function () use (&$ready, &$applicationReady): void {
+            if ($ready && $applicationReady && ! $this->modulesBooted) {
+                $this->bootModules();
+            }
+        };
+        $this->once('init', function () use (&$ready, $boot): void {
+            $ready = true;
+            $boot();
+        });
+        $this->once('application-init', function () use (&$applicationReady, $boot): void {
+            $applicationReady = true;
+            $boot();
+        });
+    }
+
+    /**
+     * Adds a feature. Call before {@see run()}; modules boot in the order
+     * they were added, once the gateway and the application are ready.
+     *
+     * @param Module $module
+     *
+     * @return static
+     *
+     * @since 1.1.0
+     */
+    public function addModule(Module $module): static
+    {
+        $this->modules[] = $module;
+
+        return $this;
+    }
+
+    /**
+     * The modules added, in boot order.
+     *
+     * @return list<Module>
+     *
+     * @since 1.1.0
+     */
+    public function getModules(): array
+    {
+        return $this->modules;
+    }
+
+    /**
+     * Registers a global application command, or updates it when the
+     * definition in code differs from what Discord has. Unchanged commands
+     * are left alone; Discord overwrites a command created again under the
+     * same name and type.
+     *
+     * @param CommandBuilder $builder
+     *
+     * @return PromiseInterface<Command>
+     *
+     * @since 1.1.0
+     */
+    public function defineCommand(CommandBuilder $builder): PromiseInterface
+    {
+        $this->commandRepository ??= $this->application->commands->freshen();
+
+        return $this->commandRepository->then(function (GlobalCommandRepository $commands) use ($builder) {
+            $wanted = $builder->jsonSerialize();
+            $type = (int) ($wanted['type'] ?? Command::CHAT_INPUT);
+            $existing = $commands->find(fn (Command $command) => $command->name === $wanted['name'] && (int) ($command->type ?? Command::CHAT_INPUT) === $type);
+
+            if ($existing instanceof Command && CommandSignature::same(json_decode(json_encode($existing), true), $wanted)) {
+                return $existing;
+            }
+
+            $this->logger->info(($existing ? 'Updating' : 'Creating')." application command {$wanted['name']}");
+
+            return $builder->create($commands)->save(($existing ? 'Update' : 'Create')." {$wanted['name']} command");
+        });
+    }
+
+    /**
+     * Boots every module, skipping one that fails rather than the bot.
+     */
+    protected function bootModules(): void
+    {
+        $this->modulesBooted = true;
+
+        foreach ($this->modules as $module) {
+            try {
+                foreach ($module->commands($this) as $command) {
+                    $this->defineCommand($command)->then(null, fn (\Throwable $e) => $this->logger->error('Could not register a '.$module->name().' command: '.$e->getMessage()));
+                }
+                $module->boot($this);
+                $this->logger->info('Module booted: '.$module->name());
+            } catch (\Throwable $e) {
+                $this->logger->error('Module '.$module->name().' failed to boot: '.$e->getMessage());
+            }
         }
     }
 
@@ -265,6 +447,54 @@ class MTG extends MessageCommandClient
     public function getMtgHttpClient(): Http
     {
         return $this->mtg_http;
+    }
+
+    /**
+     * Gets today's card prices, or null when they are turned off.
+     *
+     * @return PriceDatabase|null
+     *
+     * @since 1.1.0
+     */
+    public function getPriceDatabase(): ?PriceDatabase
+    {
+        return $this->prices;
+    }
+
+    /**
+     * Gets the autocomplete answers.
+     *
+     * @return Suggestions
+     *
+     * @since 1.1.0
+     */
+    public function getSuggestions(): Suggestions
+    {
+        return $this->suggestions;
+    }
+
+    /**
+     * Gets the state behind message components.
+     *
+     * @return SearchCache
+     *
+     * @since 1.1.0
+     */
+    public function getSearchCache(): SearchCache
+    {
+        return $this->searchCache;
+    }
+
+    /**
+     * Seconds since the client was constructed.
+     *
+     * @return int
+     *
+     * @since 1.1.0
+     */
+    public function getUptime(): int
+    {
+        return time() - $this->startedAt;
     }
 
     /**

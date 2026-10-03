@@ -19,8 +19,9 @@ namespace MTG\Database;
  * Every `sets` column is a filter: `name`, `block` and `mcmName` match
  * partially, `languages` by membership, numbers with comparisons, `is*`
  * columns as booleans, and the rest (`code`, `type`, `parentCode`,
- * `releaseDate`, …) exactly. `orderBy`, `page` and `pageSize` (1-100,
- * default 100) work as for cards. Unordered results are newest first.
+ * `releaseDate`, …) exactly; `year` matches the release year. `orderBy`,
+ * `page` and `pageSize` (1-100, default 100) work as for cards. Unordered
+ * results are newest first.
  *
  * @link https://mtgjson.com/data-models/set/ Set model
  *
@@ -58,7 +59,15 @@ class SetQuery extends Query
         $page = $filters['page'] ?? 1;
         $pageSize = $filters['pageSize'] ?? self::MAX_PAGE_SIZE;
         $orderBy = $filters['orderBy'] ?? '-releaseDate';
-        unset($filters['page'], $filters['pageSize'], $filters['orderBy']);
+
+        if (isset($filters['year'])) {
+            $this->where(self::combine(array_map(
+                fn (string $year) => ['"sets"."releaseDate" LIKE ?', [((int) $year).'-%']],
+                self::terms($filters['year'])
+            )));
+        }
+
+        unset($filters['page'], $filters['pageSize'], $filters['orderBy'], $filters['year']);
 
         foreach ($filters as $field => $value) {
             if (! isset($columns[$field])) {

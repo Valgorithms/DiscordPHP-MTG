@@ -8,3 +8,4 @@
 /phpacker.ini      export-ignore
 /phpdoc.dist.xml     export-ignore
 /.github             export-ignore
+/build-prices.php  export-ignore

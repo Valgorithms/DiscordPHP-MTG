@@ -1,0 +1,51 @@
+name: Card prices
+
+# Builds today's card prices from MTGJSON's AllPricesToday into the small
+# SQLite file the bot downloads (MTG\Database\PriceDatabase), and publishes it
+# as assets of the `prices` release. Decoding MTGJSON's 53 MB price file takes
+# close to a gigabyte of memory, so it happens here once a day rather than in
+# every running bot.
+
+on:
+  schedule:
+    # MTGJSON's daily build lands around 06:10 UTC.
+    - cron: '30 8 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: prices
+  cancel-in-progress: false
+
+jobs:
+  prices:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo_sqlite, zlib
+          coverage: none
+
+      - name: Build the price files
+        run: php build-prices.php build
+
+      - name: Publish to the prices release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view prices > /dev/null 2>&1; then
+            gh release create prices \
+              --title "Card prices (daily)" \
+              --prerelease \
+              --latest=false \
+              --notes "Today's card prices for DiscordPHP-MTG, rebuilt daily from [MTGJSON](https://mtgjson.com)'s AllPricesToday by the \`prices\` workflow. \`prices.sqlite.gz\` is the build the bot downloads; \`prices.json\` holds its MTGJSON date and version. Prices come from MTGJSON's partners (TCGplayer, Card Kingdom, Cardmarket, Mana Pool, Cardhoarder)."
+          fi
+          gh release upload prices build/prices.sqlite.gz build/prices.json --clobber
+          cat build/prices.json
