@@ -68,6 +68,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/mtg-builders.html" class="">Builders</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/mtg-database.html" class="">Database</a>
                 
             </li>
@@ -77,6 +81,10 @@
             </li>
                     <li>
                 <a href="namespaces/mtg-http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/mtg-modules.html" class="">Modules</a>
                 
             </li>
                     <li>
@@ -459,6 +467,13 @@ is never held in memory.</dd>
 <dd>Downloads, verifies and swaps in MTGJSON&#039;s current build.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a class="" href="classes/MTG-Database-Database.html#method_label">label()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>What this build is called in logs and errors.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a class="" href="classes/MTG-Database-Database.html#method_open">open()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -481,12 +496,26 @@ is never held in memory.</dd>
 stays in use.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a class="" href="classes/MTG-Database-Database.html#method_remoteVersion">remoteVersion()</a>
+    <span>
+                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, ?string&gt;    </span>
+</dt>
+<dd>The version of the build currently published, from `Meta.json`.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a class="" href="classes/MTG-Database-Database.html#method_schedule">schedule()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Starts the refresh timer, and checks right away if the build on disk
 is already older than one interval.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a class="" href="classes/MTG-Database-Database.html#method_source">source()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Where the gzipped build is downloaded from.</dd>
 
     </dl>
 
@@ -1268,7 +1297,7 @@ can contain commas.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">432</span>
+    <span class="phpdocumentor-element-found-in__line">430</span>
 
     </aside>
 
@@ -1304,7 +1333,7 @@ reopens it.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">338</span>
+    <span class="phpdocumentor-element-found-in__line">336</span>
 
     </aside>
 
@@ -1370,7 +1399,7 @@ empty scalars are dropped.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">368</span>
+    <span class="phpdocumentor-element-found-in__line">366</span>
 
     </aside>
 
@@ -1425,7 +1454,7 @@ empty scalars are dropped.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">403</span>
+    <span class="phpdocumentor-element-found-in__line">401</span>
 
     </aside>
 
@@ -1468,7 +1497,7 @@ empty scalars are dropped.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">413</span>
+    <span class="phpdocumentor-element-found-in__line">411</span>
 
     </aside>
 
@@ -1507,7 +1536,7 @@ empty scalars are dropped.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">393</span>
+    <span class="phpdocumentor-element-found-in__line">391</span>
 
     </aside>
 
@@ -1550,7 +1579,7 @@ empty scalars are dropped.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">423</span>
+    <span class="phpdocumentor-element-found-in__line">421</span>
 
     </aside>
 
@@ -1589,7 +1618,7 @@ empty scalars are dropped.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">298</span>
+    <span class="phpdocumentor-element-found-in__line">296</span>
 
     </aside>
 
@@ -1753,7 +1782,7 @@ than the open one (or always, when forced).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">314</span>
+    <span class="phpdocumentor-element-found-in__line">312</span>
 
     </aside>
 
@@ -1834,7 +1863,7 @@ have waited for {@see ready()}.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">471</span>
+    <span class="phpdocumentor-element-found-in__line">469</span>
 
     </aside>
 
@@ -1869,7 +1898,7 @@ have waited for {@see ready()}.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">561</span>
+    <span class="phpdocumentor-element-found-in__line">589</span>
 
     </aside>
 
@@ -1930,7 +1959,7 @@ is never held in memory.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">602</span>
+    <span class="phpdocumentor-element-found-in__line">630</span>
 
     </aside>
 
@@ -2003,7 +2032,7 @@ is never held in memory.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">484</span>
+    <span class="phpdocumentor-element-found-in__line">512</span>
 
     </aside>
 
@@ -2038,6 +2067,45 @@ is never held in memory.</p>
             -protected
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_label">
+        label()
+        <a href="classes/MTG-Database-Database.html#method_label" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">482</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">What this build is called in logs and errors.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">label</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_open">
         open()
         <a href="classes/MTG-Database-Database.html#method_open" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2046,7 +2114,7 @@ is never held in memory.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">447</span>
+    <span class="phpdocumentor-element-found-in__line">445</span>
 
     </aside>
 
@@ -2097,7 +2165,7 @@ is never held in memory.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">531</span>
+    <span class="phpdocumentor-element-found-in__line">559</span>
 
     </aside>
 
@@ -2168,7 +2236,7 @@ is never held in memory.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">666</span>
+    <span class="phpdocumentor-element-found-in__line">694</span>
 
     </aside>
 
@@ -2196,6 +2264,45 @@ stays in use.</p>
             -protected
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_remoteVersion">
+        remoteVersion()
+        <a href="classes/MTG-Database-Database.html#method_remoteVersion" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">502</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The version of the build currently published, from `Meta.json`.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">remoteVersion</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, ?string&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, ?string&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_schedule">
         schedule()
         <a href="classes/MTG-Database-Database.html#method_schedule" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2204,7 +2311,7 @@ stays in use.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">649</span>
+    <span class="phpdocumentor-element-found-in__line">677</span>
 
     </aside>
 
@@ -2225,6 +2332,45 @@ is already older than one interval.</p>
         
     
     
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_source">
+        source()
+        <a href="classes/MTG-Database-Database.html#method_source" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Database/Database.php"><a href="files/src-mtg-database-database.html"><abbr title="src/MTG/Database/Database.php">Database.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">492</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Where the gzipped build is downloaded from.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">source</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
             </section>
 
@@ -2294,10 +2440,13 @@ is already older than one interval.</p>
                                             <li class=""><a href="classes/MTG-Database-Database.html#method_download">download()</a></li>
                                             <li class=""><a href="classes/MTG-Database-Database.html#method_inflateTo">inflateTo()</a></li>
                                             <li class=""><a href="classes/MTG-Database-Database.html#method_install">install()</a></li>
+                                            <li class=""><a href="classes/MTG-Database-Database.html#method_label">label()</a></li>
                                             <li class=""><a href="classes/MTG-Database-Database.html#method_open">open()</a></li>
                                             <li class=""><a href="classes/MTG-Database-Database.html#method_prepare">prepare()</a></li>
                                             <li class=""><a href="classes/MTG-Database-Database.html#method_refreshQuietly">refreshQuietly()</a></li>
+                                            <li class=""><a href="classes/MTG-Database-Database.html#method_remoteVersion">remoteVersion()</a></li>
                                             <li class=""><a href="classes/MTG-Database-Database.html#method_schedule">schedule()</a></li>
+                                            <li class=""><a href="classes/MTG-Database-Database.html#method_source">source()</a></li>
                                     </ul>
             </li>
                     </ul>

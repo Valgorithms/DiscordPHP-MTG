@@ -68,6 +68,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/mtg-builders.html" class="">Builders</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/mtg-database.html" class="">Database</a>
                 
             </li>
@@ -77,6 +81,10 @@
             </li>
                     <li>
                 <a href="namespaces/mtg-http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/mtg-modules.html" class="">Modules</a>
                 
             </li>
                     <li>
@@ -146,16 +154,20 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">61</span>
 
     </aside>
 
             <p class="phpdocumentor-summary">The MTG client class — a DiscordPHP {@see MessageCommandClient} extended
 with MTGJSON: an async HTTP client for the MTGJSON v5 API, a local copy of
-its AllPrintings SQLite build for card and set searches, and the card, set
-and deck repositories that read them.</p>
+its AllPrintings SQLite build for card and set searches, today&#039;s card
+prices, and the card, set and deck repositories that read them.</p>
 
 
+    <section class="phpdocumentor-description"><p>Bot features are <a href="classes/MTG-Modules-Module.html"><abbr title="\MTG\Modules\Module">Module</abbr></a>s, as in Tutelar: each registers its own
+application commands and component handlers, and all of them boot once the
+gateway and the application are both ready, in the order they were added.</p>
+</section>
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -261,11 +273,32 @@ and deck repositories that read them.</p>
 <dd>The extended Client class.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/MTG-MTG.html#property_commandRepository">$commandRepository</a>
+    <span>
+                        &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Repository\Interaction\GlobalCommandRepository">GlobalCommandRepository</abbr>&gt;|null            </span>
+</dt>
+<dd>The registered global commands, read once for {@see defineCommand()}.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/MTG-MTG.html#property_database">$database</a>
     <span>
                         &nbsp;: <a href="classes/MTG-Database-Database.html"><abbr title="\MTG\Database\Database">Database</abbr></a>            </span>
 </dt>
 <dd>The local MTGJSON build.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/MTG-MTG.html#property_modules">$modules</a>
+    <span>
+                        &nbsp;: array&lt;int, <a href="classes/MTG-Modules-Module.html"><abbr title="\MTG\Modules\Module">Module</abbr></a>&gt;            </span>
+</dt>
+<dd>The bot&#039;s features, in boot order.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/MTG-MTG.html#property_modulesBooted">$modulesBooted</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+<dd>Whether the modules have booted.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/MTG-MTG.html#property_mtg_http">$mtg_http</a>
@@ -275,10 +308,38 @@ and deck repositories that read them.</p>
 <dd>The extended HTTP client.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/MTG-MTG.html#property_prices">$prices</a>
+    <span>
+                        &nbsp;: <a href="classes/MTG-Database-PriceDatabase.html"><abbr title="\MTG\Database\PriceDatabase">PriceDatabase</abbr></a>|null            </span>
+</dt>
+<dd>Today&#039;s card prices, or null when turned off.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/MTG-MTG.html#property_searchCache">$searchCache</a>
+    <span>
+                        &nbsp;: <a href="classes/MTG-Helpers-SearchCache.html"><abbr title="\MTG\Helpers\SearchCache">SearchCache</abbr></a>            </span>
+</dt>
+<dd>State behind message components (search filters, opened packs).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/MTG-MTG.html#property_startedAt">$startedAt</a>
+    <span>
+                        &nbsp;: int            </span>
+</dt>
+<dd>When the client was constructed, for uptime.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/MTG-MTG.html#property_stats">$stats</a>
     <span>
                         &nbsp;: <a href="classes/Discord-Stats.html"><abbr title="\Discord\Stats">Stats</abbr></a>            </span>
 </dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/MTG-MTG.html#property_suggestions">$suggestions</a>
+    <span>
+                        &nbsp;: <a href="classes/MTG-Database-Suggestions.html"><abbr title="\MTG\Database\Suggestions">Suggestions</abbr></a>            </span>
+</dt>
+<dd>Autocomplete answers, read from the build.</dd>
 
     </dl>
 
@@ -309,6 +370,14 @@ and deck repositories that read them.</p>
 <dd>Handles dynamic get calls to the client.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-MTG.html#method_addModule">addModule()</a>
+    <span>
+                                &nbsp;: static    </span>
+</dt>
+<dd>Adds a feature. Call before {@see run()}; modules boot in the order
+they were added, once the gateway and the application are ready.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-HelperTrait.html#method_colorIdentityToInteger">colorIdentityToInteger()</a>
     <span>
                                 &nbsp;: int|null    </span>
@@ -321,6 +390,16 @@ and deck repositories that read them.</p>
                                 &nbsp;: <abbr title="\Discord\Builders\MessageBuilder">MessageBuilder</abbr>    </span>
 </dt>
 <dd>Creates a new instance of MessageBuilder.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-MTG.html#method_defineCommand">defineCommand()</a>
+    <span>
+                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Parts\Interactions\Command\Command">Command</abbr>&gt;    </span>
+</dt>
+<dd>Registers a global application command, or updates it when the
+definition in code differs from what Discord has. Unchanged commands
+are left alone; Discord overwrites a command created again under the
+same name and type.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-HelperTrait.html#method_encapsulated_emoji_str_replace">encapsulated_emoji_str_replace()</a>
@@ -385,6 +464,13 @@ model then property (e.g. `card` → `rarity`).</dd>
 <dd>Fetches the current MTGJSON build&#039;s version and date.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-MTG.html#method_getModules">getModules()</a>
+    <span>
+                                &nbsp;: array&lt;int, <a href="classes/MTG-Modules-Module.html"><abbr title="\MTG\Modules\Module">Module</abbr></a>&gt;    </span>
+</dt>
+<dd>The modules added, in boot order.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-MTG.html#method_getMtgHttpClient">getMtgHttpClient()</a>
     <span>
                                 &nbsp;: <a href="classes/MTG-Http-Http.html"><abbr title="\MTG\Http\Http">Http</abbr></a>    </span>
@@ -392,11 +478,32 @@ model then property (e.g. `card` → `rarity`).</dd>
 <dd>Gets the MTG HTTP client.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-MTG.html#method_getPriceDatabase">getPriceDatabase()</a>
+    <span>
+                                &nbsp;: <a href="classes/MTG-Database-PriceDatabase.html"><abbr title="\MTG\Database\PriceDatabase">PriceDatabase</abbr></a>|null    </span>
+</dt>
+<dd>Gets today&#039;s card prices, or null when they are turned off.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-MTG.html#method_getSearchCache">getSearchCache()</a>
+    <span>
+                                &nbsp;: <a href="classes/MTG-Helpers-SearchCache.html"><abbr title="\MTG\Helpers\SearchCache">SearchCache</abbr></a>    </span>
+</dt>
+<dd>Gets the state behind message components.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-MTG.html#method_getSubtypes">getSubtypes()</a>
     <span>
                                 &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string|int, string&gt;&gt;    </span>
 </dt>
 <dd>Fetches the list of all card subtypes (e.g. `Elf`, `Equipment`).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-MTG.html#method_getSuggestions">getSuggestions()</a>
+    <span>
+                                &nbsp;: <a href="classes/MTG-Database-Suggestions.html"><abbr title="\MTG\Database\Suggestions">Suggestions</abbr></a>    </span>
+</dt>
+<dd>Gets the autocomplete answers.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-MTG.html#method_getSupertypes">getSupertypes()</a>
@@ -413,6 +520,13 @@ model then property (e.g. `card` → `rarity`).</dd>
 <dd>Fetches the list of all card types (e.g. `Creature`, `Instant`).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-MTG.html#method_getUptime">getUptime()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Seconds since the client was constructed.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-MTG.html#method_setClient">setClient()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -421,6 +535,13 @@ model then property (e.g. `card` → `rarity`).</dd>
 client DiscordPHP builds before this constructor swaps in
 {@see Client} re-installs itself once its application has loaded,
 which would drop the MTG repositories.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a class="" href="classes/MTG-MTG.html#method_bootModules">bootModules()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Boots every module, skipping one that fails rather than the bot.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a class="" href="classes/MTG-MTG.html#method_mergeTypes">mergeTypes()</a>
@@ -450,7 +571,7 @@ which would drop the MTG repositories.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">53</span>
+    <span class="phpdocumentor-element-found-in__line">65</span>
 
     </aside>
 
@@ -607,7 +728,7 @@ which would drop the MTG repositories.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">76</span>
+    <span class="phpdocumentor-element-found-in__line">137</span>
 
     </aside>
 
@@ -637,6 +758,44 @@ which would drop the MTG repositories.</dd>
             -protected
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_commandRepository">
+        $commandRepository
+        <a href="classes/MTG-MTG.html#property_commandRepository" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">123</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The registered global commands, read once for {@see defineCommand()}.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Repository\Interaction\GlobalCommandRepository">GlobalCommandRepository</abbr>&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$commandRepository</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_database">
         $database
         <a href="classes/MTG-MTG.html#property_database" class="headerlink"><i class="fas fa-link"></i></a>
@@ -647,7 +806,7 @@ which would drop the MTG repositories.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">69</span>
+    <span class="phpdocumentor-element-found-in__line">81</span>
 
     </aside>
 
@@ -675,6 +834,82 @@ which would drop the MTG repositories.</dd>
             -protected
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_modules">
+        $modules
+        <a href="classes/MTG-MTG.html#property_modules" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">109</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The bot&#039;s features, in boot order.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type">array&lt;int, <a href="classes/MTG-Modules-Module.html"><abbr title="\MTG\Modules\Module">Module</abbr></a>&gt;</span>
+    <span class="phpdocumentor-signature__name">$modules</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_modulesBooted">
+        $modulesBooted
+        <a href="classes/MTG-MTG.html#property_modulesBooted" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">116</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Whether the modules have booted.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$modulesBooted</span>
+     = <span class="phpdocumentor-signature__default-value">false</span></code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_mtg_http">
         $mtg_http
         <a href="classes/MTG-MTG.html#property_mtg_http" class="headerlink"><i class="fas fa-link"></i></a>
@@ -685,7 +920,7 @@ which would drop the MTG repositories.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">62</span>
+    <span class="phpdocumentor-element-found-in__line">74</span>
 
     </aside>
 
@@ -715,6 +950,120 @@ which would drop the MTG repositories.</dd>
             -protected
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_prices">
+        $prices
+        <a href="classes/MTG-MTG.html#property_prices" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">88</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Today&#039;s card prices, or null when turned off.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/MTG-Database-PriceDatabase.html"><abbr title="\MTG\Database\PriceDatabase">PriceDatabase</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$prices</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_searchCache">
+        $searchCache
+        <a href="classes/MTG-MTG.html#property_searchCache" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">102</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">State behind message components (search filters, opened packs).</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/MTG-Helpers-SearchCache.html"><abbr title="\MTG\Helpers\SearchCache">SearchCache</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$searchCache</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_startedAt">
+        $startedAt
+        <a href="classes/MTG-MTG.html#property_startedAt" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">130</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">When the client was constructed, for uptime.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$startedAt</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_stats">
         $stats
         <a href="classes/MTG-MTG.html#property_stats" class="headerlink"><i class="fas fa-link"></i></a>
@@ -725,7 +1074,7 @@ which would drop the MTG repositories.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">67</span>
 
     </aside>
 
@@ -735,6 +1084,44 @@ which would drop the MTG repositories.</dd>
         <span class="phpdocumentor-signature__visibility">protected</span>
             <span class="phpdocumentor-signature__type"><a href="classes/Discord-Stats.html"><abbr title="\Discord\Stats">Stats</abbr></a></span>
     <span class="phpdocumentor-signature__name">$stats</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_suggestions">
+        $suggestions
+        <a href="classes/MTG-MTG.html#property_suggestions" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">95</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Autocomplete answers, read from the build.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/MTG-Database-Suggestions.html"><abbr title="\MTG\Database\Suggestions">Suggestions</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$suggestions</span>
     </code>
 
     
@@ -767,7 +1154,7 @@ which would drop the MTG repositories.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">93</span>
+    <span class="phpdocumentor-element-found-in__line">159</span>
 
     </aside>
 
@@ -801,6 +1188,11 @@ never refreshes.</li>
 <li><code class="prettyprint">preload</code> (bool): open (or download) the build
 at startup rather than on the first search;
 default true.</li>
+<li><code class="prettyprint">prices</code> (bool|string): keep today's card prices
+(~5 MB download a day); a string is the URL of
+another <code class="prettyprint">prices.sqlite.gz</code>. Default true.</li>
+<li><code class="prettyprint">prices_database</code> (string): where the price
+build is kept; defaults to beside the card build.</li>
 </ul>
 </section>
 
@@ -905,7 +1297,7 @@ default true.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">305</span>
+    <span class="phpdocumentor-element-found-in__line">545</span>
 
     </aside>
 
@@ -937,6 +1329,70 @@ default true.</li>
         
     
     
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_addModule">
+        addModule()
+        <a href="classes/MTG-MTG.html#method_addModule" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">248</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Adds a feature. Call before {@see run()}; modules boot in the order
+they were added, once the gateway and the application are ready.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">addModule</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/MTG-Modules-Module.html"><abbr title="\MTG\Modules\Module">Module</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$module</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$module</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/MTG-Modules-Module.html"><abbr title="\MTG\Modules\Module">Module</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_addModule_tags">
+        Tags
+        <a href="classes/MTG-MTG.html#method_addModule_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">static</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1067,6 +1523,72 @@ default true.</li>
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Discord\Builders\MessageBuilder">MessageBuilder</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_defineCommand">
+        defineCommand()
+        <a href="classes/MTG-MTG.html#method_defineCommand" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">279</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Registers a global application command, or updates it when the
+definition in code differs from what Discord has. Unchanged commands
+are left alone; Discord overwrites a command created again under the
+same name and type.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">defineCommand</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Discord\Builders\CommandBuilder">CommandBuilder</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$builder</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Parts\Interactions\Command\Command">Command</abbr>&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$builder</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Discord\Builders\CommandBuilder">CommandBuilder</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_defineCommand_tags">
+        Tags
+        <a href="classes/MTG-MTG.html#method_defineCommand_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Parts\Interactions\Command\Command">Command</abbr>&gt;</span>
             </section>
 
 </article>
@@ -1239,7 +1761,7 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">136</span>
+    <span class="phpdocumentor-element-found-in__line">328</span>
 
     </aside>
 
@@ -1299,7 +1821,7 @@ by lower-case type (`artifact`, `creature`, …).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">277</span>
+    <span class="phpdocumentor-element-found-in__line">517</span>
 
     </aside>
 
@@ -1352,7 +1874,7 @@ by lower-case type (`artifact`, `creature`, …).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">222</span>
+    <span class="phpdocumentor-element-found-in__line">414</span>
 
     </aside>
 
@@ -1412,7 +1934,7 @@ model then property (e.g. `card` → `rarity`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">188</span>
+    <span class="phpdocumentor-element-found-in__line">380</span>
 
     </aside>
 
@@ -1466,7 +1988,7 @@ model then property (e.g. `card` → `rarity`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">205</span>
+    <span class="phpdocumentor-element-found-in__line">397</span>
 
     </aside>
 
@@ -1526,7 +2048,7 @@ model then property (e.g. `card` → `rarity`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">238</span>
+    <span class="phpdocumentor-element-found-in__line">430</span>
 
     </aside>
 
@@ -1577,6 +2099,59 @@ model then property (e.g. `card` → `rarity`).</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getModules">
+        getModules()
+        <a href="classes/MTG-MTG.html#method_getModules" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">262</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The modules added, in boot order.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getModules</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;int, <a href="classes/MTG-Modules-Module.html"><abbr title="\MTG\Modules\Module">Module</abbr></a>&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getModules_tags">
+        Tags
+        <a href="classes/MTG-MTG.html#method_getModules_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;int, <a href="classes/MTG-Modules-Module.html"><abbr title="\MTG\Modules\Module">Module</abbr></a>&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getMtgHttpClient">
         getMtgHttpClient()
         <a href="classes/MTG-MTG.html#method_getMtgHttpClient" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1585,7 +2160,7 @@ model then property (e.g. `card` → `rarity`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">265</span>
+    <span class="phpdocumentor-element-found-in__line">457</span>
 
     </aside>
 
@@ -1616,6 +2191,112 @@ model then property (e.g. `card` → `rarity`).</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getPriceDatabase">
+        getPriceDatabase()
+        <a href="classes/MTG-MTG.html#method_getPriceDatabase" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">469</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Gets today&#039;s card prices, or null when they are turned off.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getPriceDatabase</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MTG-Database-PriceDatabase.html"><abbr title="\MTG\Database\PriceDatabase">PriceDatabase</abbr></a>|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getPriceDatabase_tags">
+        Tags
+        <a href="classes/MTG-MTG.html#method_getPriceDatabase_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/MTG-Database-PriceDatabase.html"><abbr title="\MTG\Database\PriceDatabase">PriceDatabase</abbr></a>|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getSearchCache">
+        getSearchCache()
+        <a href="classes/MTG-MTG.html#method_getSearchCache" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">493</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Gets the state behind message components.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getSearchCache</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MTG-Helpers-SearchCache.html"><abbr title="\MTG\Helpers\SearchCache">SearchCache</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getSearchCache_tags">
+        Tags
+        <a href="classes/MTG-MTG.html#method_getSearchCache_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/MTG-Helpers-SearchCache.html"><abbr title="\MTG\Helpers\SearchCache">SearchCache</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getSubtypes">
         getSubtypes()
         <a href="classes/MTG-MTG.html#method_getSubtypes" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1624,7 +2305,7 @@ model then property (e.g. `card` → `rarity`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">162</span>
+    <span class="phpdocumentor-element-found-in__line">354</span>
 
     </aside>
 
@@ -1668,6 +2349,59 @@ model then property (e.g. `card` → `rarity`).</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getSuggestions">
+        getSuggestions()
+        <a href="classes/MTG-MTG.html#method_getSuggestions" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">481</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Gets the autocomplete answers.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getSuggestions</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MTG-Database-Suggestions.html"><abbr title="\MTG\Database\Suggestions">Suggestions</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getSuggestions_tags">
+        Tags
+        <a href="classes/MTG-MTG.html#method_getSuggestions_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/MTG-Database-Suggestions.html"><abbr title="\MTG\Database\Suggestions">Suggestions</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getSupertypes">
         getSupertypes()
         <a href="classes/MTG-MTG.html#method_getSupertypes" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1676,7 +2410,7 @@ model then property (e.g. `card` → `rarity`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">174</span>
+    <span class="phpdocumentor-element-found-in__line">366</span>
 
     </aside>
 
@@ -1728,7 +2462,7 @@ model then property (e.g. `card` → `rarity`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">150</span>
+    <span class="phpdocumentor-element-found-in__line">342</span>
 
     </aside>
 
@@ -1772,6 +2506,59 @@ model then property (e.g. `card` → `rarity`).</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getUptime">
+        getUptime()
+        <a href="classes/MTG-MTG.html#method_getUptime" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">505</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Seconds since the client was constructed.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getUptime</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getUptime_tags">
+        Tags
+        <a href="classes/MTG-MTG.html#method_getUptime_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setClient">
         setClient()
         <a href="classes/MTG-MTG.html#method_setClient" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1780,7 +2567,7 @@ model then property (e.g. `card` → `rarity`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">253</span>
+    <span class="phpdocumentor-element-found-in__line">445</span>
 
     </aside>
 
@@ -1820,6 +2607,41 @@ which would drop the MTG repositories.</p>
         class="phpdocumentor-element
             -method
             -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_bootModules">
+        bootModules()
+        <a href="classes/MTG-MTG.html#method_bootModules" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">301</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Boots every module, skipping one that fails rather than the bot.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">bootModules</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
                                     -static                    "
 >
     <h4 class="phpdocumentor-element__name" id="method_mergeTypes">
@@ -1830,7 +2652,7 @@ which would drop the MTG repositories.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">290</span>
+    <span class="phpdocumentor-element-found-in__line">530</span>
 
     </aside>
 
@@ -1909,9 +2731,16 @@ which would drop the MTG repositories.</p>
                                                     <li class=""><a href="classes/MTG-MTG.html#property_decks">$decks</a></li>
                                                     <li class=""><a href="classes/MTG-MTG.html#property_sets">$sets</a></li>
                                                     <li class=""><a href="classes/MTG-MTG.html#property_client">$client</a></li>
+                                                    <li class=""><a href="classes/MTG-MTG.html#property_commandRepository">$commandRepository</a></li>
                                                     <li class=""><a href="classes/MTG-MTG.html#property_database">$database</a></li>
+                                                    <li class=""><a href="classes/MTG-MTG.html#property_modules">$modules</a></li>
+                                                    <li class=""><a href="classes/MTG-MTG.html#property_modulesBooted">$modulesBooted</a></li>
                                                     <li class=""><a href="classes/MTG-MTG.html#property_mtg_http">$mtg_http</a></li>
+                                                    <li class=""><a href="classes/MTG-MTG.html#property_prices">$prices</a></li>
+                                                    <li class=""><a href="classes/MTG-MTG.html#property_searchCache">$searchCache</a></li>
+                                                    <li class=""><a href="classes/MTG-MTG.html#property_startedAt">$startedAt</a></li>
                                                     <li class=""><a href="classes/MTG-MTG.html#property_stats">$stats</a></li>
+                                                    <li class=""><a href="classes/MTG-MTG.html#property_suggestions">$suggestions</a></li>
                                             </ul>
                 </li>
             
@@ -1921,8 +2750,10 @@ which would drop the MTG repositories.</p>
                                             <li class=""><a href="classes/MTG-MTG.html#method___construct">__construct()</a></li>
                                             <li class=""><a href="classes/MTG-HelperTrait.html#method___encapsulatedSymbolsToEmojis">__encapsulatedSymbolsToEmojis()</a></li>
                                             <li class=""><a href="classes/MTG-MTG.html#method___get">__get()</a></li>
+                                            <li class=""><a href="classes/MTG-MTG.html#method_addModule">addModule()</a></li>
                                             <li class=""><a href="classes/MTG-HelperTrait.html#method_colorIdentityToInteger">colorIdentityToInteger()</a></li>
                                             <li class=""><a href="classes/MTG-HelperTrait.html#method_createBuilder">createBuilder()</a></li>
+                                            <li class=""><a href="classes/MTG-MTG.html#method_defineCommand">defineCommand()</a></li>
                                             <li class=""><a href="classes/MTG-HelperTrait.html#method_encapsulated_emoji_str_replace">encapsulated_emoji_str_replace()</a></li>
                                             <li class=""><a href="classes/MTG-HelperTrait.html#method_encapsulatedSymbolsToEmojis">encapsulatedSymbolsToEmojis()</a></li>
                                             <li class=""><a href="classes/MTG-MTG.html#method_getCardTypes">getCardTypes()</a></li>
@@ -1931,11 +2762,17 @@ which would drop the MTG repositories.</p>
                                             <li class=""><a href="classes/MTG-MTG.html#method_getFormats">getFormats()</a></li>
                                             <li class=""><a href="classes/MTG-MTG.html#method_getKeywords">getKeywords()</a></li>
                                             <li class=""><a href="classes/MTG-MTG.html#method_getMeta">getMeta()</a></li>
+                                            <li class=""><a href="classes/MTG-MTG.html#method_getModules">getModules()</a></li>
                                             <li class=""><a href="classes/MTG-MTG.html#method_getMtgHttpClient">getMtgHttpClient()</a></li>
+                                            <li class=""><a href="classes/MTG-MTG.html#method_getPriceDatabase">getPriceDatabase()</a></li>
+                                            <li class=""><a href="classes/MTG-MTG.html#method_getSearchCache">getSearchCache()</a></li>
                                             <li class=""><a href="classes/MTG-MTG.html#method_getSubtypes">getSubtypes()</a></li>
+                                            <li class=""><a href="classes/MTG-MTG.html#method_getSuggestions">getSuggestions()</a></li>
                                             <li class=""><a href="classes/MTG-MTG.html#method_getSupertypes">getSupertypes()</a></li>
                                             <li class=""><a href="classes/MTG-MTG.html#method_getTypes">getTypes()</a></li>
+                                            <li class=""><a href="classes/MTG-MTG.html#method_getUptime">getUptime()</a></li>
                                             <li class=""><a href="classes/MTG-MTG.html#method_setClient">setClient()</a></li>
+                                            <li class=""><a href="classes/MTG-MTG.html#method_bootModules">bootModules()</a></li>
                                             <li class=""><a href="classes/MTG-MTG.html#method_mergeTypes">mergeTypes()</a></li>
                                     </ul>
             </li>

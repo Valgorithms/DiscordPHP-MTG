@@ -68,6 +68,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/mtg-builders.html" class="">Builders</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/mtg-database.html" class="">Database</a>
                 
             </li>
@@ -77,6 +81,10 @@
             </li>
                     <li>
                 <a href="namespaces/mtg-http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/mtg-modules.html" class="">Modules</a>
                 
             </li>
                     <li>
@@ -306,6 +314,14 @@ within the class. If it does, it calls that method with the provided arguments.<
 <dd>Clears the repository.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-Repository-CardRepository.html#method_countCards">countCards()</a>
+    <span>
+                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, int&gt;    </span>
+</dt>
+<dd>Counts the card printings (or, with `unique`, the cards) a search
+matches, ignoring `page` and `pageSize`.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_create">create()</a>
     <span>
                                 &nbsp;: <abbr title="\Discord\Parts\Part">Part</abbr>    </span>
@@ -394,6 +410,14 @@ the common ones are `name`, `manaValue` (or `cmc`), `colors`,
                                 &nbsp;: <abbr title="\Traversable">Traversable</abbr>    </span>
 </dt>
 <dd>Returns an iterator for the cache.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-Repository-CardRepository.html#method_getPrintings">getPrintings()</a>
+    <span>
+                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string|int, array&lt;string|int, mixed&gt;&gt;&gt;    </span>
+</dt>
+<dd>Every printing of a card face, newest first: {uuid, setCode, setName,
+number, releaseDate}. For the printing picker.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="-deprecated" href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_has">has()</a>
@@ -1126,6 +1150,72 @@ This was changed to use the <code class="prettyprint">__Collection__method</code
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_countCards">
+        countCards()
+        <a href="classes/MTG-Repository-CardRepository.html#method_countCards" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">111</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Counts the card printings (or, with `unique`, the cards) a search
+matches, ignoring `page` and `pageSize`.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">countCards</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type"><a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>|array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$params</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, int&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$params</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>|array&lt;string|int, mixed&gt;</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">[]</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The same filters as <abbr title="\MTG\Repository\getCards()">getCards()</abbr>.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_countCards_tags">
+        Tags
+        <a href="classes/MTG-Repository-CardRepository.html#method_countCards_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, int&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_create">
         create()
         <a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_create" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1750,7 +1840,7 @@ the common ones are `name`, `manaValue` (or `cmc`), `colors`,
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">110</span>
+    <span class="phpdocumentor-element-found-in__line">152</span>
 
     </aside>
 
@@ -1839,6 +1929,70 @@ the common ones are `name`, `manaValue` (or `cmc`), `colors`,
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Traversable">Traversable</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getPrintings">
+        getPrintings()
+        <a href="classes/MTG-Repository-CardRepository.html#method_getPrintings" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">132</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Every printing of a card face, newest first: {uuid, setCode, setName,
+number, releaseDate}. For the printing picker.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getPrintings</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$card</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string|int, array&lt;string|int, mixed&gt;&gt;&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$card</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getPrintings_tags">
+        Tags
+        <a href="classes/MTG-Repository-CardRepository.html#method_getPrintings_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string|int, array&lt;string|int, mixed&gt;&gt;&gt;</span>
             </section>
 
 </article>
@@ -2672,7 +2826,7 @@ This method is deprecated for userland code but can still be used internally wit
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">223</span>
+    <span class="phpdocumentor-element-found-in__line">271</span>
 
     </aside>
 
@@ -2722,7 +2876,7 @@ as `,`-joined terms that must all match. Nested data is skipped.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">155</span>
+    <span class="phpdocumentor-element-found-in__line">197</span>
 
     </aside>
 
@@ -2786,7 +2940,7 @@ as `,`-joined terms that must all match. Nested data is skipped.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">118</span>
+    <span class="phpdocumentor-element-found-in__line">160</span>
 
     </aside>
 
@@ -2847,7 +3001,7 @@ as `,`-joined terms that must all match. Nested data is skipped.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">181</span>
+    <span class="phpdocumentor-element-found-in__line">223</span>
 
     </aside>
 
@@ -2901,7 +3055,7 @@ data of a set of cards.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">132</span>
+    <span class="phpdocumentor-element-found-in__line">174</span>
 
     </aside>
 
@@ -2986,6 +3140,7 @@ data of a set of cards.</p>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepository.html#method___construct">__construct()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method___get">__get()</a></li>
                                             <li class="-deprecated"><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_clear">clear()</a></li>
+                                            <li class=""><a href="classes/MTG-Repository-CardRepository.html#method_countCards">countCards()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_create">create()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_delete">delete()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-DatabaseRepositoryTrait.html#method_fetch">fetch()</a></li>
@@ -2998,6 +3153,7 @@ data of a set of cards.</p>
                                             <li class=""><a href="classes/MTG-Repository-CardRepository.html#method_getCards">getCards()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-CardRepository.html#method_getCardsByUuid">getCardsByUuid()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_getIterator">getIterator()</a></li>
+                                            <li class=""><a href="classes/MTG-Repository-CardRepository.html#method_getPrintings">getPrintings()</a></li>
                                             <li class="-deprecated"><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_has">has()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_jsonSerialize">jsonSerialize()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_keys">keys()</a></li>

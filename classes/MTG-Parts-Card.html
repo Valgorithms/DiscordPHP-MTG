@@ -68,6 +68,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/mtg-builders.html" class="">Builders</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/mtg-database.html" class="">Database</a>
                 
             </li>
@@ -77,6 +81,10 @@
             </li>
                     <li>
                 <a href="namespaces/mtg-http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/mtg-modules.html" class="">Modules</a>
                 
             </li>
                     <li>
@@ -144,7 +152,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">135</span>
+    <span class="phpdocumentor-element-found-in__line">136</span>
 
     </aside>
 
@@ -631,6 +639,12 @@ per face, sharing <code class="prettyprint">name</code> and told apart by <code 
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Card.html#property_prices">$prices</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/MTG-Parts-Card.html#property_printedName">$printedName</a>
     <span>
                         &nbsp;: string|null            </span>
@@ -819,28 +833,42 @@ per face, sharing <code class="prettyprint">name</code> and told apart by <code 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/MTG-Parts-Card.html#method_getForeignNamesButton">getForeignNamesButton()</a>
+    <a class="-deprecated" href="classes/MTG-Parts-Card.html#method_getForeignNamesButton">getForeignNamesButton()</a>
     <span>
                                 &nbsp;: <abbr title="\Discord\Builders\Components\Button">Button</abbr>|null    </span>
 </dt>
 <dd>Gets a button to view the foreign names for the card.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/MTG-Parts-Card.html#method_getJsonButton">getJsonButton()</a>
+    <a class="-deprecated" href="classes/MTG-Parts-Card.html#method_getJsonButton">getJsonButton()</a>
     <span>
                                 &nbsp;: <abbr title="\Discord\Builders\Components\Button">Button</abbr>    </span>
 </dt>
 <dd>Gets a button to view the raw JSON of the card.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/MTG-Parts-Card.html#method_getLegalitiesButton">getLegalitiesButton()</a>
+    <a class="-deprecated" href="classes/MTG-Parts-Card.html#method_getLegalitiesButton">getLegalitiesButton()</a>
     <span>
                                 &nbsp;: <abbr title="\Discord\Builders\Components\Button">Button</abbr>|null    </span>
 </dt>
 <dd>Gets a button to view the legal formats for the card.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/MTG-Parts-Card.html#method_getRulingsButton">getRulingsButton()</a>
+    <a class="" href="classes/MTG-Parts-Card.html#method_getPrice">getPrice()</a>
+    <span>
+                                &nbsp;: float|null    </span>
+</dt>
+<dd>Today&#039;s price at one store, or null when it has none.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-Parts-Card.html#method_getPriceCurrency">getPriceCurrency()</a>
+    <span>
+                                &nbsp;: string|null    </span>
+</dt>
+<dd>The currency a store prices in (`USD`, `EUR`), or null when it has no price.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="-deprecated" href="classes/MTG-Parts-Card.html#method_getRulingsButton">getRulingsButton()</a>
     <span>
                                 &nbsp;: <abbr title="\Discord\Builders\Components\Button">Button</abbr>|null    </span>
 </dt>
@@ -848,28 +876,28 @@ per face, sharing <code class="prettyprint">name</code> and told apart by <code 
 grouped by date. Returns null when the card has no rulings.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/MTG-Parts-Card.html#method_getSetButton">getSetButton()</a>
+    <a class="-deprecated" href="classes/MTG-Parts-Card.html#method_getSetButton">getSetButton()</a>
     <span>
                                 &nbsp;: <abbr title="\Discord\Builders\Components\Button">Button</abbr>|null    </span>
 </dt>
 <dd>Gets a button to view the set the card belongs to.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/MTG-Parts-Card.html#method_getViewImageButton">getViewImageButton()</a>
+    <a class="-deprecated" href="classes/MTG-Parts-Card.html#method_getViewImageButton">getViewImageButton()</a>
     <span>
                                 &nbsp;: <abbr title="\Discord\Builders\Components\Button">Button</abbr>|null    </span>
 </dt>
 <dd>Gets a button to view the image of the card.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/MTG-Parts-Card.html#method_normalLayoutContainer">normalLayoutContainer()</a>
+    <a class="-deprecated" href="classes/MTG-Parts-Card.html#method_normalLayoutContainer">normalLayoutContainer()</a>
     <span>
                                 &nbsp;: <abbr title="\Discord\Builders\Components\Container">Container</abbr>    </span>
 </dt>
 <dd>Builds and returns a Container representing the normal layout for a Magic: The Gathering card.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/MTG-Parts-Card.html#method_toContainer">toContainer()</a>
+    <a class="-deprecated" href="classes/MTG-Parts-Card.html#method_toContainer">toContainer()</a>
     <span>
                                 &nbsp;: <abbr title="\Discord\Builders\Components\Container">Container</abbr>|null    </span>
 </dt>
@@ -976,7 +1004,7 @@ longer than a message can hold.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">149</span>
+    <span class="phpdocumentor-element-found-in__line">150</span>
 
     </aside>
 
@@ -1007,7 +1035,7 @@ longer than a message can hold.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">156</span>
+    <span class="phpdocumentor-element-found-in__line">157</span>
 
     </aside>
 
@@ -1038,7 +1066,7 @@ longer than a message can hold.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">163</span>
+    <span class="phpdocumentor-element-found-in__line">164</span>
 
     </aside>
 
@@ -1069,7 +1097,7 @@ longer than a message can hold.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">142</span>
+    <span class="phpdocumentor-element-found-in__line">143</span>
 
     </aside>
 
@@ -3641,6 +3669,45 @@ longer than a message can hold.</dd>
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_prices">
+        $prices
+        <a href="classes/MTG-Parts-Card.html#property_prices" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$prices</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Today's prices, <code class="prettyprint">medium → provider → {currency, retail|buylist → finish → price}</code>, when the price build is available.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_printedName">
         $printedName
         <a href="classes/MTG-Parts-Card.html#property_printedName" class="headerlink"><i class="fas fa-link"></i></a>
@@ -4743,7 +4810,7 @@ longer than a message can hold.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">168</span>
+    <span class="phpdocumentor-element-found-in__line">169</span>
 
     </aside>
 
@@ -4846,6 +4913,8 @@ longer than a message can hold.</dd>
     &#039;count&#039;,
     &#039;isFoil&#039;,
     &#039;isEtched&#039;,
+    // From the price build, when it is available.
+    &#039;prices&#039;,
 ]</span></code>
 
     
@@ -4886,7 +4955,7 @@ longer than a message can hold.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">267</span>
+    <span class="phpdocumentor-element-found-in__line">271</span>
 
     </aside>
 
@@ -4931,7 +5000,7 @@ longer than a message can hold.</dd>
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+            -deprecated                                            "
 >
     <h4 class="phpdocumentor-element__name" id="method_getForeignNamesButton">
         getForeignNamesButton()
@@ -4941,17 +5010,24 @@ longer than a message can hold.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">606</span>
+    <span class="phpdocumentor-element-found-in__line">664</span>
 
     </aside>
 
         <p class="phpdocumentor-summary">Gets a button to view the foreign names for the card.</p>
 
-    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <code class="phpdocumentor-code phpdocumentor-signature -deprecated">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getForeignNamesButton</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Discord\Parts\Interactions\Interaction">Interaction</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$interaction</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Discord\Builders\Components\Button">Button</abbr>|null</span></code>
 
     <div class="phpdocumentor-label-line">
+        </div>
+                <div class="phpdocumentor-admonition">
+        <svg class="phpdocumentor-admonition__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <article>
+                <p>Use <a href="classes/MTG-Builders-CardMessageBuilder.html#method_foreignNames"><abbr title="\MTG\Builders\CardMessageBuilder::foreignNames()">CardMessageBuilder::foreignNames()</abbr></a>, whose buttons survive restarts.</p>
+
+            </article>
         </div>
     
     
@@ -4994,7 +5070,7 @@ longer than a message can hold.</dd>
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+            -deprecated                                            "
 >
     <h4 class="phpdocumentor-element__name" id="method_getJsonButton">
         getJsonButton()
@@ -5004,17 +5080,24 @@ longer than a message can hold.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">520</span>
+    <span class="phpdocumentor-element-found-in__line">572</span>
 
     </aside>
 
         <p class="phpdocumentor-summary">Gets a button to view the raw JSON of the card.</p>
 
-    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <code class="phpdocumentor-code phpdocumentor-signature -deprecated">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getJsonButton</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Discord\Parts\Interactions\Interaction">Interaction</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$interaction</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Discord\Builders\Components\Button">Button</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
+        </div>
+                <div class="phpdocumentor-admonition">
+        <svg class="phpdocumentor-admonition__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <article>
+                <p>Use <a href="classes/MTG-Builders-CardMessageBuilder.html#method_card"><abbr title="\MTG\Builders\CardMessageBuilder::card()">CardMessageBuilder::card()</abbr></a> (its JSON button), whose buttons survive restarts.</p>
+
+            </article>
         </div>
     
     
@@ -5057,7 +5140,7 @@ longer than a message can hold.</dd>
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+            -deprecated                                            "
 >
     <h4 class="phpdocumentor-element__name" id="method_getLegalitiesButton">
         getLegalitiesButton()
@@ -5067,17 +5150,24 @@ longer than a message can hold.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">638</span>
+    <span class="phpdocumentor-element-found-in__line">698</span>
 
     </aside>
 
         <p class="phpdocumentor-summary">Gets a button to view the legal formats for the card.</p>
 
-    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <code class="phpdocumentor-code phpdocumentor-signature -deprecated">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getLegalitiesButton</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Discord\Parts\Interactions\Interaction">Interaction</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$interaction</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Discord\Builders\Components\Button">Button</abbr>|null</span></code>
 
     <div class="phpdocumentor-label-line">
+        </div>
+                <div class="phpdocumentor-admonition">
+        <svg class="phpdocumentor-admonition__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <article>
+                <p>Use <a href="classes/MTG-Builders-CardMessageBuilder.html#method_legalities"><abbr title="\MTG\Builders\CardMessageBuilder::legalities()">CardMessageBuilder::legalities()</abbr></a>, whose buttons survive restarts.</p>
+
+            </article>
         </div>
     
     
@@ -5122,6 +5212,152 @@ longer than a message can hold.</dd>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getPrice">
+        getPrice()
+        <a href="classes/MTG-Parts-Card.html#method_getPrice" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">284</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Today&#039;s price at one store, or null when it has none.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getPrice</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$provider</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">'tcgplayer'</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$finish</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">'normal'</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$kind</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">'retail'</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">float|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$provider</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">'tcgplayer'</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p><code class="prettyprint">tcgplayer</code>, <code class="prettyprint">cardkingdom</code>, <code class="prettyprint">cardmarket</code>, <code class="prettyprint">manapool</code> or <code class="prettyprint">cardhoarder</code> (MTGO).</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$finish</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">'normal'</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p><code class="prettyprint">normal</code>, <code class="prettyprint">foil</code> or <code class="prettyprint">etched</code>.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$kind</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">'retail'</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p><code class="prettyprint">retail</code>, or <code class="prettyprint">buylist</code> (what the store pays).</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getPrice_tags">
+        Tags
+        <a href="classes/MTG-Parts-Card.html#method_getPrice_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">float|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getPriceCurrency">
+        getPriceCurrency()
+        <a href="classes/MTG-Parts-Card.html#method_getPriceCurrency" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">304</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The currency a store prices in (`USD`, `EUR`), or null when it has no price.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getPriceCurrency</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$provider</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$provider</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getPriceCurrency_tags">
+        Tags
+        <a href="classes/MTG-Parts-Card.html#method_getPriceCurrency_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+            -deprecated                                            "
+>
     <h4 class="phpdocumentor-element__name" id="method_getRulingsButton">
         getRulingsButton()
         <a href="classes/MTG-Parts-Card.html#method_getRulingsButton" class="headerlink"><i class="fas fa-link"></i></a>
@@ -5130,18 +5366,25 @@ longer than a message can hold.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">667</span>
+    <span class="phpdocumentor-element-found-in__line">729</span>
 
     </aside>
 
         <p class="phpdocumentor-summary">Builds a button that, when clicked, replies with this card&#039;s rulings
 grouped by date. Returns null when the card has no rulings.</p>
 
-    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <code class="phpdocumentor-code phpdocumentor-signature -deprecated">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getRulingsButton</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Discord\Parts\Interactions\Interaction">Interaction</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$interaction</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Discord\Builders\Components\Button">Button</abbr>|null</span></code>
 
     <div class="phpdocumentor-label-line">
+        </div>
+                <div class="phpdocumentor-admonition">
+        <svg class="phpdocumentor-admonition__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <article>
+                <p>Use <a href="classes/MTG-Builders-CardMessageBuilder.html#method_rulings"><abbr title="\MTG\Builders\CardMessageBuilder::rulings()">CardMessageBuilder::rulings()</abbr></a>, whose buttons survive restarts.</p>
+
+            </article>
         </div>
     
     
@@ -5172,7 +5415,7 @@ grouped by date. Returns null when the card has no rulings.</p>
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+            -deprecated                                            "
 >
     <h4 class="phpdocumentor-element__name" id="method_getSetButton">
         getSetButton()
@@ -5182,17 +5425,24 @@ grouped by date. Returns null when the card has no rulings.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">569</span>
+    <span class="phpdocumentor-element-found-in__line">625</span>
 
     </aside>
 
         <p class="phpdocumentor-summary">Gets a button to view the set the card belongs to.</p>
 
-    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <code class="phpdocumentor-code phpdocumentor-signature -deprecated">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getSetButton</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type"><abbr title="\Discord\Parts\Interactions\Interaction">Interaction</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$interaction</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Discord\Builders\Components\Button">Button</abbr>|null</span></code>
 
     <div class="phpdocumentor-label-line">
+        </div>
+                <div class="phpdocumentor-admonition">
+        <svg class="phpdocumentor-admonition__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <article>
+                <p>Use <a href="classes/MTG-Builders-CardMessageBuilder.html#method_card"><abbr title="\MTG\Builders\CardMessageBuilder::card()">CardMessageBuilder::card()</abbr></a> (its Set button), whose buttons survive restarts.</p>
+
+            </article>
         </div>
     
     
@@ -5237,7 +5487,7 @@ grouped by date. Returns null when the card has no rulings.</p>
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+            -deprecated                                            "
 >
     <h4 class="phpdocumentor-element__name" id="method_getViewImageButton">
         getViewImageButton()
@@ -5247,17 +5497,24 @@ grouped by date. Returns null when the card has no rulings.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">544</span>
+    <span class="phpdocumentor-element-found-in__line">598</span>
 
     </aside>
 
         <p class="phpdocumentor-summary">Gets a button to view the image of the card.</p>
 
-    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <code class="phpdocumentor-code phpdocumentor-signature -deprecated">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getViewImageButton</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Discord\Parts\Interactions\Interaction">Interaction</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$interaction</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Discord\Builders\Components\Button">Button</abbr>|null</span></code>
 
     <div class="phpdocumentor-label-line">
+        </div>
+                <div class="phpdocumentor-admonition">
+        <svg class="phpdocumentor-admonition__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <article>
+                <p>Use <a href="classes/MTG-Builders-CardMessageBuilder.html#method_card"><abbr title="\MTG\Builders\CardMessageBuilder::card()">CardMessageBuilder::card()</abbr></a> (its Image button), whose buttons survive restarts.</p>
+
+            </article>
         </div>
     
     
@@ -5300,7 +5557,7 @@ grouped by date. Returns null when the card has no rulings.</p>
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+            -deprecated                                            "
 >
     <h4 class="phpdocumentor-element__name" id="method_normalLayoutContainer">
         normalLayoutContainer()
@@ -5310,17 +5567,24 @@ grouped by date. Returns null when the card has no rulings.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">461</span>
+    <span class="phpdocumentor-element-found-in__line">511</span>
 
     </aside>
 
         <p class="phpdocumentor-summary">Builds and returns a Container representing the normal layout for a Magic: The Gathering card.</p>
 
-    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <code class="phpdocumentor-code phpdocumentor-signature -deprecated">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">normalLayoutContainer</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type"><abbr title="\Discord\Parts\Interactions\Interaction">Interaction</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$interaction</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Discord\Builders\Components\Container">Container</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
+        </div>
+                <div class="phpdocumentor-admonition">
+        <svg class="phpdocumentor-admonition__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <article>
+                <p>Use <a href="classes/MTG-Builders-CardMessageBuilder.html#method_card"><abbr title="\MTG\Builders\CardMessageBuilder::card()">CardMessageBuilder::card()</abbr></a>, whose buttons survive restarts.</p>
+
+            </article>
         </div>
     
     
@@ -5365,7 +5629,7 @@ grouped by date. Returns null when the card has no rulings.</p>
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+            -deprecated                                            "
 >
     <h4 class="phpdocumentor-element__name" id="method_toContainer">
         toContainer()
@@ -5375,17 +5639,24 @@ grouped by date. Returns null when the card has no rulings.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">437</span>
+    <span class="phpdocumentor-element-found-in__line">485</span>
 
     </aside>
 
         <p class="phpdocumentor-summary">Converts the card to a container with components.</p>
 
-    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <code class="phpdocumentor-code phpdocumentor-signature -deprecated">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">toContainer</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type"><abbr title="\Discord\Parts\Interactions\Interaction">Interaction</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$interaction</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Discord\Builders\Components\Container">Container</abbr>|null</span></code>
 
     <div class="phpdocumentor-label-line">
+        </div>
+                <div class="phpdocumentor-admonition">
+        <svg class="phpdocumentor-admonition__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <article>
+                <p>Use <a href="classes/MTG-Builders-CardMessageBuilder.html#method_card"><abbr title="\MTG\Builders\CardMessageBuilder::card()">CardMessageBuilder::card()</abbr></a>, whose buttons survive restarts.</p>
+
+            </article>
         </div>
     
     
@@ -5440,7 +5711,7 @@ grouped by date. Returns null when the card has no rulings.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">276</span>
+    <span class="phpdocumentor-element-found-in__line">322</span>
 
     </aside>
 
@@ -5493,7 +5764,7 @@ grouped by date. Returns null when the card has no rulings.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">288</span>
+    <span class="phpdocumentor-element-found-in__line">334</span>
 
     </aside>
 
@@ -5546,7 +5817,7 @@ grouped by date. Returns null when the card has no rulings.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">398</span>
+    <span class="phpdocumentor-element-found-in__line">444</span>
 
     </aside>
 
@@ -5599,7 +5870,7 @@ grouped by date. Returns null when the card has no rulings.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">376</span>
+    <span class="phpdocumentor-element-found-in__line">422</span>
 
     </aside>
 
@@ -5653,7 +5924,7 @@ double-faced card shares its front&#039;s Scryfall id.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">323</span>
+    <span class="phpdocumentor-element-found-in__line">369</span>
 
     </aside>
 
@@ -5706,7 +5977,7 @@ double-faced card shares its front&#039;s Scryfall id.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">303</span>
+    <span class="phpdocumentor-element-found-in__line">349</span>
 
     </aside>
 
@@ -5760,7 +6031,7 @@ legalities by format; each entry becomes a {@see Legality}.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">363</span>
+    <span class="phpdocumentor-element-found-in__line">409</span>
 
     </aside>
 
@@ -5813,7 +6084,7 @@ legalities by format; each entry becomes a {@see Legality}.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">337</span>
+    <span class="phpdocumentor-element-found-in__line">383</span>
 
     </aside>
 
@@ -5866,7 +6137,7 @@ legalities by format; each entry becomes a {@see Legality}.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">351</span>
+    <span class="phpdocumentor-element-found-in__line">397</span>
 
     </aside>
 
@@ -5919,7 +6190,7 @@ legalities by format; each entry becomes a {@see Legality}.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">417</span>
+    <span class="phpdocumentor-element-found-in__line">463</span>
 
     </aside>
 
@@ -5979,7 +6250,7 @@ legalities by format; each entry becomes a {@see Legality}.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Card.php"><a href="files/src-mtg-parts-card.html"><abbr title="src/MTG/Parts/Card.php">Card.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">700</span>
+    <span class="phpdocumentor-element-found-in__line">762</span>
 
     </aside>
 
@@ -6150,6 +6421,7 @@ longer than a message can hold.</p>
                                                     <li class=""><a href="classes/MTG-Parts-Card.html#property_originalType">$originalType</a></li>
                                                     <li class=""><a href="classes/MTG-Parts-Card.html#property_otherFaceIds">$otherFaceIds</a></li>
                                                     <li class=""><a href="classes/MTG-Parts-Card.html#property_power">$power</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Card.html#property_prices">$prices</a></li>
                                                     <li class=""><a href="classes/MTG-Parts-Card.html#property_printedName">$printedName</a></li>
                                                     <li class=""><a href="classes/MTG-Parts-Card.html#property_printedText">$printedText</a></li>
                                                     <li class=""><a href="classes/MTG-Parts-Card.html#property_printedType">$printedType</a></li>
@@ -6186,14 +6458,16 @@ longer than a message can hold.</p>
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/MTG-Parts-Card.html#method_getForeignNamesButton">getForeignNamesButton()</a></li>
-                                            <li class=""><a href="classes/MTG-Parts-Card.html#method_getJsonButton">getJsonButton()</a></li>
-                                            <li class=""><a href="classes/MTG-Parts-Card.html#method_getLegalitiesButton">getLegalitiesButton()</a></li>
-                                            <li class=""><a href="classes/MTG-Parts-Card.html#method_getRulingsButton">getRulingsButton()</a></li>
-                                            <li class=""><a href="classes/MTG-Parts-Card.html#method_getSetButton">getSetButton()</a></li>
-                                            <li class=""><a href="classes/MTG-Parts-Card.html#method_getViewImageButton">getViewImageButton()</a></li>
-                                            <li class=""><a href="classes/MTG-Parts-Card.html#method_normalLayoutContainer">normalLayoutContainer()</a></li>
-                                            <li class=""><a href="classes/MTG-Parts-Card.html#method_toContainer">toContainer()</a></li>
+                                            <li class="-deprecated"><a href="classes/MTG-Parts-Card.html#method_getForeignNamesButton">getForeignNamesButton()</a></li>
+                                            <li class="-deprecated"><a href="classes/MTG-Parts-Card.html#method_getJsonButton">getJsonButton()</a></li>
+                                            <li class="-deprecated"><a href="classes/MTG-Parts-Card.html#method_getLegalitiesButton">getLegalitiesButton()</a></li>
+                                            <li class=""><a href="classes/MTG-Parts-Card.html#method_getPrice">getPrice()</a></li>
+                                            <li class=""><a href="classes/MTG-Parts-Card.html#method_getPriceCurrency">getPriceCurrency()</a></li>
+                                            <li class="-deprecated"><a href="classes/MTG-Parts-Card.html#method_getRulingsButton">getRulingsButton()</a></li>
+                                            <li class="-deprecated"><a href="classes/MTG-Parts-Card.html#method_getSetButton">getSetButton()</a></li>
+                                            <li class="-deprecated"><a href="classes/MTG-Parts-Card.html#method_getViewImageButton">getViewImageButton()</a></li>
+                                            <li class="-deprecated"><a href="classes/MTG-Parts-Card.html#method_normalLayoutContainer">normalLayoutContainer()</a></li>
+                                            <li class="-deprecated"><a href="classes/MTG-Parts-Card.html#method_toContainer">toContainer()</a></li>
                                             <li class=""><a href="classes/MTG-Parts-Card.html#method_getForeignDataAttribute">getForeignDataAttribute()</a></li>
                                             <li class=""><a href="classes/MTG-Parts-Card.html#method_getIdentifiersAttribute">getIdentifiersAttribute()</a></li>
                                             <li class=""><a href="classes/MTG-Parts-Card.html#method_getImageEmbedAttribute">getImageEmbedAttribute()</a></li>

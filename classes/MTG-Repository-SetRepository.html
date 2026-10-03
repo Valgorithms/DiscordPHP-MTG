@@ -68,6 +68,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/mtg-builders.html" class="">Builders</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/mtg-database.html" class="">Database</a>
                 
             </li>
@@ -77,6 +81,10 @@
             </li>
                     <li>
                 <a href="namespaces/mtg-http.html" class="">Http</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/mtg-modules.html" class="">Modules</a>
                 
             </li>
                     <li>
@@ -282,6 +290,20 @@ within the class. If it does, it calls that method with the provided arguments.<
                                 &nbsp;: void    </span>
 </dt>
 <dd>Clears the repository.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-Repository-SetRepository.html#method_countDecks">countDecks()</a>
+    <span>
+                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, int&gt;    </span>
+</dt>
+<dd>How many preconstructed decks MTGJSON has for a set.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-Repository-SetRepository.html#method_countSets">countSets()</a>
+    <span>
+                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, int&gt;    </span>
+</dt>
+<dd>Counts the sets a search matches, ignoring `page` and `pageSize`.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_create">create()</a>
@@ -1021,6 +1043,136 @@ This was changed to use the <code class="prettyprint">__Collection__method</code
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_countDecks">
+        countDecks()
+        <a href="classes/MTG-Repository-SetRepository.html#method_countDecks" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/SetRepository.php"><a href="files/src-mtg-repository-setrepository.html"><abbr title="src/MTG/Repository/SetRepository.php">SetRepository.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">143</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">How many preconstructed decks MTGJSON has for a set.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">countDecks</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/MTG-Parts-Set.html"><abbr title="\MTG\Parts\Set">Set</abbr></a>|string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$set</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, int&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$set</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/MTG-Parts-Set.html"><abbr title="\MTG\Parts\Set">Set</abbr></a>|string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>A <a href="classes/MTG-Parts-Set.html"><abbr title="\MTG\Parts\Set">Set</abbr></a> or a set code.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_countDecks_tags">
+        Tags
+        <a href="classes/MTG-Repository-SetRepository.html#method_countDecks_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, int&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_countSets">
+        countSets()
+        <a href="classes/MTG-Repository-SetRepository.html#method_countSets" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/SetRepository.php"><a href="files/src-mtg-repository-setrepository.html"><abbr title="src/MTG/Repository/SetRepository.php">SetRepository.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">91</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Counts the sets a search matches, ignoring `page` and `pageSize`.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">countSets</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$params</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, int&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$params</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">[]</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The same filters as <abbr title="\MTG\Repository\getSets()">getSets()</abbr>.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_countSets_tags">
+        Tags
+        <a href="classes/MTG-Repository-SetRepository.html#method_countSets_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, int&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_create">
         create()
         <a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_create" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1461,7 +1613,7 @@ where the callback returns `true` when given the part.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/SetRepository.php"><a href="files/src-mtg-repository-setrepository.html"><abbr title="src/MTG/Repository/SetRepository.php">SetRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">89</span>
+    <span class="phpdocumentor-element-found-in__line">105</span>
 
     </aside>
 
@@ -1512,7 +1664,7 @@ where the callback returns `true` when given the part.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/SetRepository.php"><a href="files/src-mtg-repository-setrepository.html"><abbr title="src/MTG/Repository/SetRepository.php">SetRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">132</span>
+    <span class="phpdocumentor-element-found-in__line">166</span>
 
     </aside>
 
@@ -1654,7 +1806,7 @@ weighted sheet. Cards from foil sheets have `isFoil` set.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/SetRepository.php"><a href="files/src-mtg-repository-setrepository.html"><abbr title="src/MTG/Repository/SetRepository.php">SetRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">111</span>
+    <span class="phpdocumentor-element-found-in__line">127</span>
 
     </aside>
 
@@ -2651,7 +2803,7 @@ This method is deprecated for userland code but can still be used internally wit
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/SetRepository.php"><a href="files/src-mtg-repository-setrepository.html"><abbr title="src/MTG/Repository/SetRepository.php">SetRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">185</span>
+    <span class="phpdocumentor-element-found-in__line">219</span>
 
     </aside>
 
@@ -2716,7 +2868,7 @@ translations.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/SetRepository.php"><a href="files/src-mtg-repository-setrepository.html"><abbr title="src/MTG/Repository/SetRepository.php">SetRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">169</span>
+    <span class="phpdocumentor-element-found-in__line">203</span>
 
     </aside>
 
@@ -2801,6 +2953,8 @@ translations.</p>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepository.html#method___construct">__construct()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method___get">__get()</a></li>
                                             <li class="-deprecated"><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_clear">clear()</a></li>
+                                            <li class=""><a href="classes/MTG-Repository-SetRepository.html#method_countDecks">countDecks()</a></li>
+                                            <li class=""><a href="classes/MTG-Repository-SetRepository.html#method_countSets">countSets()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_create">create()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_delete">delete()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-DatabaseRepositoryTrait.html#method_fetch">fetch()</a></li>
