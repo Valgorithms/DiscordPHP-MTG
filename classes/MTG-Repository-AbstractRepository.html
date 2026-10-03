@@ -68,6 +68,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/mtg-database.html" class="">Database</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/mtg-helpers.html" class="">Helpers</a>
                 
             </li>
@@ -145,17 +149,19 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/AbstractRepository.php"><a href="files/src-mtg-repository-abstractrepository.html"><abbr title="src/MTG/Repository/AbstractRepository.php">AbstractRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
             <p class="phpdocumentor-summary">Base class for the MTG read-only repositories: DiscordPHP&#039;s
 {@see DiscordAbstractRepository} behaviour (keyed, cached collection of
-Parts) backed by {@see \MTG\Http\Http} and MTG {@see \MTG\Http\Endpoint}s
-instead of the Discord API. Concrete repositories ({@see CardRepository},
-{@see SetRepository}) declare their endpoint map and Part class.</p>
+Parts) backed by MTGJSON — the {@see \MTG\Http\Http} client for the small
+API files, and the local {@see Database} build for cards and sets.</p>
 
 
+    <section class="phpdocumentor-description"><p>Concrete repositories (<a href="classes/MTG-Repository-CardRepository.html"><abbr title="\MTG\Repository\CardRepository">CardRepository</abbr></a>, <a href="classes/MTG-Repository-SetRepository.html"><abbr title="\MTG\Repository\SetRepository">SetRepository</abbr></a>,
+<a href="classes/MTG-Repository-DeckRepository.html"><abbr title="\MTG\Repository\DeckRepository">DeckRepository</abbr></a>) declare their endpoint map and Part class.</p>
+</section>
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -212,6 +218,13 @@ instead of the Discord API. Concrete repositories ({@see CardRepository},
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/MTG-Repository-AbstractRepository.html#property_database">$database</a>
+    <span>
+                        &nbsp;: <a href="classes/MTG-Database-Database.html"><abbr title="\MTG\Database\Database">Database</abbr></a>            </span>
+</dt>
+<dd>The local MTGJSON build.</dd>
+
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/MTG-Repository-AbstractRepository.html#property_discord">$discord</a>
     <span>
@@ -458,6 +471,44 @@ where the callback returns `true` when given the part.</dd>
             -protected
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_database">
+        $database
+        <a href="classes/MTG-Repository-AbstractRepository.html#property_database" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/AbstractRepository.php"><a href="files/src-mtg-repository-abstractrepository.html"><abbr title="src/MTG/Repository/AbstractRepository.php">AbstractRepository.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">52</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The local MTGJSON build.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/MTG-Database-Database.html"><abbr title="\MTG\Database\Database">Database</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$database</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_discord">
         $discord
         <a href="classes/MTG-Repository-AbstractRepository.html#property_discord" class="headerlink"><i class="fas fa-link"></i></a>
@@ -468,7 +519,7 @@ where the callback returns `true` when given the part.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/AbstractRepository.php"><a href="files/src-mtg-repository-abstractrepository.html"><abbr title="src/MTG/Repository/AbstractRepository.php">AbstractRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">60</span>
 
     </aside>
 
@@ -505,7 +556,7 @@ where the callback returns `true` when given the part.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/AbstractRepository.php"><a href="files/src-mtg-repository-abstractrepository.html"><abbr title="src/MTG/Repository/AbstractRepository.php">AbstractRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
     </aside>
 
@@ -635,7 +686,7 @@ This was changed to use the <code class="prettyprint">__Collection__method</code
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/AbstractRepository.php"><a href="files/src-mtg-repository-abstractrepository.html"><abbr title="src/MTG/Repository/AbstractRepository.php">AbstractRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">60</span>
 
     </aside>
 
@@ -2219,6 +2270,7 @@ This method is deprecated for userland code but can still be used internally wit
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/MTG-Repository-AbstractRepository.html#property_database">$database</a></li>
                                                     <li class=""><a href="classes/MTG-Repository-AbstractRepository.html#property_discord">$discord</a></li>
                                                     <li class=""><a href="classes/MTG-Repository-AbstractRepository.html#property_mtg_http">$mtg_http</a></li>
                                             </ul>

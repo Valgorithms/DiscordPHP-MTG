@@ -68,6 +68,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/mtg-database.html" class="">Database</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/mtg-helpers.html" class="">Helpers</a>
                 
             </li>
@@ -140,12 +144,13 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Represents a Magic: The Gathering set (one object from the API&#039;s `sets`
-response) — its code, name, release date, block and booster configuration.</p>
+            <p class="phpdocumentor-summary">A Magic: The Gathering set — MTGJSON&#039;s Set model, without the card, token,
+deck, booster and sealed product lists (search cards by `setCode`, and
+open boosters with {@see \MTG\Repository\SetRepository::generateBooster()}).</p>
 
 
 
@@ -160,11 +165,11 @@ response) — its code, name, release date, block and booster configuration.</p>
                 <span class="phpdocumentor-tag__name">link</span>
             </dt>
                             <dd class="phpdocumentor-tag-list__definition">
-                                                                                                        <a class="phpdocumentor-tag-link" href="https://docs.magicthegathering.io/#api_v1sets_get"> <p>Set object reference</p>
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://mtgjson.com/data-models/set/"> <p>Set model</p>
  </a>
                                     </dd>
                             <dd class="phpdocumentor-tag-list__definition">
-                                                                                                        <a class="phpdocumentor-tag-link" href="https://docs.magicthegathering.io/#api_v1booster_get"> <p>Generating a booster pack from a set</p>
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://mtgjson.com/data-models/set-list/"> <p>Set List model</p>
  </a>
                                     </dd>
                                 <dt class="phpdocumentor-tag-list__entry">
@@ -198,6 +203,144 @@ response) — its code, name, release date, block and booster configuration.</p>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_baseSetSize">$baseSetSize</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_block">$block</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_code">$code</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_isFoilOnly">$isFoilOnly</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_isForeignOnly">$isForeignOnly</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_isNonFoilOnly">$isNonFoilOnly</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_isOnlineOnly">$isOnlineOnly</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_isPaperOnly">$isPaperOnly</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_isPartialPreview">$isPartialPreview</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_keyruneCode">$keyruneCode</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_languages">$languages</a>
+    <span>
+                        &nbsp;: array&lt;string|int, string&gt;|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_mcmId">$mcmId</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_mcmIdExtras">$mcmIdExtras</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_mcmName">$mcmName</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_mtgoCode">$mtgoCode</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_name">$name</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_parentCode">$parentCode</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_releaseDate">$releaseDate</a>
+    <span>
+                        &nbsp;: <abbr title="\Carbon\Carbon">Carbon</abbr>|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_tcgplayerGroupId">$tcgplayerGroupId</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_tokenSetCode">$tokenSetCode</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_totalSetSize">$totalSetSize</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_translations">$translations</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-Set.html#property_type">$type</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/MTG-Parts-Set.html#property_fillable">$fillable</a>
     <span>
@@ -213,18 +356,18 @@ response) — its code, name, release date, block and booster configuration.</p>
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/MTG-Parts-Set.html#method_getReleaseDateAttribute">getReleaseDateAttribute()</a>
-    <span>
-                                &nbsp;: ?<abbr title="\Carbon\Carbon">Carbon</abbr>|null    </span>
-</dt>
-<dd>Gets the release date of the set.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-Parts-Set.html#method_toContainer">toContainer()</a>
     <span>
                                 &nbsp;: <abbr title="\Discord\Builders\Components\Container">Container</abbr>|null    </span>
 </dt>
 <dd>Converts the set to a container with components.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a class="" href="classes/MTG-Parts-Set.html#method_getReleaseDateAttribute">getReleaseDateAttribute()</a>
+    <span>
+                                &nbsp;: <abbr title="\Carbon\Carbon">Carbon</abbr>|null    </span>
+</dt>
+<dd>Gets the release date of the set.</dd>
 
     </dl>
 
@@ -243,6 +386,903 @@ response) — its code, name, release date, block and booster configuration.</p>
         class="
             phpdocumentor-element
             -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_baseSetSize">
+        $baseSetSize
+        <a href="classes/MTG-Parts-Set.html#property_baseSetSize" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$baseSetSize</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The number of cards in the set, excluding promotional or special cards.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_block">
+        $block
+        <a href="classes/MTG-Parts-Set.html#property_block" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$block</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The block name the set was in.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_code">
+        $code
+        <a href="classes/MTG-Parts-Set.html#property_code" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$code</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The set code for the set.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_isFoilOnly">
+        $isFoilOnly
+        <a href="classes/MTG-Parts-Set.html#property_isFoilOnly" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$isFoilOnly</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>If the set is only available in foil.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_isForeignOnly">
+        $isForeignOnly
+        <a href="classes/MTG-Parts-Set.html#property_isForeignOnly" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$isForeignOnly</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>If the set is available only outside the United States of America.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_isNonFoilOnly">
+        $isNonFoilOnly
+        <a href="classes/MTG-Parts-Set.html#property_isNonFoilOnly" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$isNonFoilOnly</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>If the set is only available in non-foil.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_isOnlineOnly">
+        $isOnlineOnly
+        <a href="classes/MTG-Parts-Set.html#property_isOnlineOnly" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$isOnlineOnly</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>If the set is only available in online game variations.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_isPaperOnly">
+        $isPaperOnly
+        <a href="classes/MTG-Parts-Set.html#property_isPaperOnly" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$isPaperOnly</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>If the set is available only in paper.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_isPartialPreview">
+        $isPartialPreview
+        <a href="classes/MTG-Parts-Set.html#property_isPartialPreview" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$isPartialPreview</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>If the set is still in preview (spoiled). Preview sets do not have complete data.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_keyruneCode">
+        $keyruneCode
+        <a href="classes/MTG-Parts-Set.html#property_keyruneCode" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$keyruneCode</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The matching Keyrune code for set image icons.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_languages">
+        $languages
+        <a href="classes/MTG-Parts-Set.html#property_languages" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, string&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$languages</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The languages the set was printed in.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mcmId">
+        $mcmId
+        <a href="classes/MTG-Parts-Set.html#property_mcmId" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$mcmId</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The Magic Card Market set identifier.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mcmIdExtras">
+        $mcmIdExtras
+        <a href="classes/MTG-Parts-Set.html#property_mcmIdExtras" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$mcmIdExtras</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The split Magic Card Market set identifier if a set is printed in two sets.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mcmName">
+        $mcmName
+        <a href="classes/MTG-Parts-Set.html#property_mcmName" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$mcmName</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The Magic Card Market set name.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mtgoCode">
+        $mtgoCode
+        <a href="classes/MTG-Parts-Set.html#property_mtgoCode" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$mtgoCode</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The set code for the set as it appears on Magic: The Gathering Online.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_name">
+        $name
+        <a href="classes/MTG-Parts-Set.html#property_name" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$name</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The name of the set.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_parentCode">
+        $parentCode
+        <a href="classes/MTG-Parts-Set.html#property_parentCode" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$parentCode</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The parent set code for set variations like promotions, guild kits, etc.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                -read-only                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_releaseDate">
+        $releaseDate
+        <a href="classes/MTG-Parts-Set.html#property_releaseDate" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\Carbon\Carbon">Carbon</abbr>|null</span>
+    <span class="phpdocumentor-signature__name">$releaseDate</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The release date of the set.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_tcgplayerGroupId">
+        $tcgplayerGroupId
+        <a href="classes/MTG-Parts-Set.html#property_tcgplayerGroupId" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$tcgplayerGroupId</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The group identifier of the set on TCGplayer.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_tokenSetCode">
+        $tokenSetCode
+        <a href="classes/MTG-Parts-Set.html#property_tokenSetCode" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$tokenSetCode</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The tokens set code, formatted in uppercase.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_totalSetSize">
+        $totalSetSize
+        <a href="classes/MTG-Parts-Set.html#property_totalSetSize" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$totalSetSize</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The total number of cards in the set, including promotional and related supplemental products.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_translations">
+        $translations
+        <a href="classes/MTG-Parts-Set.html#property_translations" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$translations</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The translated set name by language.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_type">
+        $type
+        <a href="classes/MTG-Parts-Set.html#property_type" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$type</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The expansion type of the set (<code class="prettyprint">core</code>, <code class="prettyprint">expansion</code>, <code class="prettyprint">masters</code>, <code class="prettyprint">commander</code>, <code class="prettyprint">promo</code>, …).</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
             -protected
                                                                     "
 >
@@ -256,7 +1296,7 @@ response) — its code, name, release date, block and booster configuration.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">60</span>
 
     </aside>
 
@@ -266,20 +1306,7 @@ response) — its code, name, release date, block and booster configuration.</p>
         <span class="phpdocumentor-signature__visibility">protected</span>
             <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">$fillable</span>
-     = <span class="phpdocumentor-signature__default-value">[
-    &#039;name&#039;,
-    &#039;block&#039;,
-    // The fields below are also part of the response (if not null), but cannot currently be used as query parameters
-    &#039;code&#039;,
-    &#039;gathererCode&#039;,
-    &#039;oldCode&#039;,
-    &#039;magicCardsInfoCode&#039;,
-    &#039;releaseDate&#039;,
-    &#039;border&#039;,
-    &#039;expansion&#039;,
-    &#039;onlineOnly&#039;,
-    &#039;booster&#039;,
-]</span></code>
+     = <span class="phpdocumentor-signature__default-value">[&#039;baseSetSize&#039;, &#039;block&#039;, &#039;code&#039;, &#039;isForeignOnly&#039;, &#039;isFoilOnly&#039;, &#039;isNonFoilOnly&#039;, &#039;isOnlineOnly&#039;, &#039;isPaperOnly&#039;, &#039;isPartialPreview&#039;, &#039;keyruneCode&#039;, &#039;languages&#039;, &#039;mcmId&#039;, &#039;mcmIdExtras&#039;, &#039;mcmName&#039;, &#039;mtgoCode&#039;, &#039;name&#039;, &#039;parentCode&#039;, &#039;releaseDate&#039;, &#039;tcgplayerGroupId&#039;, &#039;tokenSetCode&#039;, &#039;totalSetSize&#039;, &#039;translations&#039;, &#039;type&#039;]</span></code>
 
     
     
@@ -316,59 +1343,6 @@ response) — its code, name, release date, block and booster configuration.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getReleaseDateAttribute">
-        getReleaseDateAttribute()
-        <a href="classes/MTG-Parts-Set.html#method_getReleaseDateAttribute" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">57</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Gets the release date of the set.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getReleaseDateAttribute</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">?<abbr title="\Carbon\Carbon">Carbon</abbr>|null</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="method_getReleaseDateAttribute_tags">
-        Tags
-        <a href="classes/MTG-Parts-Set.html#method_getReleaseDateAttribute_tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                    <dt class="phpdocumentor-tag-list__entry">
-                <span class="phpdocumentor-tag__name">since</span>
-            </dt>
-                            <dd class="phpdocumentor-tag-list__definition">
-                                            <span class="phpdocumentor-tag-link">0.5.0</span>
-                                                                                                        
-                                    </dd>
-                        </dl>
-
-        
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">?<abbr title="\Carbon\Carbon">Carbon</abbr>|null</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_toContainer">
         toContainer()
         <a href="classes/MTG-Parts-Set.html#method_toContainer" class="headerlink"><i class="fas fa-link"></i></a>
@@ -377,7 +1351,7 @@ response) — its code, name, release date, block and booster configuration.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">105</span>
 
     </aside>
 
@@ -416,6 +1390,59 @@ response) — its code, name, release date, block and booster configuration.</p>
             </section>
 
 </article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getReleaseDateAttribute">
+        getReleaseDateAttribute()
+        <a href="classes/MTG-Parts-Set.html#method_getReleaseDateAttribute" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/Set.php"><a href="files/src-mtg-parts-set.html"><abbr title="src/MTG/Parts/Set.php">Set.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">93</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Gets the release date of the set.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">getReleaseDateAttribute</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Carbon\Carbon">Carbon</abbr>|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getReleaseDateAttribute_tags">
+        Tags
+        <a href="classes/MTG-Parts-Set.html#method_getReleaseDateAttribute_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">0.5.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Carbon\Carbon">Carbon</abbr>|null</span>
+            </section>
+
+</article>
             </section>
 
         
@@ -438,6 +1465,29 @@ response) — its code, name, release date, block and booster configuration.</p>
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_baseSetSize">$baseSetSize</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_block">$block</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_code">$code</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_isFoilOnly">$isFoilOnly</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_isForeignOnly">$isForeignOnly</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_isNonFoilOnly">$isNonFoilOnly</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_isOnlineOnly">$isOnlineOnly</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_isPaperOnly">$isPaperOnly</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_isPartialPreview">$isPartialPreview</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_keyruneCode">$keyruneCode</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_languages">$languages</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_mcmId">$mcmId</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_mcmIdExtras">$mcmIdExtras</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_mcmName">$mcmName</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_mtgoCode">$mtgoCode</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_name">$name</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_parentCode">$parentCode</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_releaseDate">$releaseDate</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_tcgplayerGroupId">$tcgplayerGroupId</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_tokenSetCode">$tokenSetCode</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_totalSetSize">$totalSetSize</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_translations">$translations</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-Set.html#property_type">$type</a></li>
                                                     <li class=""><a href="classes/MTG-Parts-Set.html#property_fillable">$fillable</a></li>
                                             </ul>
                 </li>
@@ -445,8 +1495,8 @@ response) — its code, name, release date, block and booster configuration.</p>
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/MTG-Parts-Set.html#method_getReleaseDateAttribute">getReleaseDateAttribute()</a></li>
                                             <li class=""><a href="classes/MTG-Parts-Set.html#method_toContainer">toContainer()</a></li>
+                                            <li class=""><a href="classes/MTG-Parts-Set.html#method_getReleaseDateAttribute">getReleaseDateAttribute()</a></li>
                                     </ul>
             </li>
                     </ul>

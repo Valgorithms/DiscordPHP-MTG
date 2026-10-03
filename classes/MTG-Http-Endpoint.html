@@ -68,6 +68,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/mtg-database.html" class="">Database</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/mtg-helpers.html" class="">Helpers</a>
                 
             </li>
@@ -143,16 +147,21 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">The route table for the &quot;Magic: The Gathering Developers&quot; API — one constant
-per endpoint (`cards`, `sets`, `sets/:id/booster`, `types`, `formats`, …),
-with `:param` placeholders bound via {@see EndpointTrait}. Same mechanics as
-DiscordPHP&#039;s own `Endpoint`, pointed at `api.magicthegathering.io`.</p>
+            <p class="phpdocumentor-summary">The route table for the MTGJSON v5 API — one constant per file the API
+serves under `https://mtgjson.com/api/v5/`, with `:param` placeholders
+bound via {@see EndpointTrait}. Same mechanics as DiscordPHP&#039;s own
+`Endpoint`, pointed at `mtgjson.com`.</p>
 
 
+    <section class="phpdocumentor-description"><p>MTGJSON is a file API: every route is a static JSON document wrapped as
+<code class="prettyprint">{&quot;meta&quot;: {...}, &quot;data&quot;: ...}</code>, rebuilt daily. The bulk files (marked
+below) run from tens to hundreds of megabytes; card and set queries are
+answered from the SQLite build instead (see <a href="classes/MTG-Database-Database.html"><abbr title="\MTG\Database\Database">Database</abbr></a>).</p>
+</section>
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -162,6 +171,17 @@ DiscordPHP&#039;s own `Endpoint`, pointed at `api.magicthegathering.io`.</p>
     </h5>
     <dl class="phpdocumentor-tag-list">
                     <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">link</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://mtgjson.com/downloads/all-files/"> <p>All files</p>
+ </a>
+                                    </dd>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://mtgjson.com/api/v5/"> <p>The API root</p>
+ </a>
+                                    </dd>
+                                <dt class="phpdocumentor-tag-list__entry">
                 <span class="phpdocumentor-tag__name">see</span>
             </dt>
                             <dd class="phpdocumentor-tag-list__definition">
@@ -207,64 +227,113 @@ DiscordPHP&#039;s own `Endpoint`, pointed at `api.magicthegathering.io`.</p>
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/MTG-Http-Endpoint.html#constant_CARD">CARD</a>
+    <a class="" href="classes/MTG-Http-Endpoint.html#constant_ALL_IDENTIFIERS">ALL_IDENTIFIERS</a>
     <span>
-        &nbsp;: mixed&nbsp;= self::CARDS . &#039;/:id&#039;                            </span>
+        &nbsp;: mixed&nbsp;= &#039;AllIdentifiers.json&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/MTG-Http-Endpoint.html#constant_CARDS">CARDS</a>
+    <a class="" href="classes/MTG-Http-Endpoint.html#constant_ALL_PRICES">ALL_PRICES</a>
     <span>
-        &nbsp;: mixed&nbsp;= &#039;cards&#039;                            </span>
+        &nbsp;: mixed&nbsp;= &#039;AllPrices.json&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/MTG-Http-Endpoint.html#constant_FORMATS">FORMATS</a>
+    <a class="" href="classes/MTG-Http-Endpoint.html#constant_ALL_PRICES_TODAY">ALL_PRICES_TODAY</a>
     <span>
-        &nbsp;: mixed&nbsp;= &#039;formats&#039;                            </span>
+        &nbsp;: mixed&nbsp;= &#039;AllPricesToday.json&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/MTG-Http-Endpoint.html#constant_ALL_PRINTINGS">ALL_PRINTINGS</a>
+    <span>
+        &nbsp;: mixed&nbsp;= &#039;AllPrintings.json&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/MTG-Http-Endpoint.html#constant_ALL_PRINTINGS_SQLITE_GZ">ALL_PRINTINGS_SQLITE_GZ</a>
+    <span>
+        &nbsp;: mixed&nbsp;= &#039;AllPrintings.sqlite.gz&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/MTG-Http-Endpoint.html#constant_ATOMIC_CARDS">ATOMIC_CARDS</a>
+    <span>
+        &nbsp;: mixed&nbsp;= &#039;AtomicCards.json&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/MTG-Http-Endpoint.html#constant_CARD_TYPES">CARD_TYPES</a>
+    <span>
+        &nbsp;: mixed&nbsp;= &#039;CardTypes.json&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/MTG-Http-Endpoint.html#constant_COMPILED_LIST">COMPILED_LIST</a>
+    <span>
+        &nbsp;: mixed&nbsp;= &#039;CompiledList.json&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/MTG-Http-Endpoint.html#constant_DECK">DECK</a>
+    <span>
+        &nbsp;: mixed&nbsp;= &#039;decks/:file_name.json&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/MTG-Http-Endpoint.html#constant_DECK_LIST">DECK_LIST</a>
+    <span>
+        &nbsp;: mixed&nbsp;= &#039;DeckList.json&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/MTG-Http-Endpoint.html#constant_ENUM_VALUES">ENUM_VALUES</a>
+    <span>
+        &nbsp;: mixed&nbsp;= &#039;EnumValues.json&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/MTG-Http-Endpoint.html#constant_FORMAT">FORMAT</a>
+    <span>
+        &nbsp;: mixed&nbsp;= &#039;:format.json&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/MTG-Http-Endpoint.html#constant_KEYWORDS">KEYWORDS</a>
+    <span>
+        &nbsp;: mixed&nbsp;= &#039;Keywords.json&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/MTG-Http-Endpoint.html#constant_META">META</a>
+    <span>
+        &nbsp;: mixed&nbsp;= &#039;Meta.json&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/MTG-Http-Endpoint.html#constant_REGEX">REGEX</a>
     <span>
-        &nbsp;: string&nbsp;= &#039;/:([^\/]*)/&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;/:([A-Za-z0-9_]+)/&#039;                            </span>
 </dt>
-<dd>Regex to identify parameters in endpoints.</dd>
+<dd>Regex to identify parameters in endpoints. Stops at `.` so that
+`:code.json` binds `code`, not `code.json`.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/MTG-Http-Endpoint.html#constant_SET">SET</a>
     <span>
-        &nbsp;: mixed&nbsp;= self::SETS . &#039;/:id&#039;                            </span>
+        &nbsp;: mixed&nbsp;= &#039;:code.json&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/MTG-Http-Endpoint.html#constant_SETS">SETS</a>
+    <a class="" href="classes/MTG-Http-Endpoint.html#constant_SET_LIST">SET_LIST</a>
     <span>
-        &nbsp;: mixed&nbsp;= &#039;sets&#039;                            </span>
+        &nbsp;: mixed&nbsp;= &#039;SetList.json&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/MTG-Http-Endpoint.html#constant_SETS_BOOSTER">SETS_BOOSTER</a>
+    <a class="" href="classes/MTG-Http-Endpoint.html#constant_TCGPLAYER_SKUS">TCGPLAYER_SKUS</a>
     <span>
-        &nbsp;: mixed&nbsp;= self::SETS . &#039;/:id/booster&#039;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/MTG-Http-Endpoint.html#constant_SUBTYPES">SUBTYPES</a>
-    <span>
-        &nbsp;: mixed&nbsp;= &#039;subtypes&#039;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/MTG-Http-Endpoint.html#constant_SUPERTYPES">SUPERTYPES</a>
-    <span>
-        &nbsp;: mixed&nbsp;= &#039;supertypes&#039;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/MTG-Http-Endpoint.html#constant_TYPES">TYPES</a>
-    <span>
-        &nbsp;: mixed&nbsp;= &#039;types&#039;                            </span>
+        &nbsp;: mixed&nbsp;= &#039;TcgplayerSkus.json&#039;                            </span>
 </dt>
 
     </dl>
@@ -332,16 +401,16 @@ to the end of the endpoint with `http_build_query`.</dd>
 
         </h3>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_CARD">
-        CARD
-        <a href="classes/MTG-Http-Endpoint.html#constant_CARD" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_ALL_IDENTIFIERS">
+        ALL_IDENTIFIERS
+        <a href="classes/MTG-Http-Endpoint.html#constant_ALL_IDENTIFIERS" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">64</span>
 
     </aside>
 
@@ -350,8 +419,8 @@ to the end of the endpoint with `http_build_query`.</dd>
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">CARD</span>
-    = <span class="phpdocumentor-signature__default-value">self::CARDS . &#039;/:id&#039;</span>
+    <span class="phpdocumentor-signature__name">ALL_IDENTIFIERS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;AllIdentifiers.json&#039;</span>
 </code>
 
 
@@ -362,16 +431,16 @@ to the end of the endpoint with `http_build_query`.</dd>
         
     </article>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_CARDS">
-        CARDS
-        <a href="classes/MTG-Http-Endpoint.html#constant_CARDS" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_ALL_PRICES">
+        ALL_PRICES
+        <a href="classes/MTG-Http-Endpoint.html#constant_ALL_PRICES" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
     </aside>
 
@@ -380,8 +449,8 @@ to the end of the endpoint with `http_build_query`.</dd>
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">CARDS</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;cards&#039;</span>
+    <span class="phpdocumentor-signature__name">ALL_PRICES</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;AllPrices.json&#039;</span>
 </code>
 
 
@@ -392,9 +461,189 @@ to the end of the endpoint with `http_build_query`.</dd>
         
     </article>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_FORMATS">
-        FORMATS
-        <a href="classes/MTG-Http-Endpoint.html#constant_FORMATS" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_ALL_PRICES_TODAY">
+        ALL_PRICES_TODAY
+        <a href="classes/MTG-Http-Endpoint.html#constant_ALL_PRICES_TODAY" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">68</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ALL_PRICES_TODAY</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;AllPricesToday.json&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ALL_PRINTINGS">
+        ALL_PRINTINGS
+        <a href="classes/MTG-Http-Endpoint.html#constant_ALL_PRINTINGS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">60</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ALL_PRINTINGS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;AllPrintings.json&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ALL_PRINTINGS_SQLITE_GZ">
+        ALL_PRINTINGS_SQLITE_GZ
+        <a href="classes/MTG-Http-Endpoint.html#constant_ALL_PRINTINGS_SQLITE_GZ" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">62</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ALL_PRINTINGS_SQLITE_GZ</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;AllPrintings.sqlite.gz&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ATOMIC_CARDS">
+        ATOMIC_CARDS
+        <a href="classes/MTG-Http-Endpoint.html#constant_ATOMIC_CARDS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">66</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ATOMIC_CARDS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;AtomicCards.json&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_CARD_TYPES">
+        CARD_TYPES
+        <a href="classes/MTG-Http-Endpoint.html#constant_CARD_TYPES" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">52</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">CARD_TYPES</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;CardTypes.json&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_COMPILED_LIST">
+        COMPILED_LIST
+        <a href="classes/MTG-Http-Endpoint.html#constant_COMPILED_LIST" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">58</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">COMPILED_LIST</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;CompiledList.json&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_DECK">
+        DECK
+        <a href="classes/MTG-Http-Endpoint.html#constant_DECK" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
@@ -410,8 +659,158 @@ to the end of the endpoint with `http_build_query`.</dd>
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">FORMATS</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;formats&#039;</span>
+    <span class="phpdocumentor-signature__name">DECK</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;decks/:file_name.json&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_DECK_LIST">
+        DECK_LIST
+        <a href="classes/MTG-Http-Endpoint.html#constant_DECK_LIST" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">48</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">DECK_LIST</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;DeckList.json&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ENUM_VALUES">
+        ENUM_VALUES
+        <a href="classes/MTG-Http-Endpoint.html#constant_ENUM_VALUES" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">56</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ENUM_VALUES</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;EnumValues.json&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_FORMAT">
+        FORMAT
+        <a href="classes/MTG-Http-Endpoint.html#constant_FORMAT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">75</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">FORMAT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;:format.json&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_KEYWORDS">
+        KEYWORDS
+        <a href="classes/MTG-Http-Endpoint.html#constant_KEYWORDS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">54</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">KEYWORDS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;Keywords.json&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_META">
+        META
+        <a href="classes/MTG-Http-Endpoint.html#constant_META" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">42</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">META</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;Meta.json&#039;</span>
 </code>
 
 
@@ -431,18 +830,19 @@ to the end of the endpoint with `http_build_query`.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Regex to identify parameters in endpoints.</p>
+        <p class="phpdocumentor-summary">Regex to identify parameters in endpoints. Stops at `.` so that
+`:code.json` binds `code`, not `code.json`.</p>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">REGEX</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;/:([^\/]*)/&#039;</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;/:([A-Za-z0-9_]+)/&#039;</span>
 </code>
 
 
@@ -462,96 +862,6 @@ to the end of the endpoint with `http_build_query`.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">SET</span>
-    = <span class="phpdocumentor-signature__default-value">self::SETS . &#039;/:id&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-                    <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_SETS">
-        SETS
-        <a href="classes/MTG-Http-Endpoint.html#constant_SETS" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">38</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">SETS</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;sets&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-                    <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_SETS_BOOSTER">
-        SETS_BOOSTER
-        <a href="classes/MTG-Http-Endpoint.html#constant_SETS_BOOSTER" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">42</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">SETS_BOOSTER</span>
-    = <span class="phpdocumentor-signature__default-value">self::SETS . &#039;/:id/booster&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-                    <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_SUBTYPES">
-        SUBTYPES
-        <a href="classes/MTG-Http-Endpoint.html#constant_SUBTYPES" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
-    :
     <span class="phpdocumentor-element-found-in__line">46</span>
 
     </aside>
@@ -561,8 +871,8 @@ to the end of the endpoint with `http_build_query`.</dd>
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">SUBTYPES</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;subtypes&#039;</span>
+    <span class="phpdocumentor-signature__name">SET</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;:code.json&#039;</span>
 </code>
 
 
@@ -573,39 +883,9 @@ to the end of the endpoint with `http_build_query`.</dd>
         
     </article>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_SUPERTYPES">
-        SUPERTYPES
-        <a href="classes/MTG-Http-Endpoint.html#constant_SUPERTYPES" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">48</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">SUPERTYPES</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;supertypes&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-                    <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_TYPES">
-        TYPES
-        <a href="classes/MTG-Http-Endpoint.html#constant_TYPES" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_SET_LIST">
+        SET_LIST
+        <a href="classes/MTG-Http-Endpoint.html#constant_SET_LIST" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
@@ -621,8 +901,38 @@ to the end of the endpoint with `http_build_query`.</dd>
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">TYPES</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;types&#039;</span>
+    <span class="phpdocumentor-signature__name">SET_LIST</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;SetList.json&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_TCGPLAYER_SKUS">
+        TCGPLAYER_SKUS
+        <a href="classes/MTG-Http-Endpoint.html#constant_TCGPLAYER_SKUS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">72</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">TCGPLAYER_SKUS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;TcgplayerSkus.json&#039;</span>
 </code>
 
 
@@ -658,7 +968,7 @@ to the end of the endpoint with `http_build_query`.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">78</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 
@@ -696,7 +1006,7 @@ to the end of the endpoint with `http_build_query`.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">90</span>
 
     </aside>
 
@@ -734,7 +1044,7 @@ to the end of the endpoint with `http_build_query`.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">112</span>
 
     </aside>
 
@@ -773,7 +1083,7 @@ to the end of the endpoint with `http_build_query`.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">71</span>
+    <span class="phpdocumentor-element-found-in__line">97</span>
 
     </aside>
 
@@ -816,7 +1126,7 @@ to the end of the endpoint with `http_build_query`.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Endpoint.php"><a href="files/src-mtg-http-endpoint.html"><abbr title="src/MTG/Http/Endpoint.php">Endpoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">93</span>
+    <span class="phpdocumentor-element-found-in__line">119</span>
 
     </aside>
 
@@ -869,16 +1179,24 @@ to the end of the endpoint with `http_build_query`.</p>
                             <li class="phpdocumentor-on-this-page-section__title">Constants</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_CARD">CARD</a></li>
-                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_CARDS">CARDS</a></li>
-                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_FORMATS">FORMATS</a></li>
+                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_ALL_IDENTIFIERS">ALL_IDENTIFIERS</a></li>
+                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_ALL_PRICES">ALL_PRICES</a></li>
+                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_ALL_PRICES_TODAY">ALL_PRICES_TODAY</a></li>
+                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_ALL_PRINTINGS">ALL_PRINTINGS</a></li>
+                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_ALL_PRINTINGS_SQLITE_GZ">ALL_PRINTINGS_SQLITE_GZ</a></li>
+                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_ATOMIC_CARDS">ATOMIC_CARDS</a></li>
+                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_CARD_TYPES">CARD_TYPES</a></li>
+                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_COMPILED_LIST">COMPILED_LIST</a></li>
+                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_DECK">DECK</a></li>
+                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_DECK_LIST">DECK_LIST</a></li>
+                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_ENUM_VALUES">ENUM_VALUES</a></li>
+                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_FORMAT">FORMAT</a></li>
+                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_KEYWORDS">KEYWORDS</a></li>
+                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_META">META</a></li>
                                                     <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_REGEX">REGEX</a></li>
                                                     <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_SET">SET</a></li>
-                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_SETS">SETS</a></li>
-                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_SETS_BOOSTER">SETS_BOOSTER</a></li>
-                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_SUBTYPES">SUBTYPES</a></li>
-                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_SUPERTYPES">SUPERTYPES</a></li>
-                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_TYPES">TYPES</a></li>
+                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_SET_LIST">SET_LIST</a></li>
+                                                    <li class=""><a href="classes/MTG-Http-Endpoint.html#constant_TCGPLAYER_SKUS">TCGPLAYER_SKUS</a></li>
                                             </ul>
                 </li>
             

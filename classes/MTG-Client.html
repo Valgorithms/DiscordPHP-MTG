@@ -68,6 +68,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/mtg-database.html" class="">Database</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/mtg-helpers.html" class="">Helpers</a>
                 
             </li>
@@ -139,15 +143,17 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Client.php"><a href="files/src-mtg-client.html"><abbr title="src/MTG/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
             <p class="phpdocumentor-summary">The DiscordPHP {@see \Discord\Parts\User\Client} extended so the MTG
-repositories ({@see CardRepository}, {@see SetRepository}) hang off the same
-client the rest of the bot uses. Held by {@see MTG} as `$client`.</p>
+repositories ({@see CardRepository}, {@see SetRepository},
+{@see DeckRepository}) hang off the same client the rest of the bot uses.</p>
 
 
+    <section class="phpdocumentor-description"><p>Held by <a href="classes/MTG-MTG.html"><abbr title="\MTG\MTG">MTG</abbr></a> as <code class="prettyprint">$client</code>.</p>
+</section>
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -233,7 +239,7 @@ client the rest of the bot uses. Held by {@see MTG} as `$client`.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Client.php"><a href="files/src-mtg-client.html"><abbr title="src/MTG/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
     </aside>
 
@@ -243,7 +249,7 @@ client the rest of the bot uses. Held by {@see MTG} as `$client`.</p>
         <span class="phpdocumentor-signature__visibility">protected</span>
             <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">$repositories</span>
-     = <span class="phpdocumentor-signature__default-value">[&#039;emojis&#039; =&gt; \Discord\Repository\EmojiRepository::class, &#039;guilds&#039; =&gt; \Discord\Repository\GuildRepository::class, &#039;private_channels&#039; =&gt; \Discord\Repository\PrivateChannelRepository::class, &#039;sounds&#039; =&gt; \Discord\Repository\SoundRepository::class, &#039;sticker_packs&#039; =&gt; \Discord\Repository\StickerPackRepository::class, &#039;users&#039; =&gt; \Discord\Repository\UserRepository::class, &#039;cards&#039; =&gt; \MTG\Repository\CardRepository::class, &#039;sets&#039; =&gt; \MTG\Repository\SetRepository::class]</span></code>
+     = <span class="phpdocumentor-signature__default-value">[&#039;emojis&#039; =&gt; \Discord\Repository\EmojiRepository::class, &#039;guilds&#039; =&gt; \Discord\Repository\GuildRepository::class, &#039;private_channels&#039; =&gt; \Discord\Repository\PrivateChannelRepository::class, &#039;sounds&#039; =&gt; \Discord\Repository\SoundRepository::class, &#039;sticker_packs&#039; =&gt; \Discord\Repository\StickerPackRepository::class, &#039;users&#039; =&gt; \Discord\Repository\UserRepository::class, &#039;cards&#039; =&gt; \MTG\Repository\CardRepository::class, &#039;sets&#039; =&gt; \MTG\Repository\SetRepository::class, &#039;decks&#039; =&gt; \MTG\Repository\DeckRepository::class]</span></code>
 
     
     

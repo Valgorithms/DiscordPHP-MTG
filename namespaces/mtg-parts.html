@@ -68,6 +68,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/mtg-database.html" class="">Database</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/mtg-helpers.html" class="">Helpers</a>
                 
             </li>
@@ -132,22 +136,17 @@
 
     </h4>
     <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a></dt><dd>Represents a Magic: The Gathering card (one object from the API&#039;s `cards`
-response); {@see CardAttributes} declares the raw API fields and this class
-adds the collections and Discord render helpers.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-ForeignName.html"><abbr title="\MTG\Parts\ForeignName">ForeignName</abbr></a></dt><dd>Foreign language names for the card, if this card in this set was printed in another language. Not available for all sets.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Legality.html"><abbr title="\MTG\Parts\Legality">Legality</abbr></a></dt><dd>One entry from a {@see Card}&#039;s `legalities` array — whether the card is
-`Legal` / `Banned` / `Restricted` in a given format. Not a standalone
-endpoint; it only appears inside the card response.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Ruling.html"><abbr title="\MTG\Parts\Ruling">Ruling</abbr></a></dt><dd>One entry from a {@see Card}&#039;s `rulings` array — an official clarification,
-with the date it was issued. Not a standalone endpoint; it only appears
-inside the card response.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Set.html"><abbr title="\MTG\Parts\Set">Set</abbr></a></dt><dd>Represents a Magic: The Gathering set (one object from the API&#039;s `sets`
-response) — its code, name, release date, block and booster configuration.</dd>    </dl>
+                    <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a></dt><dd>One face of one printing of a Magic: The Gathering card — MTGJSON&#039;s Card
+(Set) model, plus the Card (Deck) fields when it comes from a deck.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Deck.html"><abbr title="\MTG\Parts\Deck">Deck</abbr></a></dt><dd>A preconstructed deck — MTGJSON&#039;s Deck model, or a Deck List entry (no
+cards) when it comes from {@see \MTG\Repository\DeckRepository::getDecks()}.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-ForeignData.html"><abbr title="\MTG\Parts\ForeignData">ForeignData</abbr></a></dt><dd>One entry from a {@see Card}&#039;s `foreignData` — the card as printed in
+another language. Not available for all sets.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Identifiers.html"><abbr title="\MTG\Parts\Identifiers">Identifiers</abbr></a></dt><dd>A {@see Card}&#039;s `identifiers` — its ids on other services. Every value is
+a string, as in MTGJSON.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-LeadershipSkills.html"><abbr title="\MTG\Parts\LeadershipSkills">LeadershipSkills</abbr></a></dt><dd>A {@see Card}&#039;s `leadershipSkills` — the formats it can be your
+commander in.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Legality.html"><abbr title="\MTG\Parts\Legality">Legality</abbr></a></dt><dd>One entry of a {@see Card}&#039;s `legalities` — its status in one format.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-PurchaseUrls.html"><abbr title="\MTG\Parts\PurchaseUrls">PurchaseUrls</abbr></a></dt><dd>A {@see Card}&#039;s `purchaseUrls` — links to buy it, through MTGJSON&#039;s
+referral redirects.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Ruling.html"><abbr title="\MTG\Parts\Ruling">Ruling</abbr></a></dt><dd>One entry from a {@see Card}&#039;s `rulings` — an official clarification,
+with the date it was issued.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Set.html"><abbr title="\MTG\Parts\Set">Set</abbr></a></dt><dd>A Magic: The Gathering set — MTGJSON&#039;s Set model, without the card, token,
+deck, booster and sealed product lists (search cards by `setCode`, and
+open boosters with {@see \MTG\Repository\SetRepository::generateBooster()}).</dd>    </dl>
 
-    <h4 id="toc-traits">
-        Traits
-        <a href="namespaces/mtg-parts.html#toc-traits" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/MTG-Parts-CardAttributes.html"><abbr title="\MTG\Parts\CardAttributes">CardAttributes</abbr></a></dt><dd>This query will return a maximum of 100 cards.</dd>    </dl>
 
 
 
@@ -171,8 +170,7 @@ response) — its code, name, release date, block and booster configuration.</dd
             <li>
                 <ul class="phpdocumentor-list -clean">
                                                                                                     <li><a href="namespaces/mtg-parts.html#toc-classes">Classes</a></li>
-                                                            <li><a href="namespaces/mtg-parts.html#toc-traits">Traits</a></li>
-                                                                                                </ul>
+                                                                                                                    </ul>
             </li>
 
             

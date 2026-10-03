@@ -68,6 +68,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/mtg-database.html" class="">Database</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/mtg-helpers.html" class="">Helpers</a>
                 
             </li>
@@ -116,7 +120,7 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    ForeignName
+    LeadershipSkills
 
         <span class="phpdocumentor-element__extends">
         extends <abbr title="\Discord\Parts\Part">Part</abbr>
@@ -138,20 +142,21 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/ForeignName.php"><a href="files/src-mtg-parts-foreignname.html"><abbr title="src/MTG/Parts/ForeignName.php">ForeignName.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/LeadershipSkills.php"><a href="files/src-mtg-parts-leadershipskills.html"><abbr title="src/MTG/Parts/LeadershipSkills.php">LeadershipSkills.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Foreign language names for the card, if this card in this set was printed in another language. Not available for all sets.</p>
+            <p class="phpdocumentor-summary">A {@see Card}&#039;s `leadershipSkills` — the formats it can be your
+commander in.</p>
 
 
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/MTG-Parts-ForeignName.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/MTG-Parts-LeadershipSkills.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -159,14 +164,23 @@
                 <span class="phpdocumentor-tag__name">link</span>
             </dt>
                             <dd class="phpdocumentor-tag-list__definition">
-                                                                                                        <a class="phpdocumentor-tag-link" href="https://docs.magicthegathering.io/#advancedcards_get_by_language"> <p>Querying cards by language</p>
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://mtgjson.com/data-models/leadership-skills/"> <p>Leadership Skills model</p>
  </a>
+                                    </dd>
+                                <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">see</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a></span>
+                                                                    <section class="phpdocumentor-description"><p>The parent object</p>
+</section>
+
                                     </dd>
                                 <dt class="phpdocumentor-tag-list__entry">
                 <span class="phpdocumentor-tag__name">since</span>
             </dt>
                             <dd class="phpdocumentor-tag-list__definition">
-                                            <span class="phpdocumentor-tag-link">0.3.0</span>
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
                                                                                                         
                                     </dd>
                         </dl>
@@ -175,7 +189,7 @@
     
 <h3 id="toc">
     Table of Contents
-    <a href="classes/MTG-Parts-ForeignName.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/MTG-Parts-LeadershipSkills.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -189,30 +203,42 @@
 
 <h4 id="toc-properties">
     Properties
-    <a href="classes/MTG-Parts-ForeignName.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/MTG-Parts-LeadershipSkills.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/MTG-Parts-ForeignName.html#property_language">$language</a>
+    <a class="" href="classes/MTG-Parts-LeadershipSkills.html#property_brawl">$brawl</a>
     <span>
-                        &nbsp;: string            </span>
+                        &nbsp;: bool|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/MTG-Parts-ForeignName.html#property_multiverseid">$multiverseid</a>
+    <a class="" href="classes/MTG-Parts-LeadershipSkills.html#property_commander">$commander</a>
     <span>
-                        &nbsp;: string            </span>
+                        &nbsp;: bool|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/MTG-Parts-ForeignName.html#property_name">$name</a>
+    <a class="" href="classes/MTG-Parts-LeadershipSkills.html#property_oathbreaker">$oathbreaker</a>
     <span>
-                        &nbsp;: string            </span>
+                        &nbsp;: bool|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-LeadershipSkills.html#property_pauper_commander">$pauper_commander</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-Parts-LeadershipSkills.html#property_predh">$predh</a>
+    <span>
+                        &nbsp;: bool|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a class="" href="classes/MTG-Parts-ForeignName.html#property_fillable">$fillable</a>
+    <a class="" href="classes/MTG-Parts-LeadershipSkills.html#property_fillable">$fillable</a>
     <span>
                         &nbsp;: mixed            </span>
 </dt>
@@ -228,7 +254,7 @@
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/MTG-Parts-ForeignName.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/MTG-Parts-LeadershipSkills.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -238,15 +264,15 @@
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_language">
-        $language
-        <a href="classes/MTG-Parts-ForeignName.html#property_language" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_brawl">
+        $brawl
+        <a href="classes/MTG-Parts-LeadershipSkills.html#property_brawl" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/ForeignName.php"><a href="files/src-mtg-parts-foreignname.html"><abbr title="src/MTG/Parts/ForeignName.php">ForeignName.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/LeadershipSkills.php"><a href="files/src-mtg-parts-leadershipskills.html"><abbr title="src/MTG/Parts/LeadershipSkills.php">LeadershipSkills.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">0</span>
 
@@ -256,11 +282,11 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$language</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$brawl</span>
     </code>
 
-        <section class="phpdocumentor-description"><p>The language of the card.</p>
+        <section class="phpdocumentor-description"><p>If the card can be your commander in the Brawl format.</p>
 </section>
 
     
@@ -277,15 +303,15 @@
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_multiverseid">
-        $multiverseid
-        <a href="classes/MTG-Parts-ForeignName.html#property_multiverseid" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_commander">
+        $commander
+        <a href="classes/MTG-Parts-LeadershipSkills.html#property_commander" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/ForeignName.php"><a href="files/src-mtg-parts-foreignname.html"><abbr title="src/MTG/Parts/ForeignName.php">ForeignName.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/LeadershipSkills.php"><a href="files/src-mtg-parts-leadershipskills.html"><abbr title="src/MTG/Parts/LeadershipSkills.php">LeadershipSkills.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">0</span>
 
@@ -295,11 +321,11 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$multiverseid</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$commander</span>
     </code>
 
-        <section class="phpdocumentor-description"><p>The multiverse ID of the card.</p>
+        <section class="phpdocumentor-description"><p>If the card can be your commander in the Commander/EDH format.</p>
 </section>
 
     
@@ -316,15 +342,15 @@
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_name">
-        $name
-        <a href="classes/MTG-Parts-ForeignName.html#property_name" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_oathbreaker">
+        $oathbreaker
+        <a href="classes/MTG-Parts-LeadershipSkills.html#property_oathbreaker" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/ForeignName.php"><a href="files/src-mtg-parts-foreignname.html"><abbr title="src/MTG/Parts/ForeignName.php">ForeignName.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/LeadershipSkills.php"><a href="files/src-mtg-parts-leadershipskills.html"><abbr title="src/MTG/Parts/LeadershipSkills.php">LeadershipSkills.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">0</span>
 
@@ -334,11 +360,89 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$name</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$oathbreaker</span>
     </code>
 
-        <section class="phpdocumentor-description"><p>The name of the card in the foreign language.</p>
+        <section class="phpdocumentor-description"><p>If the card can be your commander in the Oathbreaker format.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_pauper_commander">
+        $pauper_commander
+        <a href="classes/MTG-Parts-LeadershipSkills.html#property_pauper_commander" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/LeadershipSkills.php"><a href="files/src-mtg-parts-leadershipskills.html"><abbr title="src/MTG/Parts/LeadershipSkills.php">LeadershipSkills.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$pauper_commander</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>If the card can be your commander in the Pauper Commander format.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_predh">
+        $predh
+        <a href="classes/MTG-Parts-LeadershipSkills.html#property_predh" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/LeadershipSkills.php"><a href="files/src-mtg-parts-leadershipskills.html"><abbr title="src/MTG/Parts/LeadershipSkills.php">LeadershipSkills.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$predh</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>If the card can be your commander in the PreDH format.</p>
 </section>
 
     
@@ -357,15 +461,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="property_fillable">
         $fillable
-        <a href="classes/MTG-Parts-ForeignName.html#property_fillable" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/MTG-Parts-LeadershipSkills.html#property_fillable" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/ForeignName.php"><a href="files/src-mtg-parts-foreignname.html"><abbr title="src/MTG/Parts/ForeignName.php">ForeignName.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Parts/LeadershipSkills.php"><a href="files/src-mtg-parts-leadershipskills.html"><abbr title="src/MTG/Parts/LeadershipSkills.php">LeadershipSkills.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
@@ -375,14 +479,14 @@
         <span class="phpdocumentor-signature__visibility">protected</span>
             <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">$fillable</span>
-     = <span class="phpdocumentor-signature__default-value">[&#039;language&#039;, &#039;name&#039;, &#039;multiverseid&#039;]</span></code>
+     = <span class="phpdocumentor-signature__default-value">[&#039;brawl&#039;, &#039;commander&#039;, &#039;oathbreaker&#039;, &#039;pauper_commander&#039;, &#039;predh&#039;]</span></code>
 
     
     
     
     <h5 class="phpdocumentor-tag-list__heading" id="property_fillable_tags">
         Tags
-        <a href="classes/MTG-Parts-ForeignName.html#property_fillable_tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/MTG-Parts-LeadershipSkills.html#property_fillable_tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -413,17 +517,19 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                            <li><a href="classes/MTG-Parts-ForeignName.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/MTG-Parts-LeadershipSkills.html#toc-properties">Properties</a></li>
                                                         </ul>
             </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/MTG-Parts-ForeignName.html#property_language">$language</a></li>
-                                                    <li class=""><a href="classes/MTG-Parts-ForeignName.html#property_multiverseid">$multiverseid</a></li>
-                                                    <li class=""><a href="classes/MTG-Parts-ForeignName.html#property_name">$name</a></li>
-                                                    <li class=""><a href="classes/MTG-Parts-ForeignName.html#property_fillable">$fillable</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-LeadershipSkills.html#property_brawl">$brawl</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-LeadershipSkills.html#property_commander">$commander</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-LeadershipSkills.html#property_oathbreaker">$oathbreaker</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-LeadershipSkills.html#property_pauper_commander">$pauper_commander</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-LeadershipSkills.html#property_predh">$predh</a></li>
+                                                    <li class=""><a href="classes/MTG-Parts-LeadershipSkills.html#property_fillable">$fillable</a></li>
                                             </ul>
                 </li>
             
@@ -444,7 +550,7 @@
     </section>
 </section>
         </div>
-        <a href="classes/MTG-Parts-ForeignName.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/MTG-Parts-LeadershipSkills.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

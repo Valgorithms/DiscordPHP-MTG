@@ -63,13 +63,543 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MTG\\Client",
             "name": "Client",
-            "summary": "The\u0020DiscordPHP\u0020\u007B\u0040see\u0020\\Discord\\Parts\\User\\Client\u007D\u0020extended\u0020so\u0020the\u0020MTG\nrepositories\u0020\u0028\u007B\u0040see\u0020CardRepository\u007D,\u0020\u007B\u0040see\u0020SetRepository\u007D\u0029\u0020hang\u0020off\u0020the\u0020same\nclient\u0020the\u0020rest\u0020of\u0020the\u0020bot\u0020uses.\u0020Held\u0020by\u0020\u007B\u0040see\u0020MTG\u007D\u0020as\u0020\u0060\u0024client\u0060.",
+            "summary": "The\u0020DiscordPHP\u0020\u007B\u0040see\u0020\\Discord\\Parts\\User\\Client\u007D\u0020extended\u0020so\u0020the\u0020MTG\nrepositories\u0020\u0028\u007B\u0040see\u0020CardRepository\u007D,\u0020\u007B\u0040see\u0020SetRepository\u007D,\n\u007B\u0040see\u0020DeckRepository\u007D\u0029\u0020hang\u0020off\u0020the\u0020same\u0020client\u0020the\u0020rest\u0020of\u0020the\u0020bot\u0020uses.",
             "url": "classes/MTG-Client.html"
         },                {
             "fqsen": "\\MTG\\Client\u003A\u003A\u0024repositories",
             "name": "repositories",
             "summary": "",
             "url": "classes/MTG-Client.html#property_repositories"
+        },                {
+            "fqsen": "\\MTG\\Database\\Booster",
+            "name": "Booster",
+            "summary": "Opens\u0020booster\u0020packs\u0020from\u0020a\u0020set\u0027s\u0020MTGJSON\u0020booster\u0020configuration,\u0020as\nstored\u0020in\u0020the\u0020AllPrintings\u0020build\u0027s\u0020\u0060setBooster\u002A\u0060\u0020tables.",
+            "url": "classes/MTG-Database-Booster.html"
+        },                {
+            "fqsen": "\\MTG\\Database\\Booster\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/MTG-Database-Booster.html#method___construct"
+        },                {
+            "fqsen": "\\MTG\\Database\\Booster\u003A\u003Atypes\u0028\u0029",
+            "name": "types",
+            "summary": "The\u0020booster\u0020types\u0020a\u0020set\u0020has,\u0020preferred\u0020first.",
+            "url": "classes/MTG-Database-Booster.html#method_types"
+        },                {
+            "fqsen": "\\MTG\\Database\\Booster\u003A\u003Aopen\u0028\u0029",
+            "name": "open",
+            "summary": "Opens\u0020one\u0020pack.",
+            "url": "classes/MTG-Database-Booster.html#method_open"
+        },                {
+            "fqsen": "\\MTG\\Database\\Booster\u003A\u003Afill\u0028\u0029",
+            "name": "fill",
+            "summary": "Picks\u0020a\u0020sheet\u0027s\u0020cards\u0020for\u0020one\u0020pack.",
+            "url": "classes/MTG-Database-Booster.html#method_fill"
+        },                {
+            "fqsen": "\\MTG\\Database\\Booster\u003A\u003Aweighted\u0028\u0029",
+            "name": "weighted",
+            "summary": "Picks\u0020one\u0020key,\u0020with\u0020probability\u0020proportional\u0020to\u0020its\u0020weight.",
+            "url": "classes/MTG-Database-Booster.html#method_weighted"
+        },                {
+            "fqsen": "\\MTG\\Database\\Booster\u003A\u003APREFERENCE",
+            "name": "PREFERENCE",
+            "summary": "Booster\u0020types\u0020preferred\u0020when\u0020none\u0020is\u0020asked\u0020for,\u0020best\u0020first.",
+            "url": "classes/MTG-Database-Booster.html#constant_PREFERENCE"
+        },                {
+            "fqsen": "\\MTG\\Database\\Booster\u003A\u003ACOLORS",
+            "name": "COLORS",
+            "summary": "The\u0020colors\u0020a\u0020balanced\u0020sheet\u0020covers.",
+            "url": "classes/MTG-Database-Booster.html#constant_COLORS"
+        },                {
+            "fqsen": "\\MTG\\Database\\Booster\u003A\u003A\u0024database",
+            "name": "database",
+            "summary": "",
+            "url": "classes/MTG-Database-Booster.html#property_database"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery",
+            "name": "CardQuery",
+            "summary": "A\u0020card\u0020search\u0020against\u0020the\u0020AllPrintings\u0020build\u0027s\u0020\u0060cards\u0060\u0020table,\u0020joined\u0020to\n\u0060sets\u0060\u0020\u0028for\u0020\u0060setName\u0060\u0029,\u0020\u0060cardIdentifiers\u0060\u0020and\u0020\u0060cardLegalities\u0060\u0020as\u0020filters\nneed\u0020them.\u0020One\u0020row\u0020per\u0020card\u0020face\u0020per\u0020printing,\u0020as\u0020in\u0020MTGJSON.",
+            "url": "classes/MTG-Database-CardQuery.html"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003Afilter\u0028\u0029",
+            "name": "filter",
+            "summary": "Applies\u0020a\u0020set\u0020of\u0020filters\u0020and\u0020query\u0020modifiers.",
+            "url": "classes/MTG-Database-CardQuery.html#method_filter"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003Aselect\u0028\u0029",
+            "name": "select",
+            "summary": "The\u0020select\u0020list.",
+            "url": "classes/MTG-Database-CardQuery.html#method_select"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003Acolumn\u0028\u0029",
+            "name": "column",
+            "summary": "The\u0020condition\u0020for\u0020one\u0020\u0060cards\u0060\u0020column,\u0020by\u0020its\u0020kind.",
+            "url": "classes/MTG-Database-CardQuery.html#method_column"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003AcolorRuns\u0028\u0029",
+            "name": "colorRuns",
+            "summary": "Splits\u0020runs\u0020of\u0020color\u0020letters\u0020\u0028\u0060UR\u0060,\u0020\u0060wubrg\u0060\u0029\u0020into\u0020separate\u0020required\nterms\u0020\u0028\u0060U,R\u0060\u0029,\u0020leaving\u0020color\u0020names\u0020alone.",
+            "url": "classes/MTG-Database-CardQuery.html#method_colorRuns"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003Aidentifier\u0028\u0029",
+            "name": "identifier",
+            "summary": "Joins\u0020\u0060cardIdentifiers\u0060\u0020and\u0020qualifies\u0020one\u0020of\u0020its\u0020columns.",
+            "url": "classes/MTG-Database-CardQuery.html#method_identifier"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003AnameAndLanguage\u0028\u0029",
+            "name": "nameAndLanguage",
+            "summary": "Filters\u0020on\u0020name\u0020and\u0020the\u0020printing\u0027s\u0020language.\u0020With\u0020a\u0020non\u002DEnglish\nlanguage,\u0020the\u0020name\u0020is\u0020searched\u0020among\u0020that\u0020language\u0027s\u0020printed\u0020names.",
+            "url": "classes/MTG-Database-CardQuery.html#method_nameAndLanguage"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003Alegality\u0028\u0029",
+            "name": "legality",
+            "summary": "Filters\u0020on\u0020format\u0020legality.",
+            "url": "classes/MTG-Database-CardQuery.html#method_legality"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003Ahas\u0028\u0029",
+            "name": "has",
+            "summary": "Requires\u0020fields\u0020to\u0020hold\u0020a\u0020value.",
+            "url": "classes/MTG-Database-CardQuery.html#method_has"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003Asort\u0028\u0029",
+            "name": "sort",
+            "summary": "Orders\u0020by\u0020an\u0020explicit\u0020field.",
+            "url": "classes/MTG-Database-CardQuery.html#method_sort"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003Arank\u0028\u0029",
+            "name": "rank",
+            "summary": "The\u0020default\u0020ranking\u003A\u0020exact\u0020name\u0020matches,\u0020shorter\u0020names,\u0020then\u0020the\u0020most\nregular\u0020printing,\u0020newest\u0020first.",
+            "url": "classes/MTG-Database-CardQuery.html#method_rank"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003AisEnglish\u0028\u0029",
+            "name": "isEnglish",
+            "summary": "Whether\u0020a\u0020language\u0020filter\u0020asks\u0020only\u0020for\u0020English.",
+            "url": "classes/MTG-Database-CardQuery.html#method_isEnglish"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003AALIASES",
+            "name": "ALIASES",
+            "summary": "Old\u0020api.magicthegathering.io\u0020parameter\u0020names,\u0020mapped\u0020to\u0020MTGJSON\u0027s.",
+            "url": "classes/MTG-Database-CardQuery.html#constant_ALIASES"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003APARTIAL",
+            "name": "PARTIAL",
+            "summary": "Text\u0020columns\u0020matched\u0020partially\u0020rather\u0020than\u0020exactly.",
+            "url": "classes/MTG-Database-CardQuery.html#constant_PARTIAL"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003ACOLOR_COLUMNS",
+            "name": "COLOR_COLUMNS",
+            "summary": "List\u0020columns\u0020holding\u0020colors,\u0020which\u0020accept\u0020color\u0020names.",
+            "url": "classes/MTG-Database-CardQuery.html#constant_COLOR_COLUMNS"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003ACOLORS",
+            "name": "COLORS",
+            "summary": "Color\u0020names\u0020and\u0020letters,\u0020mapped\u0020to\u0020MTGJSON\u0027s\u0020letters\u003B\u0020colorless\u0020maps\nto\u0020an\u0020empty\u0020list.",
+            "url": "classes/MTG-Database-CardQuery.html#constant_COLORS"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003AREGULAR_SET_TYPES",
+            "name": "REGULAR_SET_TYPES",
+            "summary": "Set\u0020types\u0020whose\u0020printings\u0020are\u0020preferred\u0020when\u0020results\u0020are\u0020not\u0020ordered\nexplicitly.",
+            "url": "classes/MTG-Database-CardQuery.html#constant_REGULAR_SET_TYPES"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003A\u0024table",
+            "name": "table",
+            "summary": "The\u0020primary\u0020table.",
+            "url": "classes/MTG-Database-CardQuery.html#property_table"
+        },                {
+            "fqsen": "\\MTG\\Database\\CardQuery\u003A\u003A\u0024names",
+            "name": "names",
+            "summary": "The\u0020name\u0020alternatives\u0020searched\u0020for,\u0020used\u0020to\u0020rank\u0020exact\u0020matches\u0020first.",
+            "url": "classes/MTG-Database-CardQuery.html#property_names"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database",
+            "name": "Database",
+            "summary": "A\u0020local\u0020copy\u0020of\u0020MTGJSON\u0027s\u0020AllPrintings\u0020SQLite\u0020build,\u0020kept\u0020current\u0020from\u0020the\nAPI.\u0020MTGJSON\u0020has\u0020no\u0020query\u0020endpoint\u0020\u2014\u0020it\u0020publishes\u0020whole\u0020files\u0020\u2014\u0020so\u0020card\u0020and\nset\u0020searches\u0020run\u0020here\u0020instead\u0020of\u0020over\u0020HTTP.",
+            "url": "classes/MTG-Database-Database.html"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/MTG-Database-Database.html#method___construct"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003Aready\u0028\u0029",
+            "name": "ready",
+            "summary": "Opens\u0020the\u0020build,\u0020downloading\u0020it\u0020first\u0020if\u0020there\u0020is\u0020none\u0020on\u0020disk,\u0020and\nstarts\u0020the\u0020refresh\u0020timer.",
+            "url": "classes/MTG-Database-Database.html#method_ready"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003Arefresh\u0028\u0029",
+            "name": "refresh",
+            "summary": "Checks\u0020\u0060Meta.json\u0060\u0020and\u0020installs\u0020MTGJSON\u0027s\u0020current\u0020build\u0020if\u0020it\u0020is\u0020newer\nthan\u0020the\u0020open\u0020one\u0020\u0028or\u0020always,\u0020when\u0020forced\u0029.",
+            "url": "classes/MTG-Database-Database.html#method_refresh"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003Aquery\u0028\u0029",
+            "name": "query",
+            "summary": "Runs\u0020a\u0020read\u0020query\u0020against\u0020the\u0020build,\u0020opening\u0020\u0028or\u0020downloading\u0029\u0020it\u0020first.",
+            "url": "classes/MTG-Database-Database.html#method_query"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003Aselect\u0028\u0029",
+            "name": "select",
+            "summary": "Runs\u0020a\u0020read\u0020query\u0020against\u0020the\u0020open\u0020build,\u0020synchronously.\u0020Callers\u0020must\nhave\u0020waited\u0020for\u0020\u007B\u0040see\u0020ready\u0028\u0029\u007D.",
+            "url": "classes/MTG-Database-Database.html#method_select"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003Adecode\u0028\u0029",
+            "name": "decode",
+            "summary": "Decodes\u0020a\u0020row\u0020of\u0020\u0060\u0024table\u0060\u0020into\u0020MTGJSON\u0027s\u0020JSON\u0020shape\u003A\u0020list\u0020and\u0020JSON\ncolumns\u0020become\u0020arrays,\u0020\u0060BOOLEAN\u0060\u0020columns\u0020become\u0020\u0060bool\u0060,\u0020and\u0020null\u0020or\nempty\u0020scalars\u0020are\u0020dropped.",
+            "url": "classes/MTG-Database-Database.html#method_decode"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003AgetColumns\u0028\u0029",
+            "name": "getColumns",
+            "summary": "The\u0020columns\u0020of\u0020a\u0020table\u0020in\u0020the\u0020open\u0020build,\u0020with\u0020their\u0020declared\u0020types.",
+            "url": "classes/MTG-Database-Database.html#method_getColumns"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003AgetVersion\u0028\u0029",
+            "name": "getVersion",
+            "summary": "The\u0020version\u0020\u0028\u0060meta.version\u0060\u0029\u0020of\u0020the\u0020open\u0020build,\u0020e.g.\u0020\u00605.3.0\u002B20261003\u0060.",
+            "url": "classes/MTG-Database-Database.html#method_getVersion"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003AgetDate\u0028\u0029",
+            "name": "getDate",
+            "summary": "The\u0020date\u0020\u0028\u0060meta.date\u0060\u0029\u0020of\u0020the\u0020open\u0020build,\u0020e.g.\u0020\u00602026\u002D10\u002D03\u0060.",
+            "url": "classes/MTG-Database-Database.html#method_getDate"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003AgetPath\u0028\u0029",
+            "name": "getPath",
+            "summary": "Where\u0020the\u0020build\u0020is\u0020kept.",
+            "url": "classes/MTG-Database-Database.html#method_getPath"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003AisOpen\u0028\u0029",
+            "name": "isOpen",
+            "summary": "Whether\u0020a\u0020build\u0020is\u0020open.",
+            "url": "classes/MTG-Database-Database.html#method_isOpen"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003Aclose\u0028\u0029",
+            "name": "close",
+            "summary": "Closes\u0020the\u0020connection\u0020and\u0020stops\u0020the\u0020refresh\u0020timer.\u0020The\u0020next\u0020query\nreopens\u0020it.",
+            "url": "classes/MTG-Database-Database.html#method_close"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003Aopen\u0028\u0029",
+            "name": "open",
+            "summary": "Opens\u0020the\u0020build\u0020at\u0020\u007B\u0040see\u0020\u0024path\u007D\u0020read\u002Donly\u0020and\u0020reads\u0020its\u0020version.",
+            "url": "classes/MTG-Database-Database.html#method_open"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003Adisconnect\u0028\u0029",
+            "name": "disconnect",
+            "summary": "Drops\u0020the\u0020connection\u0020so\u0020the\u0020file\u0020can\u0020be\u0020replaced.",
+            "url": "classes/MTG-Database-Database.html#method_disconnect"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003Ainstall\u0028\u0029",
+            "name": "install",
+            "summary": "Downloads,\u0020verifies\u0020and\u0020swaps\u0020in\u0020MTGJSON\u0027s\u0020current\u0020build.",
+            "url": "classes/MTG-Database-Database.html#method_install"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003Aprepare\u0028\u0029",
+            "name": "prepare",
+            "summary": "Checks\u0020a\u0020downloaded\u0020build\u0020and\u0020adds\u0020the\u0020extra\u0020indexes.",
+            "url": "classes/MTG-Database-Database.html#method_prepare"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003Adownload\u0028\u0029",
+            "name": "download",
+            "summary": "Streams\u0020a\u0020gzipped\u0020file,\u0020inflating\u0020it\u0020to\u0020\u0060\u0024target\u0060\u0020chunk\u0020by\u0020chunk\u0020so\u0020it\nis\u0020never\u0020held\u0020in\u0020memory.",
+            "url": "classes/MTG-Database-Database.html#method_download"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003AinflateTo\u0028\u0029",
+            "name": "inflateTo",
+            "summary": "Inflates\u0020a\u0020gzip\u0020body\u0020stream\u0020into\u0020an\u0020open\u0020file.",
+            "url": "classes/MTG-Database-Database.html#method_inflateTo"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003Aschedule\u0028\u0029",
+            "name": "schedule",
+            "summary": "Starts\u0020the\u0020refresh\u0020timer,\u0020and\u0020checks\u0020right\u0020away\u0020if\u0020the\u0020build\u0020on\u0020disk\nis\u0020already\u0020older\u0020than\u0020one\u0020interval.",
+            "url": "classes/MTG-Database-Database.html#method_schedule"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003ArefreshQuietly\u0028\u0029",
+            "name": "refreshQuietly",
+            "summary": "Refreshes,\u0020logging\u0020rather\u0020than\u0020throwing\u0020on\u0020failure\u003B\u0020the\u0020open\u0020build\nstays\u0020in\u0020use.",
+            "url": "classes/MTG-Database-Database.html#method_refreshQuietly"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003AFILE",
+            "name": "FILE",
+            "summary": "The\u0020file\u0020name\u0020of\u0020the\u0020installed\u0020build.",
+            "url": "classes/MTG-Database-Database.html#constant_FILE"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003ADEFAULT_REFRESH_INTERVAL",
+            "name": "DEFAULT_REFRESH_INTERVAL",
+            "summary": "Seconds\u0020between\u0020\u0060Meta.json\u0060\u0020checks\u0020by\u0020default\u003A\u0020MTGJSON\u0020rebuilds\u0020daily.",
+            "url": "classes/MTG-Database-Database.html#constant_DEFAULT_REFRESH_INTERVAL"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003ALIST_COLUMNS",
+            "name": "LIST_COLUMNS",
+            "summary": "Columns\u0020the\u0020SQL\u0020build\u0020stores\u0020as\u0020\u0060\u0022,\u0020\u0022\u0060\u002Djoined\u0020lists,\u0020by\u0020table.",
+            "url": "classes/MTG-Database-Database.html#constant_LIST_COLUMNS"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003AJSON_COLUMNS",
+            "name": "JSON_COLUMNS",
+            "summary": "Columns\u0020the\u0020SQL\u0020build\u0020stores\u0020as\u0020JSON\u0020text,\u0020by\u0020table.",
+            "url": "classes/MTG-Database-Database.html#constant_JSON_COLUMNS"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003AINDEXES",
+            "name": "INDEXES",
+            "summary": "Indexes\u0020added\u0020to\u0020each\u0020build\u0020after\u0020download,\u0020for\u0020lookups\u0020MTGJSON\u0020does\nnot\u0020index\u0020itself.",
+            "url": "classes/MTG-Database-Database.html#constant_INDEXES"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003A\u0024pdo",
+            "name": "pdo",
+            "summary": "The\u0020open\u0020read\u002Donly\u0020connection,\u0020or\u0020null\u0020while\u0020closed.",
+            "url": "classes/MTG-Database-Database.html#property_pdo"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003A\u0024version",
+            "name": "version",
+            "summary": "The\u0020version\u0020\u0028\u0060meta.version\u0060\u0029\u0020of\u0020the\u0020open\u0020build.",
+            "url": "classes/MTG-Database-Database.html#property_version"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003A\u0024date",
+            "name": "date",
+            "summary": "The\u0020date\u0020\u0028\u0060meta.date\u0060\u0029\u0020of\u0020the\u0020open\u0020build.",
+            "url": "classes/MTG-Database-Database.html#property_date"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003A\u0024columns",
+            "name": "columns",
+            "summary": "Declared\u0020column\u0020types,\u0020by\u0020table,\u0020read\u0020lazily\u0020with\u0020\u0060PRAGMA\u0020table_info\u0060.",
+            "url": "classes/MTG-Database-Database.html#property_columns"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003A\u0024opening",
+            "name": "opening",
+            "summary": "The\u0020pending\u0020first\u0020install,\u0020shared\u0020by\u0020every\u0020caller\u0020of\u0020\u007B\u0040see\u0020ready\u0028\u0029\u007D.",
+            "url": "classes/MTG-Database-Database.html#property_opening"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003A\u0024refreshing",
+            "name": "refreshing",
+            "summary": "The\u0020pending\u0020refresh,\u0020shared\u0020by\u0020every\u0020caller\u0020of\u0020\u007B\u0040see\u0020refresh\u0028\u0029\u007D.",
+            "url": "classes/MTG-Database-Database.html#property_refreshing"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003A\u0024timer",
+            "name": "timer",
+            "summary": "The\u0020periodic\u0020refresh\u0020timer.",
+            "url": "classes/MTG-Database-Database.html#property_timer"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003A\u0024loop",
+            "name": "loop",
+            "summary": "",
+            "url": "classes/MTG-Database-Database.html#property_loop"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003A\u0024logger",
+            "name": "logger",
+            "summary": "",
+            "url": "classes/MTG-Database-Database.html#property_logger"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003A\u0024http",
+            "name": "http",
+            "summary": "",
+            "url": "classes/MTG-Database-Database.html#property_http"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003A\u0024browser",
+            "name": "browser",
+            "summary": "",
+            "url": "classes/MTG-Database-Database.html#property_browser"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003A\u0024path",
+            "name": "path",
+            "summary": "",
+            "url": "classes/MTG-Database-Database.html#property_path"
+        },                {
+            "fqsen": "\\MTG\\Database\\Database\u003A\u003A\u0024refreshInterval",
+            "name": "refreshInterval",
+            "summary": "",
+            "url": "classes/MTG-Database-Database.html#property_refreshInterval"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query",
+            "name": "Query",
+            "summary": "Compiles\u0020a\u0020search\u0020\u2014\u0020the\u0020same\u0020\u0060key\u0020\u003D\u003E\u0020value\u0060\u0020filters\u0020the\u0020old\napi.magicthegathering.io\u0020took\u0020\u2014\u0020into\u0020SQL\u0020against\u0020the\u0020AllPrintings\u0020build.",
+            "url": "classes/MTG-Database-Query.html"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/MTG-Database-Query.html#method___construct"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Afilter\u0028\u0029",
+            "name": "filter",
+            "summary": "Applies\u0020a\u0020set\u0020of\u0020filters\u0020and\u0020query\u0020modifiers.",
+            "url": "classes/MTG-Database-Query.html#method_filter"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003AtoSql\u0028\u0029",
+            "name": "toSql",
+            "summary": "The\u0020compiled\u0020statement.",
+            "url": "classes/MTG-Database-Query.html#method_toSql"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003AgetBindings\u0028\u0029",
+            "name": "getBindings",
+            "summary": "The\u0020values\u0020bound\u0020to\u0020the\u0020compiled\u0020statement\u0027s\u0020placeholders.",
+            "url": "classes/MTG-Database-Query.html#method_getBindings"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "Runs\u0020the\u0020compiled\u0020statement\u0020and\u0020decodes\u0020each\u0020row.",
+            "url": "classes/MTG-Database-Query.html#method_get"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Aselect\u0028\u0029",
+            "name": "select",
+            "summary": "The\u0020select\u0020list.",
+            "url": "classes/MTG-Database-Query.html#method_select"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003A\u0024where",
+            "name": "where",
+            "summary": "Conditions,\u0020combined\u0020with\u0020\u0060AND\u0060.",
+            "url": "classes/MTG-Database-Query.html#property_where"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003AorderBy\u0028\u0029",
+            "name": "orderBy",
+            "summary": "Adds\u0020an\u0020\u0060ORDER\u0020BY\u0060\u0020term.",
+            "url": "classes/MTG-Database-Query.html#method_orderBy"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Anormalize\u0028\u0029",
+            "name": "normalize",
+            "summary": "Normalizes\u0020filter\u0020keys\u0020to\u0020camelCase\u0020\u0028\u0060color_identity\u0060\u0020\u2192\u0020\u0060colorIdentity\u0060\u0029\nand\u0020drops\u0020empty\u0020values.",
+            "url": "classes/MTG-Database-Query.html#method_normalize"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Aalternatives\u0028\u0029",
+            "name": "alternatives",
+            "summary": "Splits\u0020a\u0020filter\u0020value\u0020into\u0020alternatives\u0020\u0028\u0060\u007C\u0060\u0029,\u0020each\u0020a\u0020list\u0020of\u0020terms\nthat\u0020must\u0020all\u0020hold\u0020\u0028\u0060,\u0060\u0029\u0020when\u0020\u0060\u0024and\u0060\u0020is\u0020set.",
+            "url": "classes/MTG-Database-Query.html#method_alternatives"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Aterms\u0028\u0029",
+            "name": "terms",
+            "summary": "The\u0020first\u0020term\u0020of\u0020each\u0020alternative,\u0020for\u0020single\u002Dvalued\u0020fields.",
+            "url": "classes/MTG-Database-Query.html#method_terms"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Ascalar\u0028\u0029",
+            "name": "scalar",
+            "summary": "Converts\u0020a\u0020scalar\u0020filter\u0020value\u0020to\u0020a\u0020string.",
+            "url": "classes/MTG-Database-Query.html#method_scalar"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Aplaceholders\u0028\u0029",
+            "name": "placeholders",
+            "summary": "\u0060\u003F,\u0020\u003F,\u0020\u003F\u0060\u0020for\u0020a\u0020list\u0020of\u0020values.",
+            "url": "classes/MTG-Database-Query.html#method_placeholders"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Acombine\u0028\u0029",
+            "name": "combine",
+            "summary": "Combines\u0020conditions\u0020with\u0020\u0060OR\u0060\u0020\u0028or\u0020\u0060AND\u0060\u0029.",
+            "url": "classes/MTG-Database-Query.html#method_combine"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Alike\u0028\u0029",
+            "name": "like",
+            "summary": "Partial,\u0020case\u002Dinsensitive\u0020text\u0020match\u0020against\u0020one\u0020or\u0020more\u0020columns\u003B\u0020a\nvalue\u0020in\u0020double\u0020quotes\u0020matches\u0020exactly.",
+            "url": "classes/MTG-Database-Query.html#method_like"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Aequals\u0028\u0029",
+            "name": "equals",
+            "summary": "Exact,\u0020case\u002Dinsensitive\u0020match.",
+            "url": "classes/MTG-Database-Query.html#method_equals"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Aexact\u0028\u0029",
+            "name": "exact",
+            "summary": "Exact\u0020match\u0020on\u0020a\u0020column\u0020stored\u0020in\u0020one\u0020case\u0020\u0028set\u0020codes,\u0020UUIDs\u0029,\u0020so\u0020its\nindex\u0020still\u0020applies.",
+            "url": "classes/MTG-Database-Query.html#method_exact"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Acompare\u0028\u0029",
+            "name": "compare",
+            "summary": "Numeric\u0020match,\u0020with\u0020an\u0020optional\u0020comparison\u0020prefix\u0020per\u0020alternative.",
+            "url": "classes/MTG-Database-Query.html#method_compare"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Acontains\u0028\u0029",
+            "name": "contains",
+            "summary": "Matches\u0020a\u0020\u0060\u0022,\u0020\u0022\u0060\u002Djoined\u0020list\u0020column\u003A\u0020every\u0020term\u0020of\u0020an\u0020alternative\u0020must\nbe\u0020in\u0020the\u0020list.",
+            "url": "classes/MTG-Database-Query.html#method_contains"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Aflag\u0028\u0029",
+            "name": "flag",
+            "summary": "Matches\u0020a\u0020\u0060BOOLEAN\u0060\u0020column,\u0020where\u0020the\u0020build\u0020stores\u0020false\u0020as\u0020\u00600\u0060\u0020or\u0020null.",
+            "url": "classes/MTG-Database-Query.html#method_flag"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Apresent\u0028\u0029",
+            "name": "present",
+            "summary": "Requires\u0020a\u0020column\u0020to\u0020hold\u0020a\u0020value.",
+            "url": "classes/MTG-Database-Query.html#method_present"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Apaginate\u0028\u0029",
+            "name": "paginate",
+            "summary": "Applies\u0020\u0060page\u0060\u0020and\u0020\u0060pageSize\u0060.",
+            "url": "classes/MTG-Database-Query.html#method_paginate"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Adirection\u0028\u0029",
+            "name": "direction",
+            "summary": "Parses\u0020an\u0020\u0060orderBy\u0060\u0020value\u003A\u0020a\u0020field,\u0020optionally\u0020prefixed\u0020with\u0020\u0060\u002D\u0060\u0020or\nsuffixed\u0020with\u0020\u0060\u0020desc\u0060\/\u0060\u0020asc\u0060.",
+            "url": "classes/MTG-Database-Query.html#method_direction"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003Atruthy\u0028\u0029",
+            "name": "truthy",
+            "summary": "Reads\u0020a\u0020boolean\u002Dish\u0020filter\u0020value.",
+            "url": "classes/MTG-Database-Query.html#method_truthy"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003AMAX_PAGE_SIZE",
+            "name": "MAX_PAGE_SIZE",
+            "summary": "The\u0020largest\u0020page\u0020a\u0020query\u0020may\u0020return.",
+            "url": "classes/MTG-Database-Query.html#constant_MAX_PAGE_SIZE"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003A\u0024table",
+            "name": "table",
+            "summary": "The\u0020primary\u0020table.",
+            "url": "classes/MTG-Database-Query.html#property_table"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003A\u0024joins",
+            "name": "joins",
+            "summary": "Joined\u0020tables,\u0020by\u0020table\u0020name,\u0020as\u0020SQL\u0020fragments.",
+            "url": "classes/MTG-Database-Query.html#property_joins"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003A\u0024bindings",
+            "name": "bindings",
+            "summary": "Values\u0020bound\u0020to\u0020the\u0020conditions\u0027\u0020placeholders,\u0020in\u0020order.",
+            "url": "classes/MTG-Database-Query.html#property_bindings"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003A\u0024order",
+            "name": "order",
+            "summary": "\u0060ORDER\u0020BY\u0060\u0020terms.",
+            "url": "classes/MTG-Database-Query.html#property_order"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003A\u0024orderBindings",
+            "name": "orderBindings",
+            "summary": "Values\u0020bound\u0020to\u0020the\u0020ordering\u0027s\u0020placeholders,\u0020in\u0020order.",
+            "url": "classes/MTG-Database-Query.html#property_orderBindings"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003A\u0024limit",
+            "name": "limit",
+            "summary": "Page\u0020size,\u0020or\u0020null\u0020for\u0020no\u0020limit.",
+            "url": "classes/MTG-Database-Query.html#property_limit"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003A\u0024offset",
+            "name": "offset",
+            "summary": "Rows\u0020to\u0020skip.",
+            "url": "classes/MTG-Database-Query.html#property_offset"
+        },                {
+            "fqsen": "\\MTG\\Database\\Query\u003A\u003A\u0024database",
+            "name": "database",
+            "summary": "",
+            "url": "classes/MTG-Database-Query.html#property_database"
+        },                {
+            "fqsen": "\\MTG\\Database\\SetQuery",
+            "name": "SetQuery",
+            "summary": "A\u0020set\u0020search\u0020against\u0020the\u0020AllPrintings\u0020build\u0027s\u0020\u0060sets\u0060\u0020table.",
+            "url": "classes/MTG-Database-SetQuery.html"
+        },                {
+            "fqsen": "\\MTG\\Database\\SetQuery\u003A\u003Afilter\u0028\u0029",
+            "name": "filter",
+            "summary": "Applies\u0020a\u0020set\u0020of\u0020filters\u0020and\u0020query\u0020modifiers.",
+            "url": "classes/MTG-Database-SetQuery.html#method_filter"
+        },                {
+            "fqsen": "\\MTG\\Database\\SetQuery\u003A\u003APARTIAL",
+            "name": "PARTIAL",
+            "summary": "Text\u0020columns\u0020matched\u0020partially\u0020rather\u0020than\u0020exactly.",
+            "url": "classes/MTG-Database-SetQuery.html#constant_PARTIAL"
+        },                {
+            "fqsen": "\\MTG\\Database\\SetQuery\u003A\u003ACODES",
+            "name": "CODES",
+            "summary": "Set\u0020code\u0020columns,\u0020stored\u0020upper\u0020case\u0020and\u0020matched\u0020exactly.",
+            "url": "classes/MTG-Database-SetQuery.html#constant_CODES"
+        },                {
+            "fqsen": "\\MTG\\Database\\SetQuery\u003A\u003A\u0024table",
+            "name": "table",
+            "summary": "The\u0020primary\u0020table.",
+            "url": "classes/MTG-Database-SetQuery.html#property_table"
         },                {
             "fqsen": "\\MTG\\Helpers\\Collection",
             "name": "Collection",
@@ -138,7 +668,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MTG\\Http\\Endpoint",
             "name": "Endpoint",
-            "summary": "The\u0020route\u0020table\u0020for\u0020the\u0020\u0022Magic\u003A\u0020The\u0020Gathering\u0020Developers\u0022\u0020API\u0020\u2014\u0020one\u0020constant\nper\u0020endpoint\u0020\u0028\u0060cards\u0060,\u0020\u0060sets\u0060,\u0020\u0060sets\/\u003Aid\/booster\u0060,\u0020\u0060types\u0060,\u0020\u0060formats\u0060,\u0020\u2026\u0029,\nwith\u0020\u0060\u003Aparam\u0060\u0020placeholders\u0020bound\u0020via\u0020\u007B\u0040see\u0020EndpointTrait\u007D.\u0020Same\u0020mechanics\u0020as\nDiscordPHP\u0027s\u0020own\u0020\u0060Endpoint\u0060,\u0020pointed\u0020at\u0020\u0060api.magicthegathering.io\u0060.",
+            "summary": "The\u0020route\u0020table\u0020for\u0020the\u0020MTGJSON\u0020v5\u0020API\u0020\u2014\u0020one\u0020constant\u0020per\u0020file\u0020the\u0020API\nserves\u0020under\u0020\u0060https\u003A\/\/mtgjson.com\/api\/v5\/\u0060,\u0020with\u0020\u0060\u003Aparam\u0060\u0020placeholders\nbound\u0020via\u0020\u007B\u0040see\u0020EndpointTrait\u007D.\u0020Same\u0020mechanics\u0020as\u0020DiscordPHP\u0027s\u0020own\n\u0060Endpoint\u0060,\u0020pointed\u0020at\u0020\u0060mtgjson.com\u0060.",
             "url": "classes/MTG-Http-Endpoint.html"
         },                {
             "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003A__construct\u0028\u0029",
@@ -146,54 +676,94 @@ Search.appendIndex(
             "summary": "Creates\u0020an\u0020endpoint\u0020class.",
             "url": "classes/MTG-Http-Endpoint.html#method___construct"
         },                {
-            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003ACARDS",
-            "name": "CARDS",
+            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003AMETA",
+            "name": "META",
             "summary": "",
-            "url": "classes/MTG-Http-Endpoint.html#constant_CARDS"
+            "url": "classes/MTG-Http-Endpoint.html#constant_META"
         },                {
-            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003ACARD",
-            "name": "CARD",
+            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003ASET_LIST",
+            "name": "SET_LIST",
             "summary": "",
-            "url": "classes/MTG-Http-Endpoint.html#constant_CARD"
-        },                {
-            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003ASETS",
-            "name": "SETS",
-            "summary": "",
-            "url": "classes/MTG-Http-Endpoint.html#constant_SETS"
+            "url": "classes/MTG-Http-Endpoint.html#constant_SET_LIST"
         },                {
             "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003ASET",
             "name": "SET",
             "summary": "",
             "url": "classes/MTG-Http-Endpoint.html#constant_SET"
         },                {
-            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003ASETS_BOOSTER",
-            "name": "SETS_BOOSTER",
+            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003ADECK_LIST",
+            "name": "DECK_LIST",
             "summary": "",
-            "url": "classes/MTG-Http-Endpoint.html#constant_SETS_BOOSTER"
+            "url": "classes/MTG-Http-Endpoint.html#constant_DECK_LIST"
         },                {
-            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003ATYPES",
-            "name": "TYPES",
+            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003ADECK",
+            "name": "DECK",
             "summary": "",
-            "url": "classes/MTG-Http-Endpoint.html#constant_TYPES"
+            "url": "classes/MTG-Http-Endpoint.html#constant_DECK"
         },                {
-            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003ASUBTYPES",
-            "name": "SUBTYPES",
+            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003ACARD_TYPES",
+            "name": "CARD_TYPES",
             "summary": "",
-            "url": "classes/MTG-Http-Endpoint.html#constant_SUBTYPES"
+            "url": "classes/MTG-Http-Endpoint.html#constant_CARD_TYPES"
         },                {
-            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003ASUPERTYPES",
-            "name": "SUPERTYPES",
+            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003AKEYWORDS",
+            "name": "KEYWORDS",
             "summary": "",
-            "url": "classes/MTG-Http-Endpoint.html#constant_SUPERTYPES"
+            "url": "classes/MTG-Http-Endpoint.html#constant_KEYWORDS"
         },                {
-            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003AFORMATS",
-            "name": "FORMATS",
+            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003AENUM_VALUES",
+            "name": "ENUM_VALUES",
             "summary": "",
-            "url": "classes/MTG-Http-Endpoint.html#constant_FORMATS"
+            "url": "classes/MTG-Http-Endpoint.html#constant_ENUM_VALUES"
+        },                {
+            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003ACOMPILED_LIST",
+            "name": "COMPILED_LIST",
+            "summary": "",
+            "url": "classes/MTG-Http-Endpoint.html#constant_COMPILED_LIST"
+        },                {
+            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003AALL_PRINTINGS",
+            "name": "ALL_PRINTINGS",
+            "summary": "",
+            "url": "classes/MTG-Http-Endpoint.html#constant_ALL_PRINTINGS"
+        },                {
+            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003AALL_PRINTINGS_SQLITE_GZ",
+            "name": "ALL_PRINTINGS_SQLITE_GZ",
+            "summary": "",
+            "url": "classes/MTG-Http-Endpoint.html#constant_ALL_PRINTINGS_SQLITE_GZ"
+        },                {
+            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003AALL_IDENTIFIERS",
+            "name": "ALL_IDENTIFIERS",
+            "summary": "",
+            "url": "classes/MTG-Http-Endpoint.html#constant_ALL_IDENTIFIERS"
+        },                {
+            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003AATOMIC_CARDS",
+            "name": "ATOMIC_CARDS",
+            "summary": "",
+            "url": "classes/MTG-Http-Endpoint.html#constant_ATOMIC_CARDS"
+        },                {
+            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003AALL_PRICES_TODAY",
+            "name": "ALL_PRICES_TODAY",
+            "summary": "",
+            "url": "classes/MTG-Http-Endpoint.html#constant_ALL_PRICES_TODAY"
+        },                {
+            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003AALL_PRICES",
+            "name": "ALL_PRICES",
+            "summary": "",
+            "url": "classes/MTG-Http-Endpoint.html#constant_ALL_PRICES"
+        },                {
+            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003ATCGPLAYER_SKUS",
+            "name": "TCGPLAYER_SKUS",
+            "summary": "",
+            "url": "classes/MTG-Http-Endpoint.html#constant_TCGPLAYER_SKUS"
+        },                {
+            "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003AFORMAT",
+            "name": "FORMAT",
+            "summary": "",
+            "url": "classes/MTG-Http-Endpoint.html#constant_FORMAT"
         },                {
             "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003AREGEX",
             "name": "REGEX",
-            "summary": "Regex\u0020to\u0020identify\u0020parameters\u0020in\u0020endpoints.",
+            "summary": "Regex\u0020to\u0020identify\u0020parameters\u0020in\u0020endpoints.\u0020Stops\u0020at\u0020\u0060.\u0060\u0020so\u0020that\n\u0060\u003Acode.json\u0060\u0020binds\u0020\u0060code\u0060,\u0020not\u0020\u0060code.json\u0060.",
             "url": "classes/MTG-Http-Endpoint.html#constant_REGEX"
         },                {
             "fqsen": "\\MTG\\Http\\Endpoint\u003A\u003A\u0024endpoint",
@@ -218,7 +788,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MTG\\Http\\Http",
             "name": "Http",
-            "summary": "HTTP\u0020client\u0020for\u0020the\u0020\u0022Magic\u003A\u0020The\u0020Gathering\u0020Developers\u0022\u0020REST\u0020API,\u0020built\u0020the\nsame\u0020way\u0020DiscordPHP\u0020talks\u0020to\u0020\u0060discord.com\u0060\u0020\u0028rate\u002Dlimit\u0020buckets,\u0020driver,\nretry\u0029\u0020but\u0020pointed\u0020at\u0020\u0060api.magicthegathering.io\u0060.\u0020The\u0020API\u0020is\u0020read\u002Donly\u0020and\nunauthenticated,\u0020so\u0020no\u0020token\u0020is\u0020required.",
+            "summary": "HTTP\u0020client\u0020for\u0020the\u0020MTGJSON\u0020v5\u0020API,\u0020built\u0020the\u0020same\u0020way\u0020DiscordPHP\u0020talks\u0020to\n\u0060discord.com\u0060\u0020\u0028buckets,\u0020driver,\u0020retry\u0029\u0020but\u0020pointed\u0020at\n\u0060mtgjson.com\/api\/v5\u0060.\u0020The\u0020API\u0020is\u0020read\u002Donly\u0020and\u0020unauthenticated,\u0020so\u0020no\u0020token\nis\u0020required.\u0020Responses\u0020are\u0020MTGJSON\u0027s\u0020\u0060\u007B\u0022meta\u0022\u003A\u0020\u007B...\u007D,\u0020\u0022data\u0022\u003A\u0020...\u007D\u0060\nwrapper,\u0020decoded.",
             "url": "classes/MTG-Http-Http.html"
         },                {
             "fqsen": "\\MTG\\Http\\Http\u003A\u003A__construct\u0028\u0029",
@@ -228,7 +798,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MTG\\Http\\Http\u003A\u003AgetUserAgent\u0028\u0029",
             "name": "getUserAgent",
-            "summary": "Identifies\u0020this\u0020client\u0020to\u0020the\u0020MTG\u0020API\u0020as\u0020DiscordPHP\u002DMTG\u0020rather\u0020than\nborrowing\u0020the\u0020generic\u0020DiscordPHP\u002DHTTP\u0020agent\u0020string.",
+            "summary": "Identifies\u0020this\u0020client\u0020to\u0020MTGJSON\u0020as\u0020DiscordPHP\u002DMTG\u0020rather\u0020than\nborrowing\u0020the\u0020generic\u0020DiscordPHP\u002DHTTP\u0020agent\u0020string.",
             "url": "classes/MTG-Http-Http.html#method_getUserAgent"
         },                {
             "fqsen": "\\MTG\\Http\\Http\u003A\u003AqueueRequest\u0028\u0029",
@@ -243,23 +813,18 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MTG\\Http\\Http\u003A\u003AHTTP_API_VERSION",
             "name": "HTTP_API_VERSION",
-            "summary": "Current\u0020MTG\u0020HTTP\u0020API\u0020version.",
+            "summary": "Current\u0020MTGJSON\u0020API\u0020version.",
             "url": "classes/MTG-Http-Http.html#constant_HTTP_API_VERSION"
         },                {
             "fqsen": "\\MTG\\Http\\Http\u003A\u003ABASE_URL",
             "name": "BASE_URL",
-            "summary": "MTG\u0020API\u0020base\u0020URL.",
+            "summary": "MTGJSON\u0020API\u0020base\u0020URL.",
             "url": "classes/MTG-Http-Http.html#constant_BASE_URL"
         },                {
             "fqsen": "\\MTG\\Http\\Http\u003A\u003A\u0024token",
             "name": "token",
-            "summary": "Authentication\u0020token.\u0020Empty\u0020for\u0020the\u0020MTG\u0020API,\u0020which\u0020is\u0020unauthenticated\u0020\u2014\nkept\u0020only\u0020so\u0020the\u0020shared\u0020\u007B\u0040see\u0020HttpTrait\u007D\u0020plumbing\u0020has\u0020something\u0020to\u0020read.",
+            "summary": "Authentication\u0020token.\u0020Empty\u0020for\u0020MTGJSON,\u0020which\u0020is\u0020unauthenticated\u0020\u2014\nkept\u0020only\u0020so\u0020the\u0020shared\u0020\u007B\u0040see\u0020HttpTrait\u007D\u0020plumbing\u0020has\u0020something\u0020to\u0020read.",
             "url": "classes/MTG-Http-Http.html#property_token"
-        },                {
-            "fqsen": "\\MTG\\Http\\Http\u003A\u003A\u0024apiKey",
-            "name": "apiKey",
-            "summary": "Optional\u0020\u0060X\u002DApi\u002DKey\u0060\u0020for\u0020the\u0020MTG\u0020API.\u0020Supplying\u0020one\u0020raises\u0020the\u0020per\u002Dhour\nrequest\u0020allowance\u003B\u0020without\u0020it\u0020the\u0020API\u0020still\u0020works\u0020at\u0020the\u0020anonymous\u0020limit.",
-            "url": "classes/MTG-Http-Http.html#property_apiKey"
         },                {
             "fqsen": "\\MTG\\Http\\Http\u003A\u003A\u0024logger",
             "name": "logger",
@@ -323,7 +888,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MTG\\MTG",
             "name": "MTG",
-            "summary": "The\u0020MTG\u0020client\u0020class\u0020\u2014\u0020a\u0020DiscordPHP\u0020\u007B\u0040see\u0020MessageCommandClient\u007D\u0020extended\u0020with\nan\u0020async\u0020HTTP\u0020client\u0020for\u0020the\u0020\u0022Magic\u003A\u0020The\u0020Gathering\u0020Developers\u0022\u0020REST\u0020API\u0020and\nthe\u0020card\u0020\/\u0020set\u0020repositories\u0020that\u0020read\u0020it.",
+            "summary": "The\u0020MTG\u0020client\u0020class\u0020\u2014\u0020a\u0020DiscordPHP\u0020\u007B\u0040see\u0020MessageCommandClient\u007D\u0020extended\nwith\u0020MTGJSON\u003A\u0020an\u0020async\u0020HTTP\u0020client\u0020for\u0020the\u0020MTGJSON\u0020v5\u0020API,\u0020a\u0020local\u0020copy\u0020of\nits\u0020AllPrintings\u0020SQLite\u0020build\u0020for\u0020card\u0020and\u0020set\u0020searches,\u0020and\u0020the\u0020card,\u0020set\nand\u0020deck\u0020repositories\u0020that\u0020read\u0020them.",
             "url": "classes/MTG-MTG.html"
         },                {
             "fqsen": "\\MTG\\MTG\u003A\u003A__construct\u0028\u0029",
@@ -331,30 +896,65 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/MTG-MTG.html#method___construct"
         },                {
+            "fqsen": "\\MTG\\MTG\u003A\u003AgetCardTypes\u0028\u0029",
+            "name": "getCardTypes",
+            "summary": "Fetches\u0020every\u0020card\u0020type\u0020with\u0020its\u0020valid\u0020subtypes\u0020and\u0020supertypes,\u0020keyed\nby\u0020lower\u002Dcase\u0020type\u0020\u0028\u0060artifact\u0060,\u0020\u0060creature\u0060,\u0020\u2026\u0029.",
+            "url": "classes/MTG-MTG.html#method_getCardTypes"
+        },                {
             "fqsen": "\\MTG\\MTG\u003A\u003AgetTypes\u0028\u0029",
             "name": "getTypes",
-            "summary": "Fetches\u0020the\u0020API\u0027s\u0020list\u0020of\u0020all\u0020card\u0020types\u0020\u0028e.g.\u0020\u0060Creature\u0060,\u0020\u0060Instant\u0060\u0029.",
+            "summary": "Fetches\u0020the\u0020list\u0020of\u0020all\u0020card\u0020types\u0020\u0028e.g.\u0020\u0060Creature\u0060,\u0020\u0060Instant\u0060\u0029.",
             "url": "classes/MTG-MTG.html#method_getTypes"
         },                {
             "fqsen": "\\MTG\\MTG\u003A\u003AgetSubtypes\u0028\u0029",
             "name": "getSubtypes",
-            "summary": "Fetches\u0020the\u0020API\u0027s\u0020list\u0020of\u0020all\u0020card\u0020subtypes\u0020\u0028e.g.\u0020\u0060Elf\u0060,\u0020\u0060Equipment\u0060\u0029.",
+            "summary": "Fetches\u0020the\u0020list\u0020of\u0020all\u0020card\u0020subtypes\u0020\u0028e.g.\u0020\u0060Elf\u0060,\u0020\u0060Equipment\u0060\u0029.",
             "url": "classes/MTG-MTG.html#method_getSubtypes"
         },                {
             "fqsen": "\\MTG\\MTG\u003A\u003AgetSupertypes\u0028\u0029",
             "name": "getSupertypes",
-            "summary": "Fetches\u0020the\u0020API\u0027s\u0020list\u0020of\u0020all\u0020card\u0020supertypes\u0020\u0028e.g.\u0020\u0060Legendary\u0060,\u0020\u0060Snow\u0060\u0029.",
+            "summary": "Fetches\u0020the\u0020list\u0020of\u0020all\u0020card\u0020supertypes\u0020\u0028e.g.\u0020\u0060Legendary\u0060,\u0020\u0060Snow\u0060\u0029.",
             "url": "classes/MTG-MTG.html#method_getSupertypes"
         },                {
             "fqsen": "\\MTG\\MTG\u003A\u003AgetFormats\u0028\u0029",
             "name": "getFormats",
-            "summary": "Fetches\u0020the\u0020API\u0027s\u0020list\u0020of\u0020all\u0020game\u0020formats\u0020\u0028e.g.\u0020\u0060Standard\u0060,\u0020\u0060Commander\u0060\u0029.",
+            "summary": "Lists\u0020the\u0020game\u0020formats\u0020MTGJSON\u0020tracks\u0020legality\u0020for,\u0020as\u0020it\u0020names\u0020them\n\u0028e.g.\u0020\u0060standard\u0060,\u0020\u0060commander\u0060,\u0020\u0060paupercommander\u0060\u0029\u0020\u2014\u0020the\u0020values\u0020the\n\u0060gameFormat\u0060\u0020card\u0020filter\u0020takes.",
             "url": "classes/MTG-MTG.html#method_getFormats"
+        },                {
+            "fqsen": "\\MTG\\MTG\u003A\u003AgetKeywords\u0028\u0029",
+            "name": "getKeywords",
+            "summary": "Fetches\u0020the\u0020keyword\u0020lists\u003A\u0020\u0060abilityWords\u0060,\u0020\u0060keywordAbilities\u0060\u0020and\n\u0060keywordActions\u0060.",
+            "url": "classes/MTG-MTG.html#method_getKeywords"
+        },                {
+            "fqsen": "\\MTG\\MTG\u003A\u003AgetEnumValues\u0028\u0029",
+            "name": "getEnumValues",
+            "summary": "Fetches\u0020every\u0020value\u0020MTGJSON\u0027s\u0020enumerated\u0020properties\u0020can\u0020hold,\u0020keyed\u0020by\nmodel\u0020then\u0020property\u0020\u0028e.g.\u0020\u0060card\u0060\u0020\u2192\u0020\u0060rarity\u0060\u0029.",
+            "url": "classes/MTG-MTG.html#method_getEnumValues"
+        },                {
+            "fqsen": "\\MTG\\MTG\u003A\u003AgetMeta\u0028\u0029",
+            "name": "getMeta",
+            "summary": "Fetches\u0020the\u0020current\u0020MTGJSON\u0020build\u0027s\u0020version\u0020and\u0020date.",
+            "url": "classes/MTG-MTG.html#method_getMeta"
+        },                {
+            "fqsen": "\\MTG\\MTG\u003A\u003AsetClient\u0028\u0029",
+            "name": "setClient",
+            "summary": "Sets\u0020the\u0020client\u0020part,\u0020but\u0020never\u0020back\u0020to\u0020a\u0020plain\u0020DiscordPHP\u0020one\u003A\u0020the\nclient\u0020DiscordPHP\u0020builds\u0020before\u0020this\u0020constructor\u0020swaps\u0020in\n\u007B\u0040see\u0020Client\u007D\u0020re\u002Dinstalls\u0020itself\u0020once\u0020its\u0020application\u0020has\u0020loaded,\nwhich\u0020would\u0020drop\u0020the\u0020MTG\u0020repositories.",
+            "url": "classes/MTG-MTG.html#method_setClient"
         },                {
             "fqsen": "\\MTG\\MTG\u003A\u003AgetMtgHttpClient\u0028\u0029",
             "name": "getMtgHttpClient",
             "summary": "Gets\u0020the\u0020MTG\u0020HTTP\u0020client.",
             "url": "classes/MTG-MTG.html#method_getMtgHttpClient"
+        },                {
+            "fqsen": "\\MTG\\MTG\u003A\u003AgetDatabase\u0028\u0029",
+            "name": "getDatabase",
+            "summary": "Gets\u0020the\u0020local\u0020MTGJSON\u0020build.",
+            "url": "classes/MTG-MTG.html#method_getDatabase"
+        },                {
+            "fqsen": "\\MTG\\MTG\u003A\u003AmergeTypes\u0028\u0029",
+            "name": "mergeTypes",
+            "summary": "Merges\u0020one\u0020list\u0020out\u0020of\u0020every\u0020card\u0020type,\u0020sorted\u0020and\u0020unique.",
+            "url": "classes/MTG-MTG.html#method_mergeTypes"
         },                {
             "fqsen": "\\MTG\\MTG\u003A\u003A__get\u0028\u0029",
             "name": "__get",
@@ -376,6 +976,11 @@ Search.appendIndex(
             "summary": "The\u0020extended\u0020HTTP\u0020client.",
             "url": "classes/MTG-MTG.html#property_mtg_http"
         },                {
+            "fqsen": "\\MTG\\MTG\u003A\u003A\u0024database",
+            "name": "database",
+            "summary": "The\u0020local\u0020MTGJSON\u0020build.",
+            "url": "classes/MTG-MTG.html#property_database"
+        },                {
             "fqsen": "\\MTG\\MTG\u003A\u003A\u0024client",
             "name": "client",
             "summary": "The\u0020extended\u0020Client\u0020class.",
@@ -383,38 +988,63 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MTG\\Parts\\Card",
             "name": "Card",
-            "summary": "Represents\u0020a\u0020Magic\u003A\u0020The\u0020Gathering\u0020card\u0020\u0028one\u0020object\u0020from\u0020the\u0020API\u0027s\u0020\u0060cards\u0060\nresponse\u0029\u003B\u0020\u007B\u0040see\u0020CardAttributes\u007D\u0020declares\u0020the\u0020raw\u0020API\u0020fields\u0020and\u0020this\u0020class\nadds\u0020the\u0020collections\u0020and\u0020Discord\u0020render\u0020helpers.",
+            "summary": "One\u0020face\u0020of\u0020one\u0020printing\u0020of\u0020a\u0020Magic\u003A\u0020The\u0020Gathering\u0020card\u0020\u2014\u0020MTGJSON\u0027s\u0020Card\n\u0028Set\u0029\u0020model,\u0020plus\u0020the\u0020Card\u0020\u0028Deck\u0029\u0020fields\u0020when\u0020it\u0020comes\u0020from\u0020a\u0020deck.",
             "url": "classes/MTG-Parts-Card.html"
         },                {
-            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AgetReleaseDateAttribute\u0028\u0029",
-            "name": "getReleaseDateAttribute",
-            "summary": "Gets\u0020the\u0020release\u0020date\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-Card.html#method_getReleaseDateAttribute"
+            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AgetForeignDataAttribute\u0028\u0029",
+            "name": "getForeignDataAttribute",
+            "summary": "Gets\u0020the\u0020card\u0027s\u0020printed\u0020names\u0020and\u0020text\u0020in\u0020other\u0020languages.",
+            "url": "classes/MTG-Parts-Card.html#method_getForeignDataAttribute"
         },                {
-            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AgetRulingsAttribute\u0028\u0029",
-            "name": "getRulingsAttribute",
-            "summary": "Converts\u0020the\u0020card\u0020to\u0020a\u0020container\u0020with\u0020components.",
-            "url": "classes/MTG-Parts-Card.html#method_getRulingsAttribute"
-        },                {
-            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AgetForeignNamesAttribute\u0028\u0029",
-            "name": "getForeignNamesAttribute",
-            "summary": "Gets\u0020the\u0020foreign\u0020names\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-Card.html#method_getForeignNamesAttribute"
+            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AgetIdentifiersAttribute\u0028\u0029",
+            "name": "getIdentifiersAttribute",
+            "summary": "Gets\u0020the\u0020card\u0027s\u0020identifiers\u0020on\u0020other\u0020services.",
+            "url": "classes/MTG-Parts-Card.html#method_getIdentifiersAttribute"
         },                {
             "fqsen": "\\MTG\\Parts\\Card\u003A\u003AgetLegalitiesAttribute\u0028\u0029",
             "name": "getLegalitiesAttribute",
-            "summary": "Gets\u0020the\u0020legality\u0020of\u0020the\u0020card.",
+            "summary": "Gets\u0020the\u0020card\u0027s\u0020status\u0020in\u0020each\u0020format\u0020it\u0020has\u0020one\u0020in.\u0020MTGJSON\u0020keys\nlegalities\u0020by\u0020format\u003B\u0020each\u0020entry\u0020becomes\u0020a\u0020\u007B\u0040see\u0020Legality\u007D.",
             "url": "classes/MTG-Parts-Card.html#method_getLegalitiesAttribute"
         },                {
-            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AtoContainer\u0028\u0029",
-            "name": "toContainer",
-            "summary": "Converts\u0020the\u0020card\u0020to\u0020a\u0020container\u0020with\u0020components.",
-            "url": "classes/MTG-Parts-Card.html#method_toContainer"
+            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AgetLeadershipSkillsAttribute\u0028\u0029",
+            "name": "getLeadershipSkillsAttribute",
+            "summary": "Gets\u0020which\u0020formats\u0020the\u0020card\u0020can\u0020be\u0020your\u0020commander\u0020in.",
+            "url": "classes/MTG-Parts-Card.html#method_getLeadershipSkillsAttribute"
+        },                {
+            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AgetPurchaseUrlsAttribute\u0028\u0029",
+            "name": "getPurchaseUrlsAttribute",
+            "summary": "Gets\u0020links\u0020to\u0020buy\u0020the\u0020card.",
+            "url": "classes/MTG-Parts-Card.html#method_getPurchaseUrlsAttribute"
+        },                {
+            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AgetRulingsAttribute\u0028\u0029",
+            "name": "getRulingsAttribute",
+            "summary": "Gets\u0020the\u0020official\u0020rulings\u0020on\u0020the\u0020card.",
+            "url": "classes/MTG-Parts-Card.html#method_getRulingsAttribute"
+        },                {
+            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AgetOriginalReleaseDateAttribute\u0028\u0029",
+            "name": "getOriginalReleaseDateAttribute",
+            "summary": "Gets\u0020the\u0020original\u0020release\u0020date\u0020of\u0020a\u0020promotional\u0020printing.",
+            "url": "classes/MTG-Parts-Card.html#method_getOriginalReleaseDateAttribute"
+        },                {
+            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AgetImageUrlAttribute\u0028\u0029",
+            "name": "getImageUrlAttribute",
+            "summary": "Gets\u0020the\u0020card\u0020face\u0027s\u0020image\u0020on\u0020Scryfall\u0027s\u0020CDN.\u0020The\u0020back\u0020face\u0020of\u0020a\ndouble\u002Dfaced\u0020card\u0020shares\u0020its\u0020front\u0027s\u0020Scryfall\u0020id.",
+            "url": "classes/MTG-Parts-Card.html#method_getImageUrlAttribute"
         },                {
             "fqsen": "\\MTG\\Parts\\Card\u003A\u003AgetImageEmbedAttribute\u0028\u0029",
             "name": "getImageEmbedAttribute",
             "summary": "Generates\u0020an\u0020Embed\u0020object\u0020for\u0020the\u0020card\u0027s\u0020image.",
             "url": "classes/MTG-Parts-Card.html#method_getImageEmbedAttribute"
+        },                {
+            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AlistOf\u0028\u0029",
+            "name": "listOf",
+            "summary": "Builds\u0020a\u0020collection\u0020of\u0020parts\u0020from\u0020a\u0020list\u0020attribute.",
+            "url": "classes/MTG-Parts-Card.html#method_listOf"
+        },                {
+            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AtoContainer\u0028\u0029",
+            "name": "toContainer",
+            "summary": "Converts\u0020the\u0020card\u0020to\u0020a\u0020container\u0020with\u0020components.",
+            "url": "classes/MTG-Parts-Card.html#method_toContainer"
         },                {
             "fqsen": "\\MTG\\Parts\\Card\u003A\u003AnormalLayoutContainer\u0028\u0029",
             "name": "normalLayoutContainer",
@@ -451,319 +1081,134 @@ Search.appendIndex(
             "summary": "Builds\u0020a\u0020button\u0020that,\u0020when\u0020clicked,\u0020replies\u0020with\u0020this\u0020card\u0027s\u0020rulings\ngrouped\u0020by\u0020date.\u0020Returns\u0020null\u0020when\u0020the\u0020card\u0020has\u0020no\u0020rulings.",
             "url": "classes/MTG-Parts-Card.html#method_getRulingsButton"
         },                {
+            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AtextButton\u0028\u0029",
+            "name": "textButton",
+            "summary": "A\u0020button\u0020that\u0020replies\u0020with\u0020a\u0020block\u0020of\u0020text\u0020\u2014\u0020as\u0020a\u0020file\u0020when\u0020it\u0020is\nlonger\u0020than\u0020a\u0020message\u0020can\u0020hold.",
+            "url": "classes/MTG-Parts-Card.html#method_textButton"
+        },                {
+            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AVISUAL_LAYOUTS",
+            "name": "VISUAL_LAYOUTS",
+            "summary": "Layouts\u0020that\u0020only\u0020render\u0020well\u0020as\u0020an\u0020image.",
+            "url": "classes/MTG-Parts-Card.html#constant_VISUAL_LAYOUTS"
+        },                {
+            "fqsen": "\\MTG\\Parts\\Card\u003A\u003ADOUBLE_FACED_LAYOUTS",
+            "name": "DOUBLE_FACED_LAYOUTS",
+            "summary": "Layouts\u0020whose\u0020later\u0020sides\u0020are\u0020printed\u0020on\u0020the\u0020back\u0020of\u0020the\u0020same\u0020card.",
+            "url": "classes/MTG-Parts-Card.html#constant_DOUBLE_FACED_LAYOUTS"
+        },                {
+            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AIMAGE_SIZE",
+            "name": "IMAGE_SIZE",
+            "summary": "The\u0020Scryfall\u0020image\u0020size\u0020used\u0020for\u0020\u0060image_url\u0060.",
+            "url": "classes/MTG-Parts-Card.html#constant_IMAGE_SIZE"
+        },                {
+            "fqsen": "\\MTG\\Parts\\Card\u003A\u003AMAX_CONTENT_LENGTH",
+            "name": "MAX_CONTENT_LENGTH",
+            "summary": "Discord\u0027s\u0020limit\u0020on\u0020a\u0020message\u0027s\u0020content.",
+            "url": "classes/MTG-Parts-Card.html#constant_MAX_CONTENT_LENGTH"
+        },                {
             "fqsen": "\\MTG\\Parts\\Card\u003A\u003A\u0024fillable",
             "name": "fillable",
             "summary": "",
             "url": "classes/MTG-Parts-Card.html#property_fillable"
         },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes",
-            "name": "CardAttributes",
-            "summary": "This\u0020query\u0020will\u0020return\u0020a\u0020maximum\u0020of\u0020100\u0020cards.",
-            "url": "classes/MTG-Parts-CardAttributes.html"
+            "fqsen": "\\MTG\\Parts\\Card\u003A\u003A\u0024visible",
+            "name": "visible",
+            "summary": "",
+            "url": "classes/MTG-Parts-Card.html#property_visible"
         },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetName\u0028\u0029",
-            "name": "setName",
-            "summary": "Sets\u0020the\u0020name\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setName"
+            "fqsen": "\\MTG\\Parts\\Deck",
+            "name": "Deck",
+            "summary": "A\u0020preconstructed\u0020deck\u0020\u2014\u0020MTGJSON\u0027s\u0020Deck\u0020model,\u0020or\u0020a\u0020Deck\u0020List\u0020entry\u0020\u0028no\ncards\u0029\u0020when\u0020it\u0020comes\u0020from\u0020\u007B\u0040see\u0020\\MTG\\Repository\\DeckRepository\u003A\u003AgetDecks\u0028\u0029\u007D.",
+            "url": "classes/MTG-Parts-Deck.html"
         },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "Gets\u0020the\u0020name\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getName"
+            "fqsen": "\\MTG\\Parts\\Deck\u003A\u003AhasCards\u0028\u0029",
+            "name": "hasCards",
+            "summary": "Whether\u0020the\u0020deck\u0020carries\u0020its\u0020cards\u0020\u0028a\u0020Deck\u0029,\u0020or\u0020only\u0020its\u0020summary\u0020\u0028a\nDeck\u0020List\u0020entry\u0029.",
+            "url": "classes/MTG-Parts-Deck.html#method_hasCards"
         },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetLayout\u0028\u0029",
-            "name": "setLayout",
-            "summary": "Sets\u0020the\u0020layout\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setLayout"
+            "fqsen": "\\MTG\\Parts\\Deck\u003A\u003AgetReleaseDateAttribute\u0028\u0029",
+            "name": "getReleaseDateAttribute",
+            "summary": "Gets\u0020the\u0020release\u0020date\u0020of\u0020the\u0020deck.",
+            "url": "classes/MTG-Parts-Deck.html#method_getReleaseDateAttribute"
         },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetLayout\u0028\u0029",
-            "name": "getLayout",
-            "summary": "Gets\u0020the\u0020layout\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getLayout"
+            "fqsen": "\\MTG\\Parts\\Deck\u003A\u003AgetCommanderAttribute\u0028\u0029",
+            "name": "getCommanderAttribute",
+            "summary": "",
+            "url": "classes/MTG-Parts-Deck.html#method_getCommanderAttribute"
         },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetCmc\u0028\u0029",
-            "name": "setCmc",
-            "summary": "Sets\u0020the\u0020converted\u0020mana\u0020cost\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setCmc"
+            "fqsen": "\\MTG\\Parts\\Deck\u003A\u003AgetDisplayCommanderAttribute\u0028\u0029",
+            "name": "getDisplayCommanderAttribute",
+            "summary": "",
+            "url": "classes/MTG-Parts-Deck.html#method_getDisplayCommanderAttribute"
         },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetCmc\u0028\u0029",
-            "name": "getCmc",
-            "summary": "Gets\u0020the\u0020converted\u0020mana\u0020cost\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getCmc"
+            "fqsen": "\\MTG\\Parts\\Deck\u003A\u003AgetMainBoardAttribute\u0028\u0029",
+            "name": "getMainBoardAttribute",
+            "summary": "",
+            "url": "classes/MTG-Parts-Deck.html#method_getMainBoardAttribute"
         },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetColors\u0028\u0029",
-            "name": "setColors",
-            "summary": "Sets\u0020the\u0020colors\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setColors"
+            "fqsen": "\\MTG\\Parts\\Deck\u003A\u003AgetPlanesAttribute\u0028\u0029",
+            "name": "getPlanesAttribute",
+            "summary": "",
+            "url": "classes/MTG-Parts-Deck.html#method_getPlanesAttribute"
         },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetColors\u0028\u0029",
-            "name": "getColors",
-            "summary": "Gets\u0020the\u0020colors\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getColors"
+            "fqsen": "\\MTG\\Parts\\Deck\u003A\u003AgetSchemesAttribute\u0028\u0029",
+            "name": "getSchemesAttribute",
+            "summary": "",
+            "url": "classes/MTG-Parts-Deck.html#method_getSchemesAttribute"
         },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetColorIdentity\u0028\u0029",
-            "name": "setColorIdentity",
-            "summary": "Sets\u0020the\u0020color\u0020identity\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setColorIdentity"
+            "fqsen": "\\MTG\\Parts\\Deck\u003A\u003AgetSideBoardAttribute\u0028\u0029",
+            "name": "getSideBoardAttribute",
+            "summary": "",
+            "url": "classes/MTG-Parts-Deck.html#method_getSideBoardAttribute"
         },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetColorIdentity\u0028\u0029",
-            "name": "getColorIdentity",
-            "summary": "Gets\u0020the\u0020color\u0020identity\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getColorIdentity"
+            "fqsen": "\\MTG\\Parts\\Deck\u003A\u003AgetTokensAttribute\u0028\u0029",
+            "name": "getTokensAttribute",
+            "summary": "",
+            "url": "classes/MTG-Parts-Deck.html#method_getTokensAttribute"
         },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetType\u0028\u0029",
-            "name": "setType",
-            "summary": "Sets\u0020the\u0020type\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setType"
+            "fqsen": "\\MTG\\Parts\\Deck\u003A\u003Acards\u0028\u0029",
+            "name": "cards",
+            "summary": "Builds\u0020one\u0020of\u0020the\u0020deck\u0027s\u0020card\u0020lists.\u0020Not\u0020keyed\u0020by\u0020uuid\u003A\u0020a\u0020deck\u0020can\nhold\u0020the\u0020same\u0020printing\u0020as\u0020foil\u0020and\u0020non\u002Dfoil.",
+            "url": "classes/MTG-Parts-Deck.html#method_cards"
         },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetType\u0028\u0029",
-            "name": "getType",
-            "summary": "Gets\u0020the\u0020type\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getType"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetSupertypes\u0028\u0029",
-            "name": "setSupertypes",
-            "summary": "Sets\u0020the\u0020supertypes\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setSupertypes"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetSupertypes\u0028\u0029",
-            "name": "getSupertypes",
-            "summary": "Gets\u0020the\u0020supertypes\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getSupertypes"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetTypes\u0028\u0029",
-            "name": "setTypes",
-            "summary": "Sets\u0020the\u0020types\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setTypes"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetTypes\u0028\u0029",
-            "name": "getTypes",
-            "summary": "Gets\u0020the\u0020types\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getTypes"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetSubtypes\u0028\u0029",
-            "name": "setSubtypes",
-            "summary": "Sets\u0020the\u0020subtypes\u0020of\u0020the\u0020card\u0020\u0028e.g.\u0020\u0022Human\u0022,\u0020\u0022Wizard\u0022,\u0020\u0022Equipment\u0022\u0029.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setSubtypes"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetSubtypes\u0028\u0029",
-            "name": "getSubtypes",
-            "summary": "Gets\u0020the\u0020subtypes\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getSubtypes"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetRarity\u0028\u0029",
-            "name": "setRarity",
-            "summary": "Sets\u0020the\u0020rarity\u0020of\u0020the\u0020card\u0020\u0028e.g.\u0020\u0022Common\u0022,\u0020\u0022Rare\u0022,\u0020\u0022Mythic\u0020Rare\u0022\u0029.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setRarity"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetRarity\u0028\u0029",
-            "name": "getRarity",
-            "summary": "Gets\u0020the\u0020rarity\u0020of\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getRarity"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetSet\u0028\u0029",
-            "name": "setSet",
-            "summary": "Sets\u0020the\u0020code\u0020of\u0020the\u0020set\u0020the\u0020card\u0020belongs\u0020to.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setSet"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetSet\u0028\u0029",
-            "name": "getSet",
-            "summary": "Gets\u0020the\u0020code\u0020of\u0020the\u0020set\u0020the\u0020card\u0020belongs\u0020to.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getSet"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetSetName\u0028\u0029",
-            "name": "setSetName",
-            "summary": "Sets\u0020the\u0020full\u0020name\u0020of\u0020the\u0020set\u0020the\u0020card\u0020belongs\u0020to.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setSetName"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetSetName\u0028\u0029",
-            "name": "getSetName",
-            "summary": "Gets\u0020the\u0020full\u0020name\u0020of\u0020the\u0020set\u0020the\u0020card\u0020belongs\u0020to.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getSetName"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetText\u0028\u0029",
-            "name": "setText",
-            "summary": "Sets\u0020the\u0020card\u0027s\u0020oracle\u0020rules\u0020text.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setText"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetText\u0028\u0029",
-            "name": "getText",
-            "summary": "Gets\u0020the\u0020card\u0027s\u0020oracle\u0020rules\u0020text.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getText"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetFlavor\u0028\u0029",
-            "name": "setFlavor",
-            "summary": "Sets\u0020the\u0020card\u0027s\u0020flavor\u0020text.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setFlavor"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetFlavor\u0028\u0029",
-            "name": "getFlavor",
-            "summary": "Gets\u0020the\u0020card\u0027s\u0020flavor\u0020text.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getFlavor"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetArtist\u0028\u0029",
-            "name": "setArtist",
-            "summary": "Sets\u0020the\u0020name\u0020of\u0020the\u0020artist\u0020who\u0020illustrated\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setArtist"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetArtist\u0028\u0029",
-            "name": "getArtist",
-            "summary": "Gets\u0020the\u0020name\u0020of\u0020the\u0020artist\u0020who\u0020illustrated\u0020the\u0020card.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getArtist"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetNumber\u0028\u0029",
-            "name": "setNumber",
-            "summary": "Sets\u0020the\u0020card\u0027s\u0020collector\u0020number\u0020within\u0020its\u0020set.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setNumber"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetNumber\u0028\u0029",
-            "name": "getNumber",
-            "summary": "Gets\u0020the\u0020card\u0027s\u0020collector\u0020number\u0020within\u0020its\u0020set.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getNumber"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetPower\u0028\u0029",
-            "name": "setPower",
-            "summary": "Sets\u0020the\u0020creature\u0027s\u0020power.\u0020A\u0020string\u0020because\u0020it\u0020may\u0020be\u0020non\u002Dnumeric\u0020\u0028e.g.\u0020\u0022\u002A\u0022\u0029.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setPower"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetPower\u0028\u0029",
-            "name": "getPower",
-            "summary": "Gets\u0020the\u0020creature\u0027s\u0020power.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getPower"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetToughness\u0028\u0029",
-            "name": "setToughness",
-            "summary": "Sets\u0020the\u0020creature\u0027s\u0020toughness.\u0020A\u0020string\u0020because\u0020it\u0020may\u0020be\u0020non\u002Dnumeric\u0020\u0028e.g.\u0020\u0022\u002A\u0022\u0029.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setToughness"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetToughness\u0028\u0029",
-            "name": "getToughness",
-            "summary": "Gets\u0020the\u0020creature\u0027s\u0020toughness.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getToughness"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetLoyalty\u0028\u0029",
-            "name": "setLoyalty",
-            "summary": "Sets\u0020the\u0020planeswalker\u0027s\u0020starting\u0020loyalty.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setLoyalty"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetLoyalty\u0028\u0029",
-            "name": "getLoyalty",
-            "summary": "Gets\u0020the\u0020planeswalker\u0027s\u0020starting\u0020loyalty.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getLoyalty"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetLanguage\u0028\u0029",
-            "name": "setLanguage",
-            "summary": "Sets\u0020the\u0020language\u0020to\u0020match\u0020foreign\u0020card\u0020names\u0020against\u0020when\u0020querying.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setLanguage"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetLanguage\u0028\u0029",
-            "name": "getLanguage",
-            "summary": "Gets\u0020the\u0020language\u0020used\u0020when\u0020querying\u0020foreign\u0020card\u0020names.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getLanguage"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetGameFormat\u0028\u0029",
-            "name": "setGameFormat",
-            "summary": "Sets\u0020the\u0020game\u0020format\u0020to\u0020filter\u0020legality\u0020against\u0020\u0028e.g.\u0020\u0022Standard\u0022,\u0020\u0022Modern\u0022\u0029.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setGameFormat"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetGameFormat\u0028\u0029",
-            "name": "getGameFormat",
-            "summary": "Gets\u0020the\u0020game\u0020format\u0020used\u0020to\u0020filter\u0020legality.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getGameFormat"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetLegality\u0028\u0029",
-            "name": "setLegality",
-            "summary": "Sets\u0020the\u0020legality\u0020status\u0020to\u0020filter\u0020by\u0020\u0028\u0022Legal\u0022,\u0020\u0022Banned\u0022\u0020or\u0020\u0022Restricted\u0022\u0029.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setLegality"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetLegality\u0028\u0029",
-            "name": "getLegality",
-            "summary": "Gets\u0020the\u0020legality\u0020status\u0020used\u0020to\u0020filter\u0020results.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getLegality"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetPage\u0028\u0029",
-            "name": "setPage",
-            "summary": "Sets\u0020the\u0020results\u0020page\u0020number\u0020to\u0020request\u0020\u00281\u002Dbased\u0020pagination\u0029.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setPage"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetPage\u0028\u0029",
-            "name": "getPage",
-            "summary": "Gets\u0020the\u0020results\u0020page\u0020number.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getPage"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetPageSize\u0028\u0029",
-            "name": "setPageSize",
-            "summary": "Sets\u0020the\u0020number\u0020of\u0020results\u0020per\u0020page.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setPageSize"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetPageSize\u0028\u0029",
-            "name": "getPageSize",
-            "summary": "Gets\u0020the\u0020number\u0020of\u0020results\u0020per\u0020page.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getPageSize"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetOrderBy\u0028\u0029",
-            "name": "setOrderBy",
-            "summary": "Sets\u0020the\u0020field\u0020to\u0020order\u0020results\u0020by.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setOrderBy"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetOrderBy\u0028\u0029",
-            "name": "getOrderBy",
-            "summary": "Gets\u0020the\u0020field\u0020results\u0020are\u0020ordered\u0020by.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getOrderBy"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetRandom\u0028\u0029",
-            "name": "setRandom",
-            "summary": "Requests\u0020a\u0020single\u0020random\u0020card\u0020matching\u0020the\u0020other\u0020filters.\u0020Only\u0020a\u0020truthy\nvalue\u0020has\u0020an\u0020effect\u003B\u0020\u0060false\u0060\/\u0060null\u0060\u0020leaves\u0020the\u0020flag\u0020unset.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setRandom"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetRandom\u0028\u0029",
-            "name": "getRandom",
-            "summary": "Gets\u0020whether\u0020a\u0020random\u0020card\u0020was\u0020requested.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getRandom"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetContains\u0028\u0029",
-            "name": "setContains",
-            "summary": "Restricts\u0020results\u0020to\u0020cards\u0020that\u0020have\u0020the\u0020named\u0020field\u0028s\u0029\u0020present.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setContains"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetContains\u0028\u0029",
-            "name": "getContains",
-            "summary": "Gets\u0020the\u0020\u0022contains\u0022\u0020field\u0020filter.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getContains"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetId\u0028\u0029",
-            "name": "setId",
-            "summary": "Sets\u0020the\u0020card\u0027s\u0020unique\u0020id\u0020\u0028a\u0020hash\u0020of\u0020set\u0020code,\u0020name\u0020and\u0020collector\u0020number\u0029.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setId"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetId\u0028\u0029",
-            "name": "getId",
-            "summary": "Gets\u0020the\u0020card\u0027s\u0020unique\u0020id.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getId"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AsetMultiverseid\u0028\u0029",
-            "name": "setMultiverseid",
-            "summary": "Sets\u0020the\u0020card\u0027s\u0020Gatherer\u0020multiverse\u0020id.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_setMultiverseid"
-        },                {
-            "fqsen": "\\MTG\\Parts\\CardAttributes\u003A\u003AgetMultiverseid\u0028\u0029",
-            "name": "getMultiverseid",
-            "summary": "Gets\u0020the\u0020card\u0027s\u0020Gatherer\u0020multiverse\u0020id.",
-            "url": "classes/MTG-Parts-CardAttributes.html#method_getMultiverseid"
-        },                {
-            "fqsen": "\\MTG\\Parts\\ForeignName",
-            "name": "ForeignName",
-            "summary": "Foreign\u0020language\u0020names\u0020for\u0020the\u0020card,\u0020if\u0020this\u0020card\u0020in\u0020this\u0020set\u0020was\u0020printed\u0020in\u0020another\u0020language.\u0020Not\u0020available\u0020for\u0020all\u0020sets.",
-            "url": "classes/MTG-Parts-ForeignName.html"
-        },                {
-            "fqsen": "\\MTG\\Parts\\ForeignName\u003A\u003A\u0024fillable",
+            "fqsen": "\\MTG\\Parts\\Deck\u003A\u003A\u0024fillable",
             "name": "fillable",
             "summary": "",
-            "url": "classes/MTG-Parts-ForeignName.html#property_fillable"
+            "url": "classes/MTG-Parts-Deck.html#property_fillable"
+        },                {
+            "fqsen": "\\MTG\\Parts\\ForeignData",
+            "name": "ForeignData",
+            "summary": "One\u0020entry\u0020from\u0020a\u0020\u007B\u0040see\u0020Card\u007D\u0027s\u0020\u0060foreignData\u0060\u0020\u2014\u0020the\u0020card\u0020as\u0020printed\u0020in\nanother\u0020language.\u0020Not\u0020available\u0020for\u0020all\u0020sets.",
+            "url": "classes/MTG-Parts-ForeignData.html"
+        },                {
+            "fqsen": "\\MTG\\Parts\\ForeignData\u003A\u003A\u0024fillable",
+            "name": "fillable",
+            "summary": "",
+            "url": "classes/MTG-Parts-ForeignData.html#property_fillable"
+        },                {
+            "fqsen": "\\MTG\\Parts\\Identifiers",
+            "name": "Identifiers",
+            "summary": "A\u0020\u007B\u0040see\u0020Card\u007D\u0027s\u0020\u0060identifiers\u0060\u0020\u2014\u0020its\u0020ids\u0020on\u0020other\u0020services.\u0020Every\u0020value\u0020is\na\u0020string,\u0020as\u0020in\u0020MTGJSON.",
+            "url": "classes/MTG-Parts-Identifiers.html"
+        },                {
+            "fqsen": "\\MTG\\Parts\\Identifiers\u003A\u003A\u0024fillable",
+            "name": "fillable",
+            "summary": "",
+            "url": "classes/MTG-Parts-Identifiers.html#property_fillable"
+        },                {
+            "fqsen": "\\MTG\\Parts\\LeadershipSkills",
+            "name": "LeadershipSkills",
+            "summary": "A\u0020\u007B\u0040see\u0020Card\u007D\u0027s\u0020\u0060leadershipSkills\u0060\u0020\u2014\u0020the\u0020formats\u0020it\u0020can\u0020be\u0020your\ncommander\u0020in.",
+            "url": "classes/MTG-Parts-LeadershipSkills.html"
+        },                {
+            "fqsen": "\\MTG\\Parts\\LeadershipSkills\u003A\u003A\u0024fillable",
+            "name": "fillable",
+            "summary": "",
+            "url": "classes/MTG-Parts-LeadershipSkills.html#property_fillable"
         },                {
             "fqsen": "\\MTG\\Parts\\Legality",
             "name": "Legality",
-            "summary": "One\u0020entry\u0020from\u0020a\u0020\u007B\u0040see\u0020Card\u007D\u0027s\u0020\u0060legalities\u0060\u0020array\u0020\u2014\u0020whether\u0020the\u0020card\u0020is\n\u0060Legal\u0060\u0020\/\u0020\u0060Banned\u0060\u0020\/\u0020\u0060Restricted\u0060\u0020in\u0020a\u0020given\u0020format.\u0020Not\u0020a\u0020standalone\nendpoint\u003B\u0020it\u0020only\u0020appears\u0020inside\u0020the\u0020card\u0020response.",
+            "summary": "One\u0020entry\u0020of\u0020a\u0020\u007B\u0040see\u0020Card\u007D\u0027s\u0020\u0060legalities\u0060\u0020\u2014\u0020its\u0020status\u0020in\u0020one\u0020format.",
             "url": "classes/MTG-Parts-Legality.html"
         },                {
             "fqsen": "\\MTG\\Parts\\Legality\u003A\u003A\u0024fillable",
@@ -771,9 +1216,19 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/MTG-Parts-Legality.html#property_fillable"
         },                {
+            "fqsen": "\\MTG\\Parts\\PurchaseUrls",
+            "name": "PurchaseUrls",
+            "summary": "A\u0020\u007B\u0040see\u0020Card\u007D\u0027s\u0020\u0060purchaseUrls\u0060\u0020\u2014\u0020links\u0020to\u0020buy\u0020it,\u0020through\u0020MTGJSON\u0027s\nreferral\u0020redirects.",
+            "url": "classes/MTG-Parts-PurchaseUrls.html"
+        },                {
+            "fqsen": "\\MTG\\Parts\\PurchaseUrls\u003A\u003A\u0024fillable",
+            "name": "fillable",
+            "summary": "",
+            "url": "classes/MTG-Parts-PurchaseUrls.html#property_fillable"
+        },                {
             "fqsen": "\\MTG\\Parts\\Ruling",
             "name": "Ruling",
-            "summary": "One\u0020entry\u0020from\u0020a\u0020\u007B\u0040see\u0020Card\u007D\u0027s\u0020\u0060rulings\u0060\u0020array\u0020\u2014\u0020an\u0020official\u0020clarification,\nwith\u0020the\u0020date\u0020it\u0020was\u0020issued.\u0020Not\u0020a\u0020standalone\u0020endpoint\u003B\u0020it\u0020only\u0020appears\ninside\u0020the\u0020card\u0020response.",
+            "summary": "One\u0020entry\u0020from\u0020a\u0020\u007B\u0040see\u0020Card\u007D\u0027s\u0020\u0060rulings\u0060\u0020\u2014\u0020an\u0020official\u0020clarification,\nwith\u0020the\u0020date\u0020it\u0020was\u0020issued.",
             "url": "classes/MTG-Parts-Ruling.html"
         },                {
             "fqsen": "\\MTG\\Parts\\Ruling\u003A\u003A\u0024fillable",
@@ -783,7 +1238,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MTG\\Parts\\Set",
             "name": "Set",
-            "summary": "Represents\u0020a\u0020Magic\u003A\u0020The\u0020Gathering\u0020set\u0020\u0028one\u0020object\u0020from\u0020the\u0020API\u0027s\u0020\u0060sets\u0060\nresponse\u0029\u0020\u2014\u0020its\u0020code,\u0020name,\u0020release\u0020date,\u0020block\u0020and\u0020booster\u0020configuration.",
+            "summary": "A\u0020Magic\u003A\u0020The\u0020Gathering\u0020set\u0020\u2014\u0020MTGJSON\u0027s\u0020Set\u0020model,\u0020without\u0020the\u0020card,\u0020token,\ndeck,\u0020booster\u0020and\u0020sealed\u0020product\u0020lists\u0020\u0028search\u0020cards\u0020by\u0020\u0060setCode\u0060,\u0020and\nopen\u0020boosters\u0020with\u0020\u007B\u0040see\u0020\\MTG\\Repository\\SetRepository\u003A\u003AgenerateBooster\u0028\u0029\u007D\u0029.",
             "url": "classes/MTG-Parts-Set.html"
         },                {
             "fqsen": "\\MTG\\Parts\\Set\u003A\u003AgetReleaseDateAttribute\u0028\u0029",
@@ -803,7 +1258,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MTG\\Repository\\AbstractRepository",
             "name": "AbstractRepository",
-            "summary": "Base\u0020class\u0020for\u0020the\u0020MTG\u0020read\u002Donly\u0020repositories\u003A\u0020DiscordPHP\u0027s\n\u007B\u0040see\u0020DiscordAbstractRepository\u007D\u0020behaviour\u0020\u0028keyed,\u0020cached\u0020collection\u0020of\nParts\u0029\u0020backed\u0020by\u0020\u007B\u0040see\u0020\\MTG\\Http\\Http\u007D\u0020and\u0020MTG\u0020\u007B\u0040see\u0020\\MTG\\Http\\Endpoint\u007Ds\ninstead\u0020of\u0020the\u0020Discord\u0020API.\u0020Concrete\u0020repositories\u0020\u0028\u007B\u0040see\u0020CardRepository\u007D,\n\u007B\u0040see\u0020SetRepository\u007D\u0029\u0020declare\u0020their\u0020endpoint\u0020map\u0020and\u0020Part\u0020class.",
+            "summary": "Base\u0020class\u0020for\u0020the\u0020MTG\u0020read\u002Donly\u0020repositories\u003A\u0020DiscordPHP\u0027s\n\u007B\u0040see\u0020DiscordAbstractRepository\u007D\u0020behaviour\u0020\u0028keyed,\u0020cached\u0020collection\u0020of\nParts\u0029\u0020backed\u0020by\u0020MTGJSON\u0020\u2014\u0020the\u0020\u007B\u0040see\u0020\\MTG\\Http\\Http\u007D\u0020client\u0020for\u0020the\u0020small\nAPI\u0020files,\u0020and\u0020the\u0020local\u0020\u007B\u0040see\u0020Database\u007D\u0020build\u0020for\u0020cards\u0020and\u0020sets.",
             "url": "classes/MTG-Repository-AbstractRepository.html"
         },                {
             "fqsen": "\\MTG\\Repository\\AbstractRepository\u003A\u003A__construct\u0028\u0029",
@@ -815,6 +1270,11 @@ Search.appendIndex(
             "name": "mtg_http",
             "summary": "The\u0020extended\u0020HTTP\u0020client.",
             "url": "classes/MTG-Repository-AbstractRepository.html#property_mtg_http"
+        },                {
+            "fqsen": "\\MTG\\Repository\\AbstractRepository\u003A\u003A\u0024database",
+            "name": "database",
+            "summary": "The\u0020local\u0020MTGJSON\u0020build.",
+            "url": "classes/MTG-Repository-AbstractRepository.html#property_database"
         },                {
             "fqsen": "\\MTG\\Repository\\AbstractRepository\u003A\u003A\u0024discord",
             "name": "discord",
@@ -968,27 +1428,62 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MTG\\Repository\\CardRepository",
             "name": "CardRepository",
-            "summary": "Reads\u0020the\u0020API\u0027s\u0020\u0060cards\u0060\u0020endpoint\u0020\u2014\u0020list\/search\u0020with\u0020query\u0020filters\u0020and\npagination,\u0020and\u0020fetch\u0020a\u0020single\u0020card\u0020by\u0020id\u0020\u2014\u0020hydrating\u0020\u007B\u0040see\u0020Card\u007D\u0020parts.",
+            "summary": "Card\u0020printings\u0020from\u0020MTGJSON\u0027s\u0020AllPrintings\u0020build\u0020\u2014\u0020search\u0020with\u0020any\n\u007B\u0040see\u0020CardQuery\u007D\u0020filter,\u0020and\u0020fetch\u0020one\u0020by\u0020its\u0020MTGJSON\u0020\u0060uuid\u0060\u0020\u2014\u0020hydrating\n\u007B\u0040see\u0020Card\u007D\u0020parts\u0020with\u0020their\u0020identifiers,\u0020legalities,\u0020rulings,\u0020foreign\ndata\u0020and\u0020purchase\u0020URLs.",
             "url": "classes/MTG-Repository-CardRepository.html"
         },                {
             "fqsen": "\\MTG\\Repository\\CardRepository\u003A\u003AgetCards\u0028\u0029",
             "name": "getCards",
-            "summary": "Fetch\u0020card\u0020information\u0020by\u0020query\u0020parameters.",
+            "summary": "Searches\u0020card\u0020printings.\u0020See\u0020\u007B\u0040see\u0020CardQuery\u007D\u0020for\u0020every\u0020filter\u003B\nthe\u0020common\u0020ones\u0020are\u0020\u0060name\u0060,\u0020\u0060manaValue\u0060\u0020\u0028or\u0020\u0060cmc\u0060\u0029,\u0020\u0060colors\u0060,\n\u0060colorIdentity\u0060,\u0020\u0060type\u0060,\u0020\u0060types\u0060,\u0020\u0060subtypes\u0060,\u0020\u0060rarity\u0060,\u0020\u0060setCode\u0060\u0020\u0028or\n\u0060set\u0060\u0029,\u0020\u0060text\u0060,\u0020\u0060gameFormat\u0060\u0020\u002B\u0020\u0060legality\u0060,\u0020\u0060multiverseId\u0060,\u0020\u0060contains\u0060,\n\u0060orderBy\u0060,\u0020\u0060random\u0060,\u0020\u0060page\u0060\u0020and\u0020\u0060pageSize\u0060\u0020\u00281\u002D100,\u0020default\u00201\u0029.",
             "url": "classes/MTG-Repository-CardRepository.html#method_getCards"
         },                {
-            "fqsen": "\\MTG\\Repository\\CardRepository\u003A\u003AcacheFreshen\u0028\u0029",
-            "name": "cacheFreshen",
-            "summary": "",
-            "url": "classes/MTG-Repository-CardRepository.html#method_cacheFreshen"
+            "fqsen": "\\MTG\\Repository\\CardRepository\u003A\u003AgetCardsByUuid\u0028\u0029",
+            "name": "getCardsByUuid",
+            "summary": "Gets\u0020card\u0020printings\u0020by\u0020their\u0020MTGJSON\u0020uuids.\u0020Unknown\u0020uuids\u0020are\u0020skipped.",
+            "url": "classes/MTG-Repository-CardRepository.html#method_getCardsByUuid"
         },                {
-            "fqsen": "\\MTG\\Repository\\CardRepository\u003A\u003Afetch\u0028\u0029",
-            "name": "fetch",
-            "summary": "Gets\u0020a\u0020part\u0020from\u0020the\u0020repository\u0020or\u0020Discord\u0020servers.",
-            "url": "classes/MTG-Repository-CardRepository.html#method_fetch"
+            "fqsen": "\\MTG\\Repository\\CardRepository\u003A\u003Alookup\u0028\u0029",
+            "name": "lookup",
+            "summary": "",
+            "url": "classes/MTG-Repository-CardRepository.html#method_lookup"
+        },                {
+            "fqsen": "\\MTG\\Repository\\CardRepository\u003A\u003Arows\u0028\u0029",
+            "name": "rows",
+            "summary": "Reads\u0020\u0060cards\u0060\u0020rows\u0020by\u0020uuid,\u0020with\u0020the\u0020set\u0020name.",
+            "url": "classes/MTG-Repository-CardRepository.html#method_rows"
+        },                {
+            "fqsen": "\\MTG\\Repository\\CardRepository\u003A\u003Ahydrate\u0028\u0029",
+            "name": "hydrate",
+            "summary": "Builds\u0020Card\u0020parts\u0020from\u0020decoded\u0020\u0060cards\u0060\u0020rows,\u0020attaching\u0020their\u0020extra\u0020data.",
+            "url": "classes/MTG-Repository-CardRepository.html#method_hydrate"
+        },                {
+            "fqsen": "\\MTG\\Repository\\CardRepository\u003A\u003Arelated\u0028\u0029",
+            "name": "related",
+            "summary": "Reads\u0020the\u0020identifiers,\u0020legalities,\u0020purchase\u0020URLs,\u0020rulings\u0020and\u0020foreign\ndata\u0020of\u0020a\u0020set\u0020of\u0020cards.",
+            "url": "classes/MTG-Repository-CardRepository.html#method_related"
+        },                {
+            "fqsen": "\\MTG\\Repository\\CardRepository\u003A\u003AfiltersFrom\u0028\u0029",
+            "name": "filtersFrom",
+            "summary": "Turns\u0020a\u0020Card\u0027s\u0020attributes\u0020into\u0020filters\u003A\u0020scalars\u0020as\u0020they\u0020are,\u0020lists\nas\u0020\u0060,\u0060\u002Djoined\u0020terms\u0020that\u0020must\u0020all\u0020match.\u0020Nested\u0020data\u0020is\u0020skipped.",
+            "url": "classes/MTG-Repository-CardRepository.html#method_filtersFrom"
+        },                {
+            "fqsen": "\\MTG\\Repository\\CardRepository\u003A\u003AONE_PER_CARD",
+            "name": "ONE_PER_CARD",
+            "summary": "Tables\u0020holding\u0020one\u0020row\u0020of\u0020extra\u0020card\u0020data\u0020per\u0020uuid,\u0020by\u0020Card\u0020attribute.",
+            "url": "classes/MTG-Repository-CardRepository.html#constant_ONE_PER_CARD"
+        },                {
+            "fqsen": "\\MTG\\Repository\\CardRepository\u003A\u003AMANY_PER_CARD",
+            "name": "MANY_PER_CARD",
+            "summary": "Tables\u0020holding\u0020a\u0020list\u0020of\u0020extra\u0020card\u0020data\u0020per\u0020uuid,\u0020by\u0020Card\u0020attribute,\nwith\u0020their\u0020ordering.",
+            "url": "classes/MTG-Repository-CardRepository.html#constant_MANY_PER_CARD"
+        },                {
+            "fqsen": "\\MTG\\Repository\\CardRepository\u003A\u003A\u0024discrim",
+            "name": "discrim",
+            "summary": "",
+            "url": "classes/MTG-Repository-CardRepository.html#property_discrim"
         },                {
             "fqsen": "\\MTG\\Repository\\CardRepository\u003A\u003A\u0024endpoints",
             "name": "endpoints",
-            "summary": "",
+            "summary": "MTGJSON\u0020has\u0020no\u0020per\u002Dcard\u0020route\u003B\u0020see\u0020\u007B\u0040see\u0020DatabaseRepositoryTrait\u007D.",
             "url": "classes/MTG-Repository-CardRepository.html#property_endpoints"
         },                {
             "fqsen": "\\MTG\\Repository\\CardRepository\u003A\u003A\u0024class",
@@ -996,25 +1491,115 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/MTG-Repository-CardRepository.html#property_class"
         },                {
+            "fqsen": "\\MTG\\Repository\\DatabaseRepositoryTrait",
+            "name": "DatabaseRepositoryTrait",
+            "summary": "\u0060fetch\u0028\u0029\u0060,\u0020\u0060fresh\u0028\u0029\u0060\u0020and\u0020\u0060freshen\u0028\u0029\u0060\u0020for\u0020repositories\u0020answered\u0020from\u0020the\nlocal\u0020MTGJSON\u0020build\u0020instead\u0020of\u0020an\u0020HTTP\u0020endpoint.\u0020MTGJSON\u0020serves\u0020cards\u0020and\nsets\u0020only\u0020inside\u0020whole\u0020files,\u0020so\u0020there\u0020is\u0020no\u0020per\u002Ditem\u0020route\u0020to\u0020call.",
+            "url": "classes/MTG-Repository-DatabaseRepositoryTrait.html"
+        },                {
+            "fqsen": "\\MTG\\Repository\\DatabaseRepositoryTrait\u003A\u003Alookup\u0028\u0029",
+            "name": "lookup",
+            "summary": "Looks\u0020one\u0020part\u0020up\u0020in\u0020the\u0020open\u0020build.",
+            "url": "classes/MTG-Repository-DatabaseRepositoryTrait.html#method_lookup"
+        },                {
+            "fqsen": "\\MTG\\Repository\\DatabaseRepositoryTrait\u003A\u003Afetch\u0028\u0029",
+            "name": "fetch",
+            "summary": "Gets\u0020a\u0020part\u0020from\u0020the\u0020repository\u0020or\u0020the\u0020MTGJSON\u0020build.",
+            "url": "classes/MTG-Repository-DatabaseRepositoryTrait.html#method_fetch"
+        },                {
+            "fqsen": "\\MTG\\Repository\\DatabaseRepositoryTrait\u003A\u003Afresh\u0028\u0029",
+            "name": "fresh",
+            "summary": "Refills\u0020a\u0020part\u0020from\u0020the\u0020MTGJSON\u0020build.",
+            "url": "classes/MTG-Repository-DatabaseRepositoryTrait.html#method_fresh"
+        },                {
+            "fqsen": "\\MTG\\Repository\\DatabaseRepositoryTrait\u003A\u003Afreshen\u0028\u0029",
+            "name": "freshen",
+            "summary": "Rejects\u003A\u0020the\u0020repository\u0020is\u0020too\u0020large\u0020to\u0020load\u0020whole\u003B\u0020search\u0020it\u0020instead.",
+            "url": "classes/MTG-Repository-DatabaseRepositoryTrait.html#method_freshen"
+        },                {
+            "fqsen": "\\MTG\\Repository\\DeckRepository",
+            "name": "DeckRepository",
+            "summary": "Preconstructed\u0020decks\u0020from\u0020the\u0020MTGJSON\u0020API\u003A\u0020the\u0020deck\u0020list\n\u0028\u0060DeckList.json\u0060\u0029\u0020to\u0020search,\u0020and\u0020one\u0020deck\u0020with\u0020its\u0020cards\n\u0028\u0060decks\/\u007BfileName\u007D.json\u0060\u0029\u0020to\u0020fetch,\u0020hydrating\u0020\u007B\u0040see\u0020Deck\u007D\u0020parts.",
+            "url": "classes/MTG-Repository-DeckRepository.html"
+        },                {
+            "fqsen": "\\MTG\\Repository\\DeckRepository\u003A\u003AgetDecks\u0028\u0029",
+            "name": "getDecks",
+            "summary": "Searches\u0020the\u0020deck\u0020list.\u0020Matches\u0020are\u0020Deck\u0020List\u0020entries,\u0020without\u0020cards\u003B\n\u007B\u0040see\u0020fetch\u0028\u0029\u007D\u0020one\u0020by\u0020\u0060fileName\u0060\u0020for\u0020its\u0020cards.",
+            "url": "classes/MTG-Repository-DeckRepository.html#method_getDecks"
+        },                {
+            "fqsen": "\\MTG\\Repository\\DeckRepository\u003A\u003Afetch\u0028\u0029",
+            "name": "fetch",
+            "summary": "Gets\u0020a\u0020deck\u0020with\u0020its\u0020cards.",
+            "url": "classes/MTG-Repository-DeckRepository.html#method_fetch"
+        },                {
+            "fqsen": "\\MTG\\Repository\\DeckRepository\u003A\u003Afresh\u0028\u0029",
+            "name": "fresh",
+            "summary": "Refills\u0020a\u0020deck\u0020with\u0020its\u0020cards.",
+            "url": "classes/MTG-Repository-DeckRepository.html#method_fresh"
+        },                {
+            "fqsen": "\\MTG\\Repository\\DeckRepository\u003A\u003Afreshen\u0028\u0029",
+            "name": "freshen",
+            "summary": "Downloads\u0020the\u0020deck\u0020list\u0020again.",
+            "url": "classes/MTG-Repository-DeckRepository.html#method_freshen"
+        },                {
+            "fqsen": "\\MTG\\Repository\\DeckRepository\u003A\u003A\u0024list",
+            "name": "list",
+            "summary": "The\u0020last\u0020deck\u0020list\u0020downloaded,\u0020and\u0020when.",
+            "url": "classes/MTG-Repository-DeckRepository.html#property_list"
+        },                {
+            "fqsen": "\\MTG\\Repository\\DeckRepository\u003A\u003ALIST_TTL",
+            "name": "LIST_TTL",
+            "summary": "How\u0020long\u0020a\u0020downloaded\u0020deck\u0020list\u0020is\u0020reused,\u0020in\u0020seconds.",
+            "url": "classes/MTG-Repository-DeckRepository.html#constant_LIST_TTL"
+        },                {
+            "fqsen": "\\MTG\\Repository\\DeckRepository\u003A\u003A\u0024discrim",
+            "name": "discrim",
+            "summary": "",
+            "url": "classes/MTG-Repository-DeckRepository.html#property_discrim"
+        },                {
+            "fqsen": "\\MTG\\Repository\\DeckRepository\u003A\u003A\u0024endpoints",
+            "name": "endpoints",
+            "summary": "",
+            "url": "classes/MTG-Repository-DeckRepository.html#property_endpoints"
+        },                {
+            "fqsen": "\\MTG\\Repository\\DeckRepository\u003A\u003A\u0024class",
+            "name": "class",
+            "summary": "",
+            "url": "classes/MTG-Repository-DeckRepository.html#property_class"
+        },                {
             "fqsen": "\\MTG\\Repository\\SetRepository",
             "name": "SetRepository",
-            "summary": "Reads\u0020the\u0020API\u0027s\u0020\u0060sets\u0060\u0020endpoint\u0020\u2014\u0020list\u0020sets,\u0020fetch\u0020one\u0020by\u0020code,\u0020and\ngenerate\u0020a\u0020booster\u0020pack\u0020from\u0020a\u0020set\u0020\u2014\u0020hydrating\u0020\u007B\u0040see\u0020Set\u007D\u0020parts.",
+            "summary": "Sets\u0020from\u0020MTGJSON\u0027s\u0020AllPrintings\u0020build\u0020\u2014\u0020search\u0020them,\u0020fetch\u0020one\u0020by\u0020code,\nand\u0020open\u0020booster\u0020packs\u0020from\u0020their\u0020booster\u0020configurations\u0020\u2014\u0020hydrating\n\u007B\u0040see\u0020Set\u007D\u0020parts\u0020with\u0020their\u0020name\u0020translations.",
             "url": "classes/MTG-Repository-SetRepository.html"
-        },                {
-            "fqsen": "\\MTG\\Repository\\SetRepository\u003A\u003AgetIdAttribute\u0028\u0029",
-            "name": "getIdAttribute",
-            "summary": "Returns\u0020the\u0020id\u0020attribute.",
-            "url": "classes/MTG-Repository-SetRepository.html#method_getIdAttribute"
         },                {
             "fqsen": "\\MTG\\Repository\\SetRepository\u003A\u003AgetSets\u0028\u0029",
             "name": "getSets",
-            "summary": "Fetch\u0020card\u0020information\u0020by\u0020query\u0020parameters.",
+            "summary": "Searches\u0020sets.\u0020See\u0020\u007B\u0040see\u0020SetQuery\u007D\u0020for\u0020every\u0020filter\u003B\u0020the\u0020common\u0020ones\nare\u0020\u0060name\u0060\u0020and\u0020\u0060block\u0060\u0020\u0028partial\u0029,\u0020\u0060code\u0060\u0020and\u0020\u0060type\u0060\u0020\u0028exact\u0029,\u0020with\n\u0060orderBy\u0060\u0020\u0028default\u0020\u0060\u002DreleaseDate\u0060\u0029,\u0020\u0060page\u0060\u0020and\u0020\u0060pageSize\u0060\u0020\u00281\u002D100,\ndefault\u0020100\u0029.",
             "url": "classes/MTG-Repository-SetRepository.html#method_getSets"
+        },                {
+            "fqsen": "\\MTG\\Repository\\SetRepository\u003A\u003Afreshen\u0028\u0029",
+            "name": "freshen",
+            "summary": "Loads\u0020every\u0020set\u0020into\u0020the\u0020repository.",
+            "url": "classes/MTG-Repository-SetRepository.html#method_freshen"
+        },                {
+            "fqsen": "\\MTG\\Repository\\SetRepository\u003A\u003AgetBoosterTypes\u0028\u0029",
+            "name": "getBoosterTypes",
+            "summary": "The\u0020booster\u0020types\u0020a\u0020set\u0020can\u0020open\u0020\u0028\u0060play\u0060,\u0020\u0060draft\u0060,\u0020\u0060collector\u0060,\u0020\u2026\u0029,\nthe\u0020one\u0020\u007B\u0040see\u0020generateBooster\u0028\u0029\u007D\u0020picks\u0020by\u0020default\u0020first.",
+            "url": "classes/MTG-Repository-SetRepository.html#method_getBoosterTypes"
         },                {
             "fqsen": "\\MTG\\Repository\\SetRepository\u003A\u003AgenerateBooster\u0028\u0029",
             "name": "generateBooster",
-            "summary": "Opens\u0020a\u0020booster\u0020pack\u0020for\u0020a\u0020set\u0020\u0028\u0060GET\u0020\/sets\/\u003Aid\/booster\u0060\u0029\u003A\u0020the\u0020API\u0020rolls\u0020a\npack\u0020against\u0020that\u0020set\u0027s\u0020booster\u0020configuration\u0020and\u0020returns\u0020the\u0020cards.",
+            "summary": "Opens\u0020a\u0020booster\u0020pack\u0020for\u0020a\u0020set\u003A\u0020a\u0020pack\u0020layout\u0020is\u0020rolled\u0020against\u0020the\nset\u0027s\u0020MTGJSON\u0020booster\u0020configuration\u0020and\u0020each\u0020slot\u0020is\u0020filled\u0020from\u0020its\nweighted\u0020sheet.\u0020Cards\u0020from\u0020foil\u0020sheets\u0020have\u0020\u0060isFoil\u0060\u0020set.",
             "url": "classes/MTG-Repository-SetRepository.html#method_generateBooster"
+        },                {
+            "fqsen": "\\MTG\\Repository\\SetRepository\u003A\u003Alookup\u0028\u0029",
+            "name": "lookup",
+            "summary": "",
+            "url": "classes/MTG-Repository-SetRepository.html#method_lookup"
+        },                {
+            "fqsen": "\\MTG\\Repository\\SetRepository\u003A\u003Ahydrate\u0028\u0029",
+            "name": "hydrate",
+            "summary": "Builds\u0020Set\u0020parts\u0020from\u0020decoded\u0020\u0060sets\u0060\u0020rows,\u0020attaching\u0020their\u0020name\ntranslations.",
+            "url": "classes/MTG-Repository-SetRepository.html#method_hydrate"
         },                {
             "fqsen": "\\MTG\\Repository\\SetRepository\u003A\u003A\u0024discrim",
             "name": "discrim",
@@ -1023,7 +1608,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MTG\\Repository\\SetRepository\u003A\u003A\u0024endpoints",
             "name": "endpoints",
-            "summary": "",
+            "summary": "MTGJSON\u0020has\u0020no\u0020per\u002Dset\u0020route\u0020that\u0020fits\u0020in\u0020memory\u003B\u0020see\u0020\u007B\u0040see\u0020DatabaseRepositoryTrait\u007D.",
             "url": "classes/MTG-Repository-SetRepository.html#property_endpoints"
         },                {
             "fqsen": "\\MTG\\Repository\\SetRepository\u003A\u003A\u0024class",
@@ -1045,6 +1630,11 @@ Search.appendIndex(
             "name": "MTG",
             "summary": "",
             "url": "namespaces/mtg.html"
+        },                {
+            "fqsen": "\\MTG\\Database",
+            "name": "Database",
+            "summary": "",
+            "url": "namespaces/mtg-database.html"
         },                {
             "fqsen": "\\MTG\\Helpers",
             "name": "Helpers",

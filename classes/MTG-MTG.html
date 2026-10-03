@@ -68,6 +68,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/mtg-database.html" class="">Database</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/mtg-helpers.html" class="">Helpers</a>
                 
             </li>
@@ -142,13 +146,14 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">49</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">The MTG client class — a DiscordPHP {@see MessageCommandClient} extended with
-an async HTTP client for the &quot;Magic: The Gathering Developers&quot; REST API and
-the card / set repositories that read it.</p>
+            <p class="phpdocumentor-summary">The MTG client class — a DiscordPHP {@see MessageCommandClient} extended
+with MTGJSON: an async HTTP client for the MTGJSON v5 API, a local copy of
+its AllPrintings SQLite build for card and set searches, and the card, set
+and deck repositories that read them.</p>
 
 
 
@@ -160,6 +165,12 @@ the card / set repositories that read it.</p>
     </h5>
     <dl class="phpdocumentor-tag-list">
                     <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">link</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://mtgjson.com/"> https://mtgjson.com/ </a>
+                                    </dd>
+                                <dt class="phpdocumentor-tag-list__entry">
                 <span class="phpdocumentor-tag__name">see</span>
             </dt>
                             <dd class="phpdocumentor-tag-list__definition">
@@ -174,6 +185,10 @@ the card / set repositories that read it.</p>
                                     </dd>
                             <dd class="phpdocumentor-tag-list__definition">
                                                                                     <span class="phpdocumentor-tag-link"><a href="classes/MTG-Repository-SetRepository.html"><abbr title="\MTG\Repository\SetRepository">SetRepository</abbr></a></span>
+                                                                
+                                    </dd>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="classes/MTG-Repository-DeckRepository.html"><abbr title="\MTG\Repository\DeckRepository">DeckRepository</abbr></a></span>
                                                                 
                                     </dd>
                                 <dt class="phpdocumentor-tag-list__entry">
@@ -227,6 +242,12 @@ the card / set repositories that read it.</p>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/MTG-MTG.html#property_decks">$decks</a>
+    <span>
+                        &nbsp;: <a href="classes/MTG-Repository-DeckRepository.html"><abbr title="\MTG\Repository\DeckRepository">DeckRepository</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/MTG-MTG.html#property_sets">$sets</a>
     <span>
                         &nbsp;: <a href="classes/MTG-Repository-SetRepository.html"><abbr title="\MTG\Repository\SetRepository">SetRepository</abbr></a>            </span>
@@ -238,6 +259,13 @@ the card / set repositories that read it.</p>
                         &nbsp;: <a href="classes/MTG-Client.html"><abbr title="\MTG\Client">Client</abbr></a>            </span>
 </dt>
 <dd>The extended Client class.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/MTG-MTG.html#property_database">$database</a>
+    <span>
+                        &nbsp;: <a href="classes/MTG-Database-Database.html"><abbr title="\MTG\Database\Database">Database</abbr></a>            </span>
+</dt>
+<dd>The local MTGJSON build.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/MTG-MTG.html#property_mtg_http">$mtg_http</a>
@@ -310,11 +338,51 @@ the card / set repositories that read it.</p>
 application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-MTG.html#method_getCardTypes">getCardTypes()</a>
+    <span>
+                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string, array{subTypes: string[], superTypes: string[]}&gt;&gt;    </span>
+</dt>
+<dd>Fetches every card type with its valid subtypes and supertypes, keyed
+by lower-case type (`artifact`, `creature`, …).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-MTG.html#method_getDatabase">getDatabase()</a>
+    <span>
+                                &nbsp;: <a href="classes/MTG-Database-Database.html"><abbr title="\MTG\Database\Database">Database</abbr></a>    </span>
+</dt>
+<dd>Gets the local MTGJSON build.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-MTG.html#method_getEnumValues">getEnumValues()</a>
+    <span>
+                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string, array&lt;string, array&lt;string|int, string&gt;&gt;&gt;&gt;    </span>
+</dt>
+<dd>Fetches every value MTGJSON&#039;s enumerated properties can hold, keyed by
+model then property (e.g. `card` → `rarity`).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-MTG.html#method_getFormats">getFormats()</a>
     <span>
                                 &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string|int, string&gt;&gt;    </span>
 </dt>
-<dd>Fetches the API&#039;s list of all game formats (e.g. `Standard`, `Commander`).</dd>
+<dd>Lists the game formats MTGJSON tracks legality for, as it names them
+(e.g. `standard`, `commander`, `paupercommander`) — the values the
+`gameFormat` card filter takes.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-MTG.html#method_getKeywords">getKeywords()</a>
+    <span>
+                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string, array&lt;string|int, string&gt;&gt;&gt;    </span>
+</dt>
+<dd>Fetches the keyword lists: `abilityWords`, `keywordAbilities` and
+`keywordActions`.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-MTG.html#method_getMeta">getMeta()</a>
+    <span>
+                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array{date: string, version: string}&gt;    </span>
+</dt>
+<dd>Fetches the current MTGJSON build&#039;s version and date.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-MTG.html#method_getMtgHttpClient">getMtgHttpClient()</a>
@@ -328,21 +396,38 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</dd>
     <span>
                                 &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string|int, string&gt;&gt;    </span>
 </dt>
-<dd>Fetches the API&#039;s list of all card subtypes (e.g. `Elf`, `Equipment`).</dd>
+<dd>Fetches the list of all card subtypes (e.g. `Elf`, `Equipment`).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-MTG.html#method_getSupertypes">getSupertypes()</a>
     <span>
                                 &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string|int, string&gt;&gt;    </span>
 </dt>
-<dd>Fetches the API&#039;s list of all card supertypes (e.g. `Legendary`, `Snow`).</dd>
+<dd>Fetches the list of all card supertypes (e.g. `Legendary`, `Snow`).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-MTG.html#method_getTypes">getTypes()</a>
     <span>
                                 &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string|int, string&gt;&gt;    </span>
 </dt>
-<dd>Fetches the API&#039;s list of all card types (e.g. `Creature`, `Instant`).</dd>
+<dd>Fetches the list of all card types (e.g. `Creature`, `Instant`).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-MTG.html#method_setClient">setClient()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the client part, but never back to a plain DiscordPHP one: the
+client DiscordPHP builds before this constructor swaps in
+{@see Client} re-installs itself once its application has loaded,
+which would drop the MTG repositories.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a class="" href="classes/MTG-MTG.html#method_mergeTypes">mergeTypes()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, string&gt;    </span>
+</dt>
+<dd>Merges one list out of every card type, sorted and unique.</dd>
 
     </dl>
 
@@ -365,7 +450,7 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">45</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
     </aside>
 
@@ -438,6 +523,43 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</dd>
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_decks">
+        $decks
+        <a href="classes/MTG-MTG.html#property_decks" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/MTG-Repository-DeckRepository.html"><abbr title="\MTG\Repository\DeckRepository">DeckRepository</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$decks</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_sets">
         $sets
         <a href="classes/MTG-MTG.html#property_sets" class="headerlink"><i class="fas fa-link"></i></a>
@@ -485,7 +607,7 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">61</span>
+    <span class="phpdocumentor-element-found-in__line">76</span>
 
     </aside>
 
@@ -515,6 +637,44 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</dd>
             -protected
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_database">
+        $database
+        <a href="classes/MTG-MTG.html#property_database" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">69</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The local MTGJSON build.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/MTG-Database-Database.html"><abbr title="\MTG\Database\Database">Database</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$database</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_mtg_http">
         $mtg_http
         <a href="classes/MTG-MTG.html#property_mtg_http" class="headerlink"><i class="fas fa-link"></i></a>
@@ -525,7 +685,7 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">54</span>
+    <span class="phpdocumentor-element-found-in__line">62</span>
 
     </aside>
 
@@ -565,7 +725,7 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">47</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
@@ -607,7 +767,7 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">71</span>
+    <span class="phpdocumentor-element-found-in__line">93</span>
 
     </aside>
 
@@ -627,12 +787,21 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</dd>
                 : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;</span>
                  = <span class="phpdocumentor-argument-list__argument__default-value">[]</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Options passed straight to the DiscordPHP client, plus
-<code class="prettyprint">socket_options</code> for the HTTP driver and an optional
-<code class="prettyprint">mtg_api_key</code> (<code class="prettyprint">X-Api-Key</code>, raises the MTG API rate
-limit). After the parent boots, the MTG HTTP client,
-the <a href="classes/MTG-Client.html"><abbr title="\MTG\Client">Client</abbr></a> part and the <a href="classes/Discord-Stats.html"><abbr title="\Discord\Stats">Stats</abbr></a> tracker
-are wired up.</p>
+                    <section class="phpdocumentor-description"><p>Options passed straight to the DiscordPHP client
+(<code class="prettyprint">socket_options</code> also configures the MTGJSON
+connections), plus an optional <code class="prettyprint">mtgjson</code> array:</p>
+<ul>
+<li><code class="prettyprint">database</code> (string): where the AllPrintings
+build is kept; defaults to
+<code class="prettyprint">{sys_get_temp_dir()}/mtgjson/AllPrintings.sqlite</code>.
+About 700 MB; the first run downloads ~250 MB.</li>
+<li><code class="prettyprint">refresh_interval</code> (int): seconds between
+checks for a new build; default one day, <code class="prettyprint">0</code>
+never refreshes.</li>
+<li><code class="prettyprint">preload</code> (bool): open (or download) the build
+at startup rather than on the first search;
+default true.</li>
+</ul>
 </section>
 
             </dd>
@@ -736,7 +905,7 @@ are wired up.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">151</span>
+    <span class="phpdocumentor-element-found-in__line">305</span>
 
     </aside>
 
@@ -1062,6 +1231,179 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getCardTypes">
+        getCardTypes()
+        <a href="classes/MTG-MTG.html#method_getCardTypes" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">136</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Fetches every card type with its valid subtypes and supertypes, keyed
+by lower-case type (`artifact`, `creature`, …).</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getCardTypes</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string, array{subTypes: string[], superTypes: string[]}&gt;&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getCardTypes_tags">
+        Tags
+        <a href="classes/MTG-MTG.html#method_getCardTypes_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">link</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://mtgjson.com/data-models/card-types/"> https://mtgjson.com/data-models/card-types/ </a>
+                                    </dd>
+                                <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string, array{subTypes: string[], superTypes: string[]}&gt;&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getDatabase">
+        getDatabase()
+        <a href="classes/MTG-MTG.html#method_getDatabase" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">277</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Gets the local MTGJSON build.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getDatabase</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MTG-Database-Database.html"><abbr title="\MTG\Database\Database">Database</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getDatabase_tags">
+        Tags
+        <a href="classes/MTG-MTG.html#method_getDatabase_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/MTG-Database-Database.html"><abbr title="\MTG\Database\Database">Database</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getEnumValues">
+        getEnumValues()
+        <a href="classes/MTG-MTG.html#method_getEnumValues" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">222</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Fetches every value MTGJSON&#039;s enumerated properties can hold, keyed by
+model then property (e.g. `card` → `rarity`).</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getEnumValues</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string, array&lt;string, array&lt;string|int, string&gt;&gt;&gt;&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getEnumValues_tags">
+        Tags
+        <a href="classes/MTG-MTG.html#method_getEnumValues_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">link</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://mtgjson.com/data-models/enum-values/"> https://mtgjson.com/data-models/enum-values/ </a>
+                                    </dd>
+                                <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string, array&lt;string, array&lt;string|int, string&gt;&gt;&gt;&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getFormats">
         getFormats()
         <a href="classes/MTG-MTG.html#method_getFormats" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1070,11 +1412,13 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">129</span>
+    <span class="phpdocumentor-element-found-in__line">188</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Fetches the API&#039;s list of all game formats (e.g. `Standard`, `Commander`).</p>
+        <p class="phpdocumentor-summary">Lists the game formats MTGJSON tracks legality for, as it names them
+(e.g. `standard`, `commander`, `paupercommander`) — the values the
+`gameFormat` card filter takes.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1096,7 +1440,7 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</p>
                 <span class="phpdocumentor-tag__name">link</span>
             </dt>
                             <dd class="phpdocumentor-tag-list__definition">
-                                                                                                        <a class="phpdocumentor-tag-link" href="https://docs.magicthegathering.io/#api_v1formats_list"> https://docs.magicthegathering.io/#api_v1formats_list </a>
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://mtgjson.com/data-models/legalities/"> https://mtgjson.com/data-models/legalities/ </a>
                                     </dd>
                         </dl>
 
@@ -1114,6 +1458,125 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getKeywords">
+        getKeywords()
+        <a href="classes/MTG-MTG.html#method_getKeywords" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">205</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Fetches the keyword lists: `abilityWords`, `keywordAbilities` and
+`keywordActions`.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getKeywords</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string, array&lt;string|int, string&gt;&gt;&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getKeywords_tags">
+        Tags
+        <a href="classes/MTG-MTG.html#method_getKeywords_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">link</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://mtgjson.com/data-models/keywords/"> https://mtgjson.com/data-models/keywords/ </a>
+                                    </dd>
+                                <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string, array&lt;string|int, string&gt;&gt;&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getMeta">
+        getMeta()
+        <a href="classes/MTG-MTG.html#method_getMeta" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">238</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Fetches the current MTGJSON build&#039;s version and date.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getMeta</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array{date: string, version: string}&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getMeta_tags">
+        Tags
+        <a href="classes/MTG-MTG.html#method_getMeta_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">link</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://mtgjson.com/data-models/meta/"> https://mtgjson.com/data-models/meta/ </a>
+                                    </dd>
+                                <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array{date: string, version: string}&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getMtgHttpClient">
         getMtgHttpClient()
         <a href="classes/MTG-MTG.html#method_getMtgHttpClient" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1122,7 +1585,7 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">139</span>
+    <span class="phpdocumentor-element-found-in__line">265</span>
 
     </aside>
 
@@ -1161,11 +1624,11 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">105</span>
+    <span class="phpdocumentor-element-found-in__line">162</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Fetches the API&#039;s list of all card subtypes (e.g. `Elf`, `Equipment`).</p>
+        <p class="phpdocumentor-summary">Fetches the list of all card subtypes (e.g. `Elf`, `Equipment`).</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1187,7 +1650,7 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</p>
                 <span class="phpdocumentor-tag__name">link</span>
             </dt>
                             <dd class="phpdocumentor-tag-list__definition">
-                                                                                                        <a class="phpdocumentor-tag-link" href="https://docs.magicthegathering.io/#api_v1subtypes_list"> https://docs.magicthegathering.io/#api_v1subtypes_list </a>
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://mtgjson.com/data-models/card-types/"> https://mtgjson.com/data-models/card-types/ </a>
                                     </dd>
                         </dl>
 
@@ -1213,11 +1676,11 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">117</span>
+    <span class="phpdocumentor-element-found-in__line">174</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Fetches the API&#039;s list of all card supertypes (e.g. `Legendary`, `Snow`).</p>
+        <p class="phpdocumentor-summary">Fetches the list of all card supertypes (e.g. `Legendary`, `Snow`).</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1239,7 +1702,7 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</p>
                 <span class="phpdocumentor-tag__name">link</span>
             </dt>
                             <dd class="phpdocumentor-tag-list__definition">
-                                                                                                        <a class="phpdocumentor-tag-link" href="https://docs.magicthegathering.io/#api_v1supertypes_list"> https://docs.magicthegathering.io/#api_v1supertypes_list </a>
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://mtgjson.com/data-models/card-types/"> https://mtgjson.com/data-models/card-types/ </a>
                                     </dd>
                         </dl>
 
@@ -1265,11 +1728,11 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">93</span>
+    <span class="phpdocumentor-element-found-in__line">150</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Fetches the API&#039;s list of all card types (e.g. `Creature`, `Instant`).</p>
+        <p class="phpdocumentor-summary">Fetches the list of all card types (e.g. `Creature`, `Instant`).</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1291,7 +1754,7 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</p>
                 <span class="phpdocumentor-tag__name">link</span>
             </dt>
                             <dd class="phpdocumentor-tag-list__definition">
-                                                                                                        <a class="phpdocumentor-tag-link" href="https://docs.magicthegathering.io/#api_v1types_list"> https://docs.magicthegathering.io/#api_v1types_list </a>
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://mtgjson.com/data-models/card-types/"> https://mtgjson.com/data-models/card-types/ </a>
                                     </dd>
                         </dl>
 
@@ -1300,6 +1763,116 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</p>
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, array&lt;string|int, string&gt;&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setClient">
+        setClient()
+        <a href="classes/MTG-MTG.html#method_setClient" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">253</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the client part, but never back to a plain DiscordPHP one: the
+client DiscordPHP builds before this constructor swaps in
+{@see Client} re-installs itself once its application has loaded,
+which would drop the MTG repositories.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setClient</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Discord\Parts\User\Client">Client</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$client</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$client</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Discord\Parts\User\Client">Client</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The client part.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_mergeTypes">
+        mergeTypes()
+        <a href="classes/MTG-MTG.html#method_mergeTypes" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/MTG.php"><a href="files/src-mtg-mtg.html"><abbr title="src/MTG/MTG.php">MTG.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">290</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Merges one list out of every card type, sorted and unique.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">mergeTypes</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$types</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$types</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The card types.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$key</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p><code class="prettyprint">subTypes</code> or <code class="prettyprint">superTypes</code>.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span>
             </section>
 
 </article>
@@ -1333,8 +1906,10 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</p>
                 <li>
                     <ul class="phpdocumentor-list -clean">
                                                     <li class=""><a href="classes/MTG-MTG.html#property_cards">$cards</a></li>
+                                                    <li class=""><a href="classes/MTG-MTG.html#property_decks">$decks</a></li>
                                                     <li class=""><a href="classes/MTG-MTG.html#property_sets">$sets</a></li>
                                                     <li class=""><a href="classes/MTG-MTG.html#property_client">$client</a></li>
+                                                    <li class=""><a href="classes/MTG-MTG.html#property_database">$database</a></li>
                                                     <li class=""><a href="classes/MTG-MTG.html#property_mtg_http">$mtg_http</a></li>
                                                     <li class=""><a href="classes/MTG-MTG.html#property_stats">$stats</a></li>
                                             </ul>
@@ -1350,11 +1925,18 @@ application emoji (stored under the name `X_`, e.g. `{U}` → emoji `U_`).</p>
                                             <li class=""><a href="classes/MTG-HelperTrait.html#method_createBuilder">createBuilder()</a></li>
                                             <li class=""><a href="classes/MTG-HelperTrait.html#method_encapsulated_emoji_str_replace">encapsulated_emoji_str_replace()</a></li>
                                             <li class=""><a href="classes/MTG-HelperTrait.html#method_encapsulatedSymbolsToEmojis">encapsulatedSymbolsToEmojis()</a></li>
+                                            <li class=""><a href="classes/MTG-MTG.html#method_getCardTypes">getCardTypes()</a></li>
+                                            <li class=""><a href="classes/MTG-MTG.html#method_getDatabase">getDatabase()</a></li>
+                                            <li class=""><a href="classes/MTG-MTG.html#method_getEnumValues">getEnumValues()</a></li>
                                             <li class=""><a href="classes/MTG-MTG.html#method_getFormats">getFormats()</a></li>
+                                            <li class=""><a href="classes/MTG-MTG.html#method_getKeywords">getKeywords()</a></li>
+                                            <li class=""><a href="classes/MTG-MTG.html#method_getMeta">getMeta()</a></li>
                                             <li class=""><a href="classes/MTG-MTG.html#method_getMtgHttpClient">getMtgHttpClient()</a></li>
                                             <li class=""><a href="classes/MTG-MTG.html#method_getSubtypes">getSubtypes()</a></li>
                                             <li class=""><a href="classes/MTG-MTG.html#method_getSupertypes">getSupertypes()</a></li>
                                             <li class=""><a href="classes/MTG-MTG.html#method_getTypes">getTypes()</a></li>
+                                            <li class=""><a href="classes/MTG-MTG.html#method_setClient">setClient()</a></li>
+                                            <li class=""><a href="classes/MTG-MTG.html#method_mergeTypes">mergeTypes()</a></li>
                                     </ul>
             </li>
                     </ul>

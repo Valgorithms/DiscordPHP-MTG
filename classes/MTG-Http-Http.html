@@ -68,6 +68,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/mtg-database.html" class="">Database</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/mtg-helpers.html" class="">Helpers</a>
                 
             </li>
@@ -143,16 +147,21 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">HTTP client for the &quot;Magic: The Gathering Developers&quot; REST API, built the
-same way DiscordPHP talks to `discord.com` (rate-limit buckets, driver,
-retry) but pointed at `api.magicthegathering.io`. The API is read-only and
-unauthenticated, so no token is required.</p>
+            <p class="phpdocumentor-summary">HTTP client for the MTGJSON v5 API, built the same way DiscordPHP talks to
+`discord.com` (buckets, driver, retry) but pointed at
+`mtgjson.com/api/v5`. The API is read-only and unauthenticated, so no token
+is required. Responses are MTGJSON&#039;s `{&quot;meta&quot;: {...}, &quot;data&quot;: ...}`
+wrapper, decoded.</p>
 
 
+    <section class="phpdocumentor-description"><p>Requests are buffered (16 MiB by default in react/http), which covers every
+small file; the bulk files are streamed separately by
+<a href="classes/MTG-Database-Database.html"><abbr title="\MTG\Database\Database">Database</abbr></a>.</p>
+</section>
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -162,6 +171,12 @@ unauthenticated, so no token is required.</p>
     </h5>
     <dl class="phpdocumentor-tag-list">
                     <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">link</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://mtgjson.com/getting-started/"> https://mtgjson.com/getting-started/ </a>
+                                    </dd>
+                                <dt class="phpdocumentor-tag-list__entry">
                 <span class="phpdocumentor-tag__name">see</span>
             </dt>
                             <dd class="phpdocumentor-tag-list__definition">
@@ -217,16 +232,16 @@ unauthenticated, so no token is required.</p>
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/MTG-Http-Http.html#constant_BASE_URL">BASE_URL</a>
     <span>
-        &nbsp;: string&nbsp;= &#039;https://api.magicthegathering.io/v&#039; . self::HT...                            </span>
+        &nbsp;: string&nbsp;= &#039;https://mtgjson.com/api/v&#039; . self::HTTP_API_VE...                            </span>
 </dt>
-<dd>MTG API base URL.</dd>
+<dd>MTGJSON API base URL.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/MTG-Http-Http.html#constant_HTTP_API_VERSION">HTTP_API_VERSION</a>
     <span>
-        &nbsp;: string&nbsp;= 1                            </span>
+        &nbsp;: string&nbsp;= 5                            </span>
 </dt>
-<dd>Current MTG HTTP API version.</dd>
+<dd>Current MTGJSON API version.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/MTG-Http-Http.html#constant_VERSION">VERSION</a>
@@ -317,19 +332,11 @@ overload.</dd>
 <dd>Number of requests that are waiting for a response.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/MTG-Http-Http.html#property_apiKey">$apiKey</a>
-    <span>
-                        &nbsp;: string|null            </span>
-</dt>
-<dd>Optional `X-Api-Key` for the MTG API. Supplying one raises the per-hour
-request allowance; without it the API still works at the anonymous limit.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/MTG-Http-Http.html#property_token">$token</a>
     <span>
                         &nbsp;: string            </span>
 </dt>
-<dd>Authentication token. Empty for the MTG API, which is unauthenticated —
+<dd>Authentication token. Empty for MTGJSON, which is unauthenticated —
 kept only so the shared {@see HttpTrait} plumbing has something to read.</dd>
 
     </dl>
@@ -352,7 +359,7 @@ kept only so the shared {@see HttpTrait} plumbing has something to read.</dd>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd>Identifies this client to the MTG API as DiscordPHP-MTG rather than
+<dd>Identifies this client to MTGJSON as DiscordPHP-MTG rather than
 borrowing the generic DiscordPHP-HTTP agent string.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
@@ -383,18 +390,18 @@ borrowing the generic DiscordPHP-HTTP agent string.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">71</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">MTG API base URL.</p>
+        <p class="phpdocumentor-summary">MTGJSON API base URL.</p>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">BASE_URL</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;https://api.magicthegathering.io/v&#039; . self::HTTP_API_VERSION</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;https://mtgjson.com/api/v&#039; . self::HTTP_API_VERSION</span>
 </code>
 
 
@@ -414,18 +421,18 @@ borrowing the generic DiscordPHP-HTTP agent string.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">64</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Current MTG HTTP API version.</p>
+        <p class="phpdocumentor-summary">Current MTGJSON API version.</p>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">HTTP_API_VERSION</span>
-    = <span class="phpdocumentor-signature__default-value">1</span>
+    = <span class="phpdocumentor-signature__default-value">5</span>
 </code>
 
 
@@ -445,7 +452,7 @@ borrowing the generic DiscordPHP-HTTP agent string.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">50</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
     </aside>
 
@@ -492,7 +499,7 @@ borrowing the generic DiscordPHP-HTTP agent string.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">108</span>
+    <span class="phpdocumentor-element-found-in__line">107</span>
 
     </aside>
 
@@ -530,7 +537,7 @@ borrowing the generic DiscordPHP-HTTP agent string.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">93</span>
 
     </aside>
 
@@ -568,7 +575,7 @@ borrowing the generic DiscordPHP-HTTP agent string.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">87</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
@@ -606,7 +613,7 @@ borrowing the generic DiscordPHP-HTTP agent string.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">101</span>
+    <span class="phpdocumentor-element-found-in__line">100</span>
 
     </aside>
 
@@ -644,7 +651,7 @@ borrowing the generic DiscordPHP-HTTP agent string.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">150</span>
+    <span class="phpdocumentor-element-found-in__line">149</span>
 
     </aside>
 
@@ -682,7 +689,7 @@ borrowing the generic DiscordPHP-HTTP agent string.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">130</span>
+    <span class="phpdocumentor-element-found-in__line">129</span>
 
     </aside>
 
@@ -721,7 +728,7 @@ overload.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">114</span>
 
     </aside>
 
@@ -759,7 +766,7 @@ overload.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">122</span>
+    <span class="phpdocumentor-element-found-in__line">121</span>
 
     </aside>
 
@@ -797,7 +804,7 @@ overload.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">138</span>
+    <span class="phpdocumentor-element-found-in__line">137</span>
 
     </aside>
 
@@ -836,7 +843,7 @@ overload.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">145</span>
+    <span class="phpdocumentor-element-found-in__line">144</span>
 
     </aside>
 
@@ -864,45 +871,6 @@ overload.</p>
             -private
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_apiKey">
-        $apiKey
-        <a href="classes/MTG-Http-Http.html#property_apiKey" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">80</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Optional `X-Api-Key` for the MTG API. Supplying one raises the per-hour
-request allowance; without it the API still works at the anonymous limit.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type">string|null</span>
-    <span class="phpdocumentor-signature__name">$apiKey</span>
-    </code>
-
-    
-    
-    
-
-        
-        
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                                    "
->
     <h4 class="phpdocumentor-element__name" id="property_token">
         $token
         <a href="classes/MTG-Http-Http.html#property_token" class="headerlink"><i class="fas fa-link"></i></a>
@@ -913,11 +881,11 @@ request allowance; without it the API still works at the anonymous limit.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">72</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Authentication token. Empty for the MTG API, which is unauthenticated —
+        <p class="phpdocumentor-summary">Authentication token. Empty for MTGJSON, which is unauthenticated —
 kept only so the shared {@see HttpTrait} plumbing has something to read.</p>
 
     
@@ -957,7 +925,7 @@ kept only so the shared {@see HttpTrait} plumbing has something to read.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">161</span>
+    <span class="phpdocumentor-element-found-in__line">159</span>
 
     </aside>
 
@@ -965,7 +933,7 @@ kept only so the shared {@see HttpTrait} plumbing has something to read.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$token</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\React\EventLoop\LoopInterface">LoopInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$loop</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$logger</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Discord\Http\DriverInterface">DriverInterface</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$driver</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$apiKey</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$token</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\React\EventLoop\LoopInterface">LoopInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$loop</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$logger</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Discord\Http\DriverInterface">DriverInterface</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$driver</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -978,7 +946,7 @@ kept only so the shared {@see HttpTrait} plumbing has something to read.</p>
                 : <span class="phpdocumentor-argument-list__argument__type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Unused by the MTG API; pass <code class="prettyprint">''</code>.</p>
+                    <section class="phpdocumentor-description"><p>Unused by MTGJSON; pass <code class="prettyprint">''</code>.</p>
 </section>
 
             </dd>
@@ -1003,15 +971,6 @@ kept only so the shared {@see HttpTrait} plumbing has something to read.</p>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$apiKey</span>
-                : <span class="phpdocumentor-argument-list__argument__type">string|null</span>
-                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Optional MTG API key (<code class="prettyprint">X-Api-Key</code>) for a higher rate limit.</p>
-</section>
-
-            </dd>
             </dl>
 
     
@@ -1034,11 +993,11 @@ kept only so the shared {@see HttpTrait} plumbing has something to read.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">176</span>
+    <span class="phpdocumentor-element-found-in__line">173</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Identifies this client to the MTG API as DiscordPHP-MTG rather than
+        <p class="phpdocumentor-summary">Identifies this client to MTGJSON as DiscordPHP-MTG rather than
 borrowing the generic DiscordPHP-HTTP agent string.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1074,7 +1033,7 @@ borrowing the generic DiscordPHP-HTTP agent string.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Http/Http.php"><a href="files/src-mtg-http-http.html"><abbr title="src/MTG/Http/Http.php">Http.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">191</span>
+    <span class="phpdocumentor-element-found-in__line">188</span>
 
     </aside>
 
@@ -1171,7 +1130,6 @@ borrowing the generic DiscordPHP-HTTP agent string.</p>
                                                     <li class=""><a href="classes/MTG-Http-Http.html#property_rateLimitReset">$rateLimitReset</a></li>
                                                     <li class=""><a href="classes/MTG-Http-Http.html#property_unboundQueue">$unboundQueue</a></li>
                                                     <li class=""><a href="classes/MTG-Http-Http.html#property_waiting">$waiting</a></li>
-                                                    <li class=""><a href="classes/MTG-Http-Http.html#property_apiKey">$apiKey</a></li>
                                                     <li class=""><a href="classes/MTG-Http-Http.html#property_token">$token</a></li>
                                             </ul>
                 </li>

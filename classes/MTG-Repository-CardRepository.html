@@ -68,6 +68,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/mtg-database.html" class="">Database</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/mtg-helpers.html" class="">Helpers</a>
                 
             </li>
@@ -130,6 +134,9 @@
         </div>
     
     
+            <span class="phpdocumentor-element__extends">
+            uses
+                            <a href="classes/MTG-Repository-DatabaseRepositoryTrait.html"><abbr title="\MTG\Repository\DatabaseRepositoryTrait">DatabaseRepositoryTrait</abbr></a>                    </span>
     </h2>
 
 <div class="phpdocumentor-label-line">
@@ -140,14 +147,19 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Reads the API&#039;s `cards` endpoint — list/search with query filters and
-pagination, and fetch a single card by id — hydrating {@see Card} parts.</p>
+            <p class="phpdocumentor-summary">Card printings from MTGJSON&#039;s AllPrintings build — search with any
+{@see CardQuery} filter, and fetch one by its MTGJSON `uuid` — hydrating
+{@see Card} parts with their identifiers, legalities, rulings, foreign
+data and purchase URLs.</p>
 
 
+    <section class="phpdocumentor-description"><p>MTGJSON serves cards only inside bulk files, so these are answered from
+the local <a href="classes/MTG-Database-Database.html"><abbr title="\MTG\Database\Database">Database</abbr></a> copy rather than over HTTP.</p>
+</section>
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -160,11 +172,7 @@ pagination, and fetch a single card by id — hydrating {@see Card} parts.</p>
                 <span class="phpdocumentor-tag__name">link</span>
             </dt>
                             <dd class="phpdocumentor-tag-list__definition">
-                                                                                                        <a class="phpdocumentor-tag-link" href="https://docs.magicthegathering.io/#api_v1cards_list"> <p>List / search cards</p>
- </a>
-                                    </dd>
-                            <dd class="phpdocumentor-tag-list__definition">
-                                                                                                        <a class="phpdocumentor-tag-link" href="https://docs.magicthegathering.io/#api_v1cards_get"> <p>Fetch one card by id</p>
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://mtgjson.com/data-models/card/card-set/"> <p>Card (Set) model</p>
  </a>
                                     </dd>
                                 <dt class="phpdocumentor-tag-list__entry">
@@ -190,6 +198,28 @@ pagination, and fetch a single card by id — hydrating {@see Card} parts.</p>
 
 
 
+<h4 id="toc-constants">
+    Constants
+    <a href="classes/MTG-Repository-CardRepository.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/MTG-Repository-CardRepository.html#constant_MANY_PER_CARD">MANY_PER_CARD</a>
+    <span>
+        &nbsp;: array&lt;string, array{0: string, 1: string}&gt;&nbsp;= [&#039;rulings&#039; =&gt; [&#039;cardRulings&#039;, &#039;&quot;date&quot;, rowid&#039;],...                            </span>
+</dt>
+<dd>Tables holding a list of extra card data per uuid, by Card attribute,
+with their ordering.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/MTG-Repository-CardRepository.html#constant_ONE_PER_CARD">ONE_PER_CARD</a>
+    <span>
+        &nbsp;: array&lt;string, string&gt;&nbsp;= [&#039;identifiers&#039; =&gt; &#039;cardIdentifiers&#039;, &#039;legalitie...                            </span>
+</dt>
+<dd>Tables holding one row of extra card data per uuid, by Card attribute.</dd>
+
+    </dl>
 
 
 <h4 id="toc-properties">
@@ -205,7 +235,20 @@ pagination, and fetch a single card by id — hydrating {@see Card} parts.</p>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/MTG-Repository-AbstractRepository.html#property_database">$database</a>
+    <span>
+                        &nbsp;: <a href="classes/MTG-Database-Database.html"><abbr title="\MTG\Database\Database">Database</abbr></a>            </span>
+</dt>
+<dd>The local MTGJSON build.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/MTG-Repository-AbstractRepository.html#property_discord">$discord</a>
+    <span>
+                        &nbsp;: mixed            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/MTG-Repository-CardRepository.html#property_discrim">$discrim</a>
     <span>
                         &nbsp;: mixed            </span>
 </dt>
@@ -215,6 +258,7 @@ pagination, and fetch a single card by id — hydrating {@see Card} parts.</p>
     <span>
                         &nbsp;: mixed            </span>
 </dt>
+<dd>MTGJSON has no per-card route; see {@see DatabaseRepositoryTrait}.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/MTG-Repository-AbstractRepository.html#property_mtg_http">$mtg_http</a>
@@ -276,11 +320,11 @@ within the class. If it does, it calls that method with the provided arguments.<
 <dd>Attempts to delete a part on the Discord servers.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/MTG-Repository-CardRepository.html#method_fetch">fetch()</a>
+    <a class="" href="classes/MTG-Repository-DatabaseRepositoryTrait.html#method_fetch">fetch()</a>
     <span>
-                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\MTG\Repository\Part">Part</abbr>&gt;    </span>
+                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Parts\Part">Part</abbr>&gt;    </span>
 </dt>
-<dd>Gets a part from the repository or Discord servers.</dd>
+<dd>Gets a part from the repository or the MTGJSON build.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_filter">filter()</a>
@@ -306,18 +350,18 @@ where the callback returns `true` when given the part.</dd>
 <dd>Returns the first cached part.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_fresh">fresh()</a>
+    <a class="" href="classes/MTG-Repository-DatabaseRepositoryTrait.html#method_fresh">fresh()</a>
     <span>
                                 &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Parts\Part">Part</abbr>&gt;    </span>
 </dt>
-<dd>Returns a part with fresh values.</dd>
+<dd>Refills a part from the MTGJSON build.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_freshen">freshen()</a>
+    <a class="" href="classes/MTG-Repository-DatabaseRepositoryTrait.html#method_freshen">freshen()</a>
     <span>
-                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, static&gt;    </span>
+                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>    </span>
 </dt>
-<dd>Freshens the repository cache.</dd>
+<dd>Rejects: the repository is too large to load whole; search it instead.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_get">get()</a>
@@ -329,9 +373,20 @@ where the callback returns `true` when given the part.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-Repository-CardRepository.html#method_getCards">getCards()</a>
     <span>
-                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Helpers\ExCollectionInterface">ExCollectionInterface</abbr>&lt;string|int, <a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&gt;|array&lt;string|int, <a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&gt;&gt;    </span>
+                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Helpers\ExCollectionInterface">ExCollectionInterface</abbr>&lt;string|int, <a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&gt;&gt;    </span>
 </dt>
-<dd>Fetch card information by query parameters.</dd>
+<dd>Searches card printings. See {@see CardQuery} for every filter;
+the common ones are `name`, `manaValue` (or `cmc`), `colors`,
+`colorIdentity`, `type`, `types`, `subtypes`, `rarity`, `setCode` (or
+`set`), `text`, `gameFormat` + `legality`, `multiverseId`, `contains`,
+`orderBy`, `random`, `page` and `pageSize` (1-100, default 1).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/MTG-Repository-CardRepository.html#method_getCardsByUuid">getCardsByUuid()</a>
+    <span>
+                                &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Helpers\ExCollectionInterface">ExCollectionInterface</abbr>&lt;string|int, <a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&gt;&gt;    </span>
+</dt>
+<dd>Gets card printings by their MTGJSON uuids. Unknown uuids are skipped.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_getIterator">getIterator()</a>
@@ -438,16 +493,122 @@ where the callback returns `true` when given the part.</dd>
 <dd>Get the values of the items.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a class="" href="classes/MTG-Repository-CardRepository.html#method_cacheFreshen">cacheFreshen()</a>
+    <a class="" href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_cacheFreshen">cacheFreshen()</a>
     <span>
                                 &nbsp;: <abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, static&gt;    </span>
 </dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a class="" href="classes/MTG-Repository-CardRepository.html#method_filtersFrom">filtersFrom()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Turns a Card&#039;s attributes into filters: scalars as they are, lists
+as `,`-joined terms that must all match. Nested data is skipped.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a class="" href="classes/MTG-Repository-CardRepository.html#method_hydrate">hydrate()</a>
+    <span>
+                                &nbsp;: <abbr title="\Discord\Helpers\ExCollectionInterface">ExCollectionInterface</abbr>&lt;string|int, <a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&gt;    </span>
+</dt>
+<dd>Builds Card parts from decoded `cards` rows, attaching their extra data.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a class="" href="classes/MTG-Repository-CardRepository.html#method_lookup">lookup()</a>
+    <span>
+                                &nbsp;: ?<a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a class="" href="classes/MTG-Repository-CardRepository.html#method_related">related()</a>
+    <span>
+                                &nbsp;: array&lt;string, array&lt;string|int, mixed&gt;&gt;    </span>
+</dt>
+<dd>Reads the identifiers, legalities, purchase URLs, rulings and foreign
+data of a set of cards.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a class="" href="classes/MTG-Repository-CardRepository.html#method_rows">rows()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, array&lt;string|int, mixed&gt;&gt;    </span>
+</dt>
+<dd>Reads `cards` rows by uuid, with the set name.</dd>
 
     </dl>
 
 
 
         
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="classes/MTG-Repository-CardRepository.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_MANY_PER_CARD">
+        MANY_PER_CARD
+        <a href="classes/MTG-Repository-CardRepository.html#constant_MANY_PER_CARD" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">55</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Tables holding a list of extra card data per uuid, by Card attribute,
+with their ordering.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array&lt;string, array{0: string, 1: string}&gt;</span>
+    <span class="phpdocumentor-signature__name">MANY_PER_CARD</span>
+    = <span class="phpdocumentor-signature__default-value">[&#039;rulings&#039; =&gt; [&#039;cardRulings&#039;, &#039;&quot;date&quot;, rowid&#039;], &#039;foreignData&#039; =&gt; [&#039;cardForeignData&#039;, &#039;&quot;language&quot;, rowid&#039;]]</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ONE_PER_CARD">
+        ONE_PER_CARD
+        <a href="classes/MTG-Repository-CardRepository.html#constant_ONE_PER_CARD" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">43</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Tables holding one row of extra card data per uuid, by Card attribute.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array&lt;string, string&gt;</span>
+    <span class="phpdocumentor-signature__name">ONE_PER_CARD</span>
+    = <span class="phpdocumentor-signature__default-value">[&#039;identifiers&#039; =&gt; &#039;cardIdentifiers&#039;, &#039;legalities&#039; =&gt; &#039;cardLegalities&#039;, &#039;purchaseUrls&#039; =&gt; &#039;cardPurchaseUrls&#039;]</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+            </section>
 
         
     <section class="phpdocumentor-properties">
@@ -473,7 +634,7 @@ where the callback returns `true` when given the part.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">50</span>
+    <span class="phpdocumentor-element-found-in__line">75</span>
 
     </aside>
 
@@ -513,6 +674,44 @@ where the callback returns `true` when given the part.</dd>
             -protected
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_database">
+        $database
+        <a href="classes/MTG-Repository-AbstractRepository.html#property_database" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/AbstractRepository.php"><a href="files/src-mtg-repository-abstractrepository.html"><abbr title="src/MTG/Repository/AbstractRepository.php">AbstractRepository.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">52</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The local MTGJSON build.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/MTG-Database-Database.html"><abbr title="\MTG\Database\Database">Database</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$database</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_discord">
         $discord
         <a href="classes/MTG-Repository-AbstractRepository.html#property_discord" class="headerlink"><i class="fas fa-link"></i></a>
@@ -523,7 +722,7 @@ where the callback returns `true` when given the part.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/AbstractRepository.php"><a href="files/src-mtg-repository-abstractrepository.html"><abbr title="src/MTG/Repository/AbstractRepository.php">AbstractRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">60</span>
 
     </aside>
 
@@ -550,6 +749,56 @@ where the callback returns `true` when given the part.</dd>
             -protected
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_discrim">
+        $discrim
+        <a href="classes/MTG-Repository-CardRepository.html#property_discrim" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">63</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$discrim</span>
+     = <span class="phpdocumentor-signature__default-value">&#039;uuid&#039;</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="property_discrim_tags">
+        Tags
+        <a href="classes/MTG-Repository-CardRepository.html#property_discrim_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">inheritDoc</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_endpoints">
         $endpoints
         <a href="classes/MTG-Repository-CardRepository.html#property_endpoints" class="headerlink"><i class="fas fa-link"></i></a>
@@ -560,17 +809,18 @@ where the callback returns `true` when given the part.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">MTGJSON has no per-card route; see {@see DatabaseRepositoryTrait}.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">protected</span>
             <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">$endpoints</span>
-     = <span class="phpdocumentor-signature__default-value">[&#039;all&#039; =&gt; \MTG\Http\Endpoint::CARDS, &#039;get&#039; =&gt; \MTG\Http\Endpoint::CARD]</span></code>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
     
     
@@ -610,7 +860,7 @@ where the callback returns `true` when given the part.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/AbstractRepository.php"><a href="files/src-mtg-repository-abstractrepository.html"><abbr title="src/MTG/Repository/AbstractRepository.php">AbstractRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
     </aside>
 
@@ -740,7 +990,7 @@ This was changed to use the <code class="prettyprint">__Collection__method</code
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/AbstractRepository.php"><a href="files/src-mtg-repository-abstractrepository.html"><abbr title="src/MTG/Repository/AbstractRepository.php">AbstractRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">60</span>
 
     </aside>
 
@@ -1028,21 +1278,21 @@ This was changed to use the <code class="prettyprint">__Collection__method</code
 >
     <h4 class="phpdocumentor-element__name" id="method_fetch">
         fetch()
-        <a href="classes/MTG-Repository-CardRepository.html#method_fetch" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/MTG-Repository-DatabaseRepositoryTrait.html#method_fetch" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/DatabaseRepositoryTrait.php"><a href="files/src-mtg-repository-databaserepositorytrait.html"><abbr title="src/MTG/Repository/DatabaseRepositoryTrait.php">DatabaseRepositoryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">185</span>
+    <span class="phpdocumentor-element-found-in__line">54</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Gets a part from the repository or Discord servers.</p>
+        <p class="phpdocumentor-summary">Gets a part from the repository or the MTGJSON build.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">fetch</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fresh</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\MTG\Repository\Part">Part</abbr>&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">fetch</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fresh</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Parts\Part">Part</abbr>&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1055,7 +1305,7 @@ This was changed to use the <code class="prettyprint">__Collection__method</code
                 : <span class="phpdocumentor-argument-list__argument__type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The ID to search for.</p>
+                    <section class="phpdocumentor-description"><p>The discriminator value to search for.</p>
 </section>
 
             </dd>
@@ -1064,33 +1314,23 @@ This was changed to use the <code class="prettyprint">__Collection__method</code
                 : <span class="phpdocumentor-argument-list__argument__type">bool</span>
                  = <span class="phpdocumentor-argument-list__argument__default-value">false</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Whether we should skip checking the cache.</p>
+                    <section class="phpdocumentor-description"><p>Whether to skip the cache.</p>
 </section>
 
             </dd>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="method_fetch_tags">
-        Tags
-        <a href="classes/MTG-Repository-CardRepository.html#method_fetch_tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                    <dt class="phpdocumentor-tag-list__entry">
-                <span class="phpdocumentor-tag__name">throws</span>
-            </dt>
-                            <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
-                                                                                    
-                                    </dd>
-                        </dl>
 
         
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\MTG\Repository\Part">Part</abbr>&gt;</span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Parts\Part">Part</abbr>&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Rejects with \OutOfBoundsException when the build has no such item.</p>
+</section>
+
             </section>
 
 </article>
@@ -1260,17 +1500,17 @@ where the callback returns `true` when given the part.</p>
 >
     <h4 class="phpdocumentor-element__name" id="method_fresh">
         fresh()
-        <a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_fresh" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/MTG-Repository-DatabaseRepositoryTrait.html#method_fresh" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/AbstractRepositoryTrait.php"><a href="files/src-mtg-repository-abstractrepositorytrait.html"><abbr title="src/MTG/Repository/AbstractRepositoryTrait.php">AbstractRepositoryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/DatabaseRepositoryTrait.php"><a href="files/src-mtg-repository-databaserepositorytrait.html"><abbr title="src/MTG/Repository/DatabaseRepositoryTrait.php">DatabaseRepositoryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">285</span>
+    <span class="phpdocumentor-element-found-in__line">81</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Returns a part with fresh values.</p>
+        <p class="phpdocumentor-summary">Refills a part from the MTGJSON build.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1287,7 +1527,7 @@ where the callback returns `true` when given the part.</p>
                 : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Discord\Parts\Part">Part</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The part to get fresh values.</p>
+                    <section class="phpdocumentor-description"><p>The part to refresh.</p>
 </section>
 
             </dd>
@@ -1296,27 +1536,13 @@ where the callback returns `true` when given the part.</p>
                 : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;</span>
                  = <span class="phpdocumentor-argument-list__argument__default-value">[]</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Query string params to add to the request (no validation)</p>
+                    <section class="phpdocumentor-description"><p>Unused; kept for the upstream signature.</p>
 </section>
 
             </dd>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="method_fresh_tags">
-        Tags
-        <a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_fresh_tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                    <dt class="phpdocumentor-tag-list__entry">
-                <span class="phpdocumentor-tag__name">throws</span>
-            </dt>
-                            <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
-                                                                                    
-                                    </dd>
-                        </dl>
 
         
     
@@ -1334,21 +1560,21 @@ where the callback returns `true` when given the part.</p>
 >
     <h4 class="phpdocumentor-element__name" id="method_freshen">
         freshen()
-        <a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_freshen" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/MTG-Repository-DatabaseRepositoryTrait.html#method_freshen" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/AbstractRepositoryTrait.php"><a href="files/src-mtg-repository-abstractrepositorytrait.html"><abbr title="src/MTG/Repository/AbstractRepositoryTrait.php">AbstractRepositoryTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/DatabaseRepositoryTrait.php"><a href="files/src-mtg-repository-databaserepositorytrait.html"><abbr title="src/MTG/Repository/DatabaseRepositoryTrait.php">DatabaseRepositoryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">111</span>
+    <span class="phpdocumentor-element-found-in__line">97</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Freshens the repository cache.</p>
+        <p class="phpdocumentor-summary">Rejects: the repository is too large to load whole; search it instead.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">freshen</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$queryparams</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, static&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">freshen</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$queryparams</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1361,33 +1587,23 @@ where the callback returns `true` when given the part.</p>
                 : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;</span>
                  = <span class="phpdocumentor-argument-list__argument__default-value">[]</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Query string params to add to the request (no validation)</p>
+                    <section class="phpdocumentor-description"><p>Unused.</p>
 </section>
 
             </dd>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="method_freshen_tags">
-        Tags
-        <a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_freshen_tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                    <dt class="phpdocumentor-tag-list__entry">
-                <span class="phpdocumentor-tag__name">throws</span>
-            </dt>
-                            <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
-                                                                                    
-                                    </dd>
-                        </dl>
 
         
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, static&gt;</span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Rejects with \BadMethodCallException.</p>
+</section>
+
             </section>
 
 </article>
@@ -1461,15 +1677,19 @@ where the callback returns `true` when given the part.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">59</span>
+    <span class="phpdocumentor-element-found-in__line">90</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Fetch card information by query parameters.</p>
+        <p class="phpdocumentor-summary">Searches card printings. See {@see CardQuery} for every filter;
+the common ones are `name`, `manaValue` (or `cmc`), `colors`,
+`colorIdentity`, `type`, `types`, `subtypes`, `rarity`, `setCode` (or
+`set`), `text`, `gameFormat` + `legality`, `multiverseId`, `contains`,
+`orderBy`, `random`, `page` and `pageSize` (1-100, default 1).</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getCards</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type"><a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>|array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$params</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Helpers\ExCollectionInterface">ExCollectionInterface</abbr>&lt;string|int, <a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&gt;|array&lt;string|int, <a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&gt;&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getCards</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type"><a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>|array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$params</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Helpers\ExCollectionInterface">ExCollectionInterface</abbr>&lt;string|int, <a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&gt;&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1482,17 +1702,104 @@ where the callback returns `true` when given the part.</p>
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>|array&lt;string|int, mixed&gt;</span>
                  = <span class="phpdocumentor-argument-list__argument__default-value">[]</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Filters, or a Card whose scalar and list attributes are used as filters.</p>
+</section>
+
             </dd>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getCards_tags">
+        Tags
+        <a href="classes/MTG-Repository-CardRepository.html#method_getCards_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">0.3.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
 
         
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Helpers\ExCollectionInterface">ExCollectionInterface</abbr>&lt;string|int, <a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&gt;|array&lt;string|int, <a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&gt;&gt;</span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Helpers\ExCollectionInterface">ExCollectionInterface</abbr>&lt;string|int, <a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&gt;&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Keyed by uuid. Rejects with \InvalidArgumentException on a bad filter.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getCardsByUuid">
+        getCardsByUuid()
+        <a href="classes/MTG-Repository-CardRepository.html#method_getCardsByUuid" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">110</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Gets card printings by their MTGJSON uuids. Unknown uuids are skipped.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getCardsByUuid</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$uuids</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Helpers\ExCollectionInterface">ExCollectionInterface</abbr>&lt;string|int, <a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&gt;&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$uuids</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, string&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getCardsByUuid_tags">
+        Tags
+        <a href="classes/MTG-Repository-CardRepository.html#method_getCardsByUuid_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\React\Promise\PromiseInterface">PromiseInterface</abbr>&lt;string|int, <abbr title="\Discord\Helpers\ExCollectionInterface">ExCollectionInterface</abbr>&lt;string|int, <a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&gt;&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>One card per distinct uuid, keyed by uuid.</p>
+</section>
+
             </section>
 
 </article>
@@ -2311,13 +2618,13 @@ This method is deprecated for userland code but can still be used internally wit
 >
     <h4 class="phpdocumentor-element__name" id="method_cacheFreshen">
         cacheFreshen()
-        <a href="classes/MTG-Repository-CardRepository.html#method_cacheFreshen" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_cacheFreshen" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/AbstractRepositoryTrait.php"><a href="files/src-mtg-repository-abstractrepositorytrait.html"><abbr title="src/MTG/Repository/AbstractRepositoryTrait.php">AbstractRepositoryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">158</span>
+    <span class="phpdocumentor-element-found-in__line">143</span>
 
     </aside>
 
@@ -2351,6 +2658,288 @@ This method is deprecated for userland code but can still be used internally wit
             </section>
 
 </article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_filtersFrom">
+        filtersFrom()
+        <a href="classes/MTG-Repository-CardRepository.html#method_filtersFrom" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">223</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Turns a Card&#039;s attributes into filters: scalars as they are, lists
+as `,`-joined terms that must all match. Nested data is skipped.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">filtersFrom</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$card</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$card</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hydrate">
+        hydrate()
+        <a href="classes/MTG-Repository-CardRepository.html#method_hydrate" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">155</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Builds Card parts from decoded `cards` rows, attaching their extra data.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">hydrate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;string|int, array&lt;string|int, mixed&gt;&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$rows</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$cache</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Discord\Helpers\ExCollectionInterface">ExCollectionInterface</abbr>&lt;string|int, <a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$rows</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, array&lt;string|int, mixed&gt;&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Decoded rows.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$cache</span>
+                : <span class="phpdocumentor-argument-list__argument__type">bool</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">true</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Whether to cache the parts.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Discord\Helpers\ExCollectionInterface">ExCollectionInterface</abbr>&lt;string|int, <a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a>&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Keyed by uuid.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_lookup">
+        lookup()
+        <a href="classes/MTG-Repository-CardRepository.html#method_lookup" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">118</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">lookup</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">?<a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$id</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_lookup_tags">
+        Tags
+        <a href="classes/MTG-Repository-CardRepository.html#method_lookup_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">inheritDoc</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">?<a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_related">
+        related()
+        <a href="classes/MTG-Repository-CardRepository.html#method_related" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">181</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Reads the identifiers, legalities, purchase URLs, rulings and foreign
+data of a set of cards.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">related</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$uuids</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, array&lt;string|int, mixed&gt;&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$uuids</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, string&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string, array&lt;string|int, mixed&gt;&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Card attributes, by uuid.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_rows">
+        rows()
+        <a href="classes/MTG-Repository-CardRepository.html#method_rows" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/MTG/Repository/CardRepository.php"><a href="files/src-mtg-repository-cardrepository.html"><abbr title="src/MTG/Repository/CardRepository.php">CardRepository.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">132</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Reads `cards` rows by uuid, with the set name.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">rows</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$uuids</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, array&lt;string|int, mixed&gt;&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$uuids</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, string&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, array&lt;string|int, mixed&gt;&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Decoded rows.</p>
+</section>
+
+            </section>
+
+</article>
             </section>
 
         
@@ -2365,16 +2954,26 @@ This method is deprecated for userland code but can still be used internally wit
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
+                                        <li><a href="classes/MTG-Repository-CardRepository.html#toc-constants">Constants</a></li>
                                                             <li><a href="classes/MTG-Repository-CardRepository.html#toc-properties">Properties</a></li>
                                                             <li><a href="classes/MTG-Repository-CardRepository.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
+                            <li class="phpdocumentor-on-this-page-section__title">Constants</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/MTG-Repository-CardRepository.html#constant_MANY_PER_CARD">MANY_PER_CARD</a></li>
+                                                    <li class=""><a href="classes/MTG-Repository-CardRepository.html#constant_ONE_PER_CARD">ONE_PER_CARD</a></li>
+                                            </ul>
+                </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
                                                     <li class=""><a href="classes/MTG-Repository-CardRepository.html#property_class">$class</a></li>
+                                                    <li class=""><a href="classes/MTG-Repository-AbstractRepository.html#property_database">$database</a></li>
                                                     <li class=""><a href="classes/MTG-Repository-AbstractRepository.html#property_discord">$discord</a></li>
+                                                    <li class=""><a href="classes/MTG-Repository-CardRepository.html#property_discrim">$discrim</a></li>
                                                     <li class=""><a href="classes/MTG-Repository-CardRepository.html#property_endpoints">$endpoints</a></li>
                                                     <li class=""><a href="classes/MTG-Repository-AbstractRepository.html#property_mtg_http">$mtg_http</a></li>
                                             </ul>
@@ -2389,14 +2988,15 @@ This method is deprecated for userland code but can still be used internally wit
                                             <li class="-deprecated"><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_clear">clear()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_create">create()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_delete">delete()</a></li>
-                                            <li class=""><a href="classes/MTG-Repository-CardRepository.html#method_fetch">fetch()</a></li>
+                                            <li class=""><a href="classes/MTG-Repository-DatabaseRepositoryTrait.html#method_fetch">fetch()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_filter">filter()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_find">find()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_first">first()</a></li>
-                                            <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_fresh">fresh()</a></li>
-                                            <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_freshen">freshen()</a></li>
+                                            <li class=""><a href="classes/MTG-Repository-DatabaseRepositoryTrait.html#method_fresh">fresh()</a></li>
+                                            <li class=""><a href="classes/MTG-Repository-DatabaseRepositoryTrait.html#method_freshen">freshen()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_get">get()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-CardRepository.html#method_getCards">getCards()</a></li>
+                                            <li class=""><a href="classes/MTG-Repository-CardRepository.html#method_getCardsByUuid">getCardsByUuid()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_getIterator">getIterator()</a></li>
                                             <li class="-deprecated"><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_has">has()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_jsonSerialize">jsonSerialize()</a></li>
@@ -2412,7 +3012,12 @@ This method is deprecated for userland code but can still be used internally wit
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_set">set()</a></li>
                                             <li class="-deprecated"><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_toArray">toArray()</a></li>
                                             <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_values">values()</a></li>
-                                            <li class=""><a href="classes/MTG-Repository-CardRepository.html#method_cacheFreshen">cacheFreshen()</a></li>
+                                            <li class=""><a href="classes/MTG-Repository-AbstractRepositoryTrait.html#method_cacheFreshen">cacheFreshen()</a></li>
+                                            <li class=""><a href="classes/MTG-Repository-CardRepository.html#method_filtersFrom">filtersFrom()</a></li>
+                                            <li class=""><a href="classes/MTG-Repository-CardRepository.html#method_hydrate">hydrate()</a></li>
+                                            <li class=""><a href="classes/MTG-Repository-CardRepository.html#method_lookup">lookup()</a></li>
+                                            <li class=""><a href="classes/MTG-Repository-CardRepository.html#method_related">related()</a></li>
+                                            <li class=""><a href="classes/MTG-Repository-CardRepository.html#method_rows">rows()</a></li>
                                     </ul>
             </li>
                     </ul>

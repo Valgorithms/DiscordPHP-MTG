@@ -68,6 +68,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/mtg-database.html" class="">Database</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/mtg-helpers.html" class="">Helpers</a>
                 
             </li>
@@ -133,33 +137,47 @@
     <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Discord-Stats.html"><abbr title="\Discord\Stats">Stats</abbr></a></dt><dd>Tracks bot runtime metrics — start time, last reconnect, message/event
 counters — and renders them as an {@see Embed} for a `!stats` style command.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Client.html"><abbr title="\MTG\Client">Client</abbr></a></dt><dd>The DiscordPHP {@see \Discord\Parts\User\Client} extended so the MTG
-repositories ({@see CardRepository}, {@see SetRepository}) hang off the same
-client the rest of the bot uses. Held by {@see MTG} as `$client`.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Helpers-Collection.html"><abbr title="\MTG\Helpers\Collection">Collection</abbr></a></dt><dd>Collection of items. Inspired by Laravel Collections. A local copy of
+repositories ({@see CardRepository}, {@see SetRepository},
+{@see DeckRepository}) hang off the same client the rest of the bot uses.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Database-Booster.html"><abbr title="\MTG\Database\Booster">Booster</abbr></a></dt><dd>Opens booster packs from a set&#039;s MTGJSON booster configuration, as
+stored in the AllPrintings build&#039;s `setBooster*` tables.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Database-CardQuery.html"><abbr title="\MTG\Database\CardQuery">CardQuery</abbr></a></dt><dd>A card search against the AllPrintings build&#039;s `cards` table, joined to
+`sets` (for `setName`), `cardIdentifiers` and `cardLegalities` as filters
+need them. One row per card face per printing, as in MTGJSON.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Database-Database.html"><abbr title="\MTG\Database\Database">Database</abbr></a></dt><dd>A local copy of MTGJSON&#039;s AllPrintings SQLite build, kept current from the
+API. MTGJSON has no query endpoint — it publishes whole files — so card and
+set searches run here instead of over HTTP.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Database-Query.html"><abbr title="\MTG\Database\Query">Query</abbr></a></dt><dd>Compiles a search — the same `key =&gt; value` filters the old
+api.magicthegathering.io took — into SQL against the AllPrintings build.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Database-SetQuery.html"><abbr title="\MTG\Database\SetQuery">SetQuery</abbr></a></dt><dd>A set search against the AllPrintings build&#039;s `sets` table.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Helpers-Collection.html"><abbr title="\MTG\Helpers\Collection">Collection</abbr></a></dt><dd>Collection of items. Inspired by Laravel Collections. A local copy of
 DiscordPHP&#039;s `Collection` so MTG code has an `MTG\Helpers`-namespaced type;
-behaviour comes entirely from {@see CollectionTrait}.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Http-Endpoint.html"><abbr title="\MTG\Http\Endpoint">Endpoint</abbr></a></dt><dd>The route table for the &quot;Magic: The Gathering Developers&quot; API — one constant
-per endpoint (`cards`, `sets`, `sets/:id/booster`, `types`, `formats`, …),
-with `:param` placeholders bound via {@see EndpointTrait}. Same mechanics as
-DiscordPHP&#039;s own `Endpoint`, pointed at `api.magicthegathering.io`.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Http-Http.html"><abbr title="\MTG\Http\Http">Http</abbr></a></dt><dd>HTTP client for the &quot;Magic: The Gathering Developers&quot; REST API, built the
-same way DiscordPHP talks to `discord.com` (rate-limit buckets, driver,
-retry) but pointed at `api.magicthegathering.io`. The API is read-only and
-unauthenticated, so no token is required.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Http-Request.html"><abbr title="\MTG\Http\Request">Request</abbr></a></dt><dd>A single queued HTTP request against the MTG API. Identical in behaviour to
+behaviour comes entirely from {@see CollectionTrait}.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Http-Endpoint.html"><abbr title="\MTG\Http\Endpoint">Endpoint</abbr></a></dt><dd>The route table for the MTGJSON v5 API — one constant per file the API
+serves under `https://mtgjson.com/api/v5/`, with `:param` placeholders
+bound via {@see EndpointTrait}. Same mechanics as DiscordPHP&#039;s own
+`Endpoint`, pointed at `mtgjson.com`.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Http-Http.html"><abbr title="\MTG\Http\Http">Http</abbr></a></dt><dd>HTTP client for the MTGJSON v5 API, built the same way DiscordPHP talks to
+`discord.com` (buckets, driver, retry) but pointed at
+`mtgjson.com/api/v5`. The API is read-only and unauthenticated, so no token
+is required. Responses are MTGJSON&#039;s `{&quot;meta&quot;: {...}, &quot;data&quot;: ...}`
+wrapper, decoded.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Http-Request.html"><abbr title="\MTG\Http\Request">Request</abbr></a></dt><dd>A single queued HTTP request against the MTG API. Identical in behaviour to
 the DiscordPHP request it extends; it exists only so MTG transport code
-depends on an MTG-owned type.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-MTG.html"><abbr title="\MTG\MTG">MTG</abbr></a></dt><dd>The MTG client class — a DiscordPHP {@see MessageCommandClient} extended with
-an async HTTP client for the &quot;Magic: The Gathering Developers&quot; REST API and
-the card / set repositories that read it.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a></dt><dd>Represents a Magic: The Gathering card (one object from the API&#039;s `cards`
-response); {@see CardAttributes} declares the raw API fields and this class
-adds the collections and Discord render helpers.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-ForeignName.html"><abbr title="\MTG\Parts\ForeignName">ForeignName</abbr></a></dt><dd>Foreign language names for the card, if this card in this set was printed in another language. Not available for all sets.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Legality.html"><abbr title="\MTG\Parts\Legality">Legality</abbr></a></dt><dd>One entry from a {@see Card}&#039;s `legalities` array — whether the card is
-`Legal` / `Banned` / `Restricted` in a given format. Not a standalone
-endpoint; it only appears inside the card response.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Ruling.html"><abbr title="\MTG\Parts\Ruling">Ruling</abbr></a></dt><dd>One entry from a {@see Card}&#039;s `rulings` array — an official clarification,
-with the date it was issued. Not a standalone endpoint; it only appears
-inside the card response.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Set.html"><abbr title="\MTG\Parts\Set">Set</abbr></a></dt><dd>Represents a Magic: The Gathering set (one object from the API&#039;s `sets`
-response) — its code, name, release date, block and booster configuration.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Repository-AbstractRepository.html"><abbr title="\MTG\Repository\AbstractRepository">AbstractRepository</abbr></a></dt><dd>Base class for the MTG read-only repositories: DiscordPHP&#039;s
+depends on an MTG-owned type.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-MTG.html"><abbr title="\MTG\MTG">MTG</abbr></a></dt><dd>The MTG client class — a DiscordPHP {@see MessageCommandClient} extended
+with MTGJSON: an async HTTP client for the MTGJSON v5 API, a local copy of
+its AllPrintings SQLite build for card and set searches, and the card, set
+and deck repositories that read them.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Card.html"><abbr title="\MTG\Parts\Card">Card</abbr></a></dt><dd>One face of one printing of a Magic: The Gathering card — MTGJSON&#039;s Card
+(Set) model, plus the Card (Deck) fields when it comes from a deck.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Deck.html"><abbr title="\MTG\Parts\Deck">Deck</abbr></a></dt><dd>A preconstructed deck — MTGJSON&#039;s Deck model, or a Deck List entry (no
+cards) when it comes from {@see \MTG\Repository\DeckRepository::getDecks()}.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-ForeignData.html"><abbr title="\MTG\Parts\ForeignData">ForeignData</abbr></a></dt><dd>One entry from a {@see Card}&#039;s `foreignData` — the card as printed in
+another language. Not available for all sets.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Identifiers.html"><abbr title="\MTG\Parts\Identifiers">Identifiers</abbr></a></dt><dd>A {@see Card}&#039;s `identifiers` — its ids on other services. Every value is
+a string, as in MTGJSON.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-LeadershipSkills.html"><abbr title="\MTG\Parts\LeadershipSkills">LeadershipSkills</abbr></a></dt><dd>A {@see Card}&#039;s `leadershipSkills` — the formats it can be your
+commander in.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Legality.html"><abbr title="\MTG\Parts\Legality">Legality</abbr></a></dt><dd>One entry of a {@see Card}&#039;s `legalities` — its status in one format.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-PurchaseUrls.html"><abbr title="\MTG\Parts\PurchaseUrls">PurchaseUrls</abbr></a></dt><dd>A {@see Card}&#039;s `purchaseUrls` — links to buy it, through MTGJSON&#039;s
+referral redirects.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Ruling.html"><abbr title="\MTG\Parts\Ruling">Ruling</abbr></a></dt><dd>One entry from a {@see Card}&#039;s `rulings` — an official clarification,
+with the date it was issued.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Parts-Set.html"><abbr title="\MTG\Parts\Set">Set</abbr></a></dt><dd>A Magic: The Gathering set — MTGJSON&#039;s Set model, without the card, token,
+deck, booster and sealed product lists (search cards by `setCode`, and
+open boosters with {@see \MTG\Repository\SetRepository::generateBooster()}).</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Repository-AbstractRepository.html"><abbr title="\MTG\Repository\AbstractRepository">AbstractRepository</abbr></a></dt><dd>Base class for the MTG read-only repositories: DiscordPHP&#039;s
 {@see DiscordAbstractRepository} behaviour (keyed, cached collection of
-Parts) backed by {@see \MTG\Http\Http} and MTG {@see \MTG\Http\Endpoint}s
-instead of the Discord API. Concrete repositories ({@see CardRepository},
-{@see SetRepository}) declare their endpoint map and Part class.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Repository-CardRepository.html"><abbr title="\MTG\Repository\CardRepository">CardRepository</abbr></a></dt><dd>Reads the API&#039;s `cards` endpoint — list/search with query filters and
-pagination, and fetch a single card by id — hydrating {@see Card} parts.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Repository-SetRepository.html"><abbr title="\MTG\Repository\SetRepository">SetRepository</abbr></a></dt><dd>Reads the API&#039;s `sets` endpoint — list sets, fetch one by code, and
-generate a booster pack from a set — hydrating {@see Set} parts.</dd>    </dl>
+Parts) backed by MTGJSON — the {@see \MTG\Http\Http} client for the small
+API files, and the local {@see Database} build for cards and sets.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Repository-CardRepository.html"><abbr title="\MTG\Repository\CardRepository">CardRepository</abbr></a></dt><dd>Card printings from MTGJSON&#039;s AllPrintings build — search with any
+{@see CardQuery} filter, and fetch one by its MTGJSON `uuid` — hydrating
+{@see Card} parts with their identifiers, legalities, rulings, foreign
+data and purchase URLs.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Repository-DeckRepository.html"><abbr title="\MTG\Repository\DeckRepository">DeckRepository</abbr></a></dt><dd>Preconstructed decks from the MTGJSON API: the deck list
+(`DeckList.json`) to search, and one deck with its cards
+(`decks/{fileName}.json`) to fetch, hydrating {@see Deck} parts.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Repository-SetRepository.html"><abbr title="\MTG\Repository\SetRepository">SetRepository</abbr></a></dt><dd>Sets from MTGJSON&#039;s AllPrintings build — search them, fetch one by code,
+and open booster packs from their booster configurations — hydrating
+{@see Set} parts with their name translations.</dd>    </dl>
 
     <h4 id="toc-traits">
         Traits
@@ -170,10 +188,12 @@ generate a booster pack from a set — hydrating {@see Set} parts.</dd>    </dl>
             <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/MTG-HelperTrait.html"><abbr title="\MTG\HelperTrait">HelperTrait</abbr></a></dt><dd>Small presentation helpers shared by {@see MTG} and its command handlers for
 turning MTG API data into Discord output: a mention-safe
 {@see MessageBuilder} factory and emoji lookup helpers. Pure formatting — no
-API or model concerns live here.</dd>        <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/MTG-Parts-CardAttributes.html"><abbr title="\MTG\Parts\CardAttributes">CardAttributes</abbr></a></dt><dd>This query will return a maximum of 100 cards.</dd>        <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/MTG-Repository-AbstractRepositoryTrait.html"><abbr title="\MTG\Repository\AbstractRepositoryTrait">AbstractRepositoryTrait</abbr></a></dt><dd>Shared implementation for every MTG repository: DiscordPHP&#039;s
+API or model concerns live here.</dd>        <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/MTG-Repository-AbstractRepositoryTrait.html"><abbr title="\MTG\Repository\AbstractRepositoryTrait">AbstractRepositoryTrait</abbr></a></dt><dd>Shared implementation for every MTG repository: DiscordPHP&#039;s
 `AbstractRepositoryTrait` ported so the collection is keyed and cached the
 same way, but backed by {@see \MTG\Http\Http} and MTG
-{@see \MTG\Http\Endpoint}s. Consumed by {@see AbstractRepository}.</dd>    </dl>
+{@see \MTG\Http\Endpoint}s. Consumed by {@see AbstractRepository}.</dd>        <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/MTG-Repository-DatabaseRepositoryTrait.html"><abbr title="\MTG\Repository\DatabaseRepositoryTrait">DatabaseRepositoryTrait</abbr></a></dt><dd>`fetch()`, `fresh()` and `freshen()` for repositories answered from the
+local MTGJSON build instead of an HTTP endpoint. MTGJSON serves cards and
+sets only inside whole files, so there is no per-item route to call.</dd>    </dl>
 
 
 

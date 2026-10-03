@@ -68,6 +68,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/mtg-database.html" class="">Database</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/mtg-helpers.html" class="">Helpers</a>
                 
             </li>
@@ -134,11 +138,15 @@
     <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Repository-AbstractRepository.html"><abbr title="\MTG\Repository\AbstractRepository">AbstractRepository</abbr></a></dt><dd>Base class for the MTG read-only repositories: DiscordPHP&#039;s
 {@see DiscordAbstractRepository} behaviour (keyed, cached collection of
-Parts) backed by {@see \MTG\Http\Http} and MTG {@see \MTG\Http\Endpoint}s
-instead of the Discord API. Concrete repositories ({@see CardRepository},
-{@see SetRepository}) declare their endpoint map and Part class.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Repository-CardRepository.html"><abbr title="\MTG\Repository\CardRepository">CardRepository</abbr></a></dt><dd>Reads the API&#039;s `cards` endpoint — list/search with query filters and
-pagination, and fetch a single card by id — hydrating {@see Card} parts.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Repository-SetRepository.html"><abbr title="\MTG\Repository\SetRepository">SetRepository</abbr></a></dt><dd>Reads the API&#039;s `sets` endpoint — list sets, fetch one by code, and
-generate a booster pack from a set — hydrating {@see Set} parts.</dd>    </dl>
+Parts) backed by MTGJSON — the {@see \MTG\Http\Http} client for the small
+API files, and the local {@see Database} build for cards and sets.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Repository-CardRepository.html"><abbr title="\MTG\Repository\CardRepository">CardRepository</abbr></a></dt><dd>Card printings from MTGJSON&#039;s AllPrintings build — search with any
+{@see CardQuery} filter, and fetch one by its MTGJSON `uuid` — hydrating
+{@see Card} parts with their identifiers, legalities, rulings, foreign
+data and purchase URLs.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Repository-DeckRepository.html"><abbr title="\MTG\Repository\DeckRepository">DeckRepository</abbr></a></dt><dd>Preconstructed decks from the MTGJSON API: the deck list
+(`DeckList.json`) to search, and one deck with its cards
+(`decks/{fileName}.json`) to fetch, hydrating {@see Deck} parts.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MTG-Repository-SetRepository.html"><abbr title="\MTG\Repository\SetRepository">SetRepository</abbr></a></dt><dd>Sets from MTGJSON&#039;s AllPrintings build — search them, fetch one by code,
+and open booster packs from their booster configurations — hydrating
+{@see Set} parts with their name translations.</dd>    </dl>
 
     <h4 id="toc-traits">
         Traits
@@ -149,7 +157,9 @@ generate a booster pack from a set — hydrating {@see Set} parts.</dd>    </dl>
             <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/MTG-Repository-AbstractRepositoryTrait.html"><abbr title="\MTG\Repository\AbstractRepositoryTrait">AbstractRepositoryTrait</abbr></a></dt><dd>Shared implementation for every MTG repository: DiscordPHP&#039;s
 `AbstractRepositoryTrait` ported so the collection is keyed and cached the
 same way, but backed by {@see \MTG\Http\Http} and MTG
-{@see \MTG\Http\Endpoint}s. Consumed by {@see AbstractRepository}.</dd>    </dl>
+{@see \MTG\Http\Endpoint}s. Consumed by {@see AbstractRepository}.</dd>        <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/MTG-Repository-DatabaseRepositoryTrait.html"><abbr title="\MTG\Repository\DatabaseRepositoryTrait">DatabaseRepositoryTrait</abbr></a></dt><dd>`fetch()`, `fresh()` and `freshen()` for repositories answered from the
+local MTGJSON build instead of an HTTP endpoint. MTGJSON serves cards and
+sets only inside whole files, so there is no per-item route to call.</dd>    </dl>
 
 
 
