@@ -21,12 +21,14 @@ use Discord\Repository\SoundRepository;
 use Discord\Repository\StickerPackRepository;
 use Discord\Repository\UserRepository;
 use MTG\Repository\CardRepository;
+use MTG\Repository\DeckRepository;
 use MTG\Repository\SetRepository;
 
 /**
  * The DiscordPHP {@see \Discord\Parts\User\Client} extended so the MTG
- * repositories ({@see CardRepository}, {@see SetRepository}) hang off the same
- * client the rest of the bot uses. Held by {@see MTG} as `$client`.
+ * repositories ({@see CardRepository}, {@see SetRepository},
+ * {@see DeckRepository}) hang off the same client the rest of the bot uses.
+ * Held by {@see MTG} as `$client`.
  *
  * @see \Discord\Parts\User\Client The DiscordPHP client this extends
  *
@@ -46,5 +48,6 @@ class Client extends DiscordClient
         'users' => UserRepository::class,
         'cards' => CardRepository::class,
         'sets' => SetRepository::class,
+        'decks' => DeckRepository::class,
     ];
 }

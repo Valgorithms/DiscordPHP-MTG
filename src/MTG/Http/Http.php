@@ -27,10 +27,17 @@ use React\Promise\PromiseInterface;
 use SplQueue;
 
 /**
- * HTTP client for the "Magic: The Gathering Developers" REST API, built the
- * same way DiscordPHP talks to `discord.com` (rate-limit buckets, driver,
- * retry) but pointed at `api.magicthegathering.io`. The API is read-only and
- * unauthenticated, so no token is required.
+ * HTTP client for the MTGJSON v5 API, built the same way DiscordPHP talks to
+ * `discord.com` (buckets, driver, retry) but pointed at
+ * `mtgjson.com/api/v5`. The API is read-only and unauthenticated, so no token
+ * is required. Responses are MTGJSON's `{"meta": {...}, "data": ...}`
+ * wrapper, decoded.
+ *
+ * Requests are buffered (16 MiB by default in react/http), which covers every
+ * small file; the bulk files are streamed separately by
+ * {@see \MTG\Database\Database}.
+ *
+ * @link https://mtgjson.com/getting-started/
  *
  * @see \Discord\Http\Http The DiscordPHP transport this mirrors
  *
@@ -50,34 +57,26 @@ class Http implements HttpInterface
     public const VERSION = 'v1.0.0';
 
     /**
-     * Current MTG HTTP API version.
+     * Current MTGJSON API version.
      *
      * @var string
      */
-    public const HTTP_API_VERSION = 1;
+    public const HTTP_API_VERSION = 5;
 
     /**
-     * MTG API base URL.
+     * MTGJSON API base URL.
      *
      * @var string
      */
-    public const BASE_URL = 'https://api.magicthegathering.io/v'.self::HTTP_API_VERSION;
+    public const BASE_URL = 'https://mtgjson.com/api/v'.self::HTTP_API_VERSION;
 
     /**
-     * Authentication token. Empty for the MTG API, which is unauthenticated —
+     * Authentication token. Empty for MTGJSON, which is unauthenticated —
      * kept only so the shared {@see HttpTrait} plumbing has something to read.
      *
      * @var string
      */
     private $token;
-
-    /**
-     * Optional `X-Api-Key` for the MTG API. Supplying one raises the per-hour
-     * request allowance; without it the API still works at the anonymous limit.
-     *
-     * @var string|null
-     */
-    private ?string $apiKey;
 
     /**
      * Logger for HTTP requests.
@@ -152,25 +151,23 @@ class Http implements HttpInterface
     /**
      * Http wrapper constructor.
      *
-     * @param string               $token  Unused by the MTG API; pass `''`.
+     * @param string               $token  Unused by MTGJSON; pass `''`.
      * @param LoopInterface        $loop
      * @param LoggerInterface      $logger
      * @param DriverInterface|null $driver
-     * @param string|null          $apiKey Optional MTG API key (`X-Api-Key`) for a higher rate limit.
      */
-    public function __construct(string $token, LoopInterface $loop, LoggerInterface $logger, ?DriverInterface $driver = null, ?string $apiKey = null)
+    public function __construct(string $token, LoopInterface $loop, LoggerInterface $logger, ?DriverInterface $driver = null)
     {
         $this->token = $token;
         $this->loop = $loop;
         $this->logger = $logger;
         $this->driver = $driver;
-        $this->apiKey = ($apiKey === null || $apiKey === '') ? null : $apiKey;
         $this->queue = new SplQueue();
         $this->unboundQueue = new SplQueue();
     }
 
     /**
-     * Identifies this client to the MTG API as DiscordPHP-MTG rather than
+     * Identifies this client to MTGJSON as DiscordPHP-MTG rather than
      * borrowing the generic DiscordPHP-HTTP agent string.
      */
     public function getUserAgent(): string
@@ -200,13 +197,10 @@ class Http implements HttpInterface
 
         $baseHeaders = ['User-Agent' => $this->getUserAgent()];
 
-        // The MTG API is unauthenticated; only send auth headers when a value is
-        // actually present so the Discord bot token never leaks to a third party.
+        // MTGJSON is unauthenticated; only send a token when one is actually
+        // present so the Discord bot token never leaks to a third party.
         if ($this->token !== '') {
             $baseHeaders['Authorization'] = $this->token;
-        }
-        if ($this->apiKey !== null) {
-            $baseHeaders['X-Api-Key'] = $this->apiKey;
         }
 
         if (! is_null($content) && ! isset($headers['Content-Type'])) {

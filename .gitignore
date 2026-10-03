@@ -19,3 +19,6 @@ phpunit.log
 # phpDocumentor toolchain, installed by the docs workflow via
 # composer create-project discord-php/phpdoc-tool
 /phpdoc-tool
+
+# Runtime data: the MTGJSON AllPrintings build (~700 MB) and traces
+/var/

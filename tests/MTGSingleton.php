@@ -35,8 +35,13 @@ class MTGSingleton
     {
         $loop = Loop::get();
 
-        $redis = (new Clue\React\Redis\Factory($loop))->createLazyClient('localhost:6379');
-        $cache = new WyriHaximus\React\Cache\Redis($redis);
+        // Redis when it is running; DiscordPHP's in-memory cache otherwise.
+        $cache = null;
+        if ($socket = @fsockopen('localhost', 6379, $errno, $errstr, 0.2)) {
+            fclose($socket);
+            $redis = (new Clue\React\Redis\Factory($loop))->createLazyClient('localhost:6379');
+            $cache = new WyriHaximus\React\Cache\Redis($redis);
+        }
 
         //$cache = new WyriHaximus\React\Cache\Filesystem(React\Filesystem\Filesystem::create($loop), getenv('RUNNER_TEMP').DIRECTORY_SEPARATOR);
 
@@ -51,12 +56,14 @@ class MTGSingleton
         $handler->setFormatter($formatter);
         $logger->pushHandler($handler);
 
-        $mtg = new MTG([
+        $mtg = new MTG(array_filter([
             'token' => getenv('MTG_TOKEN'),
             'loop' => $loop,
             'logger' => $logger,
             'cache' => $cache,
-        ]);
+            // Opened on first use, so a build the Database tests already downloaded is reused.
+            'mtgjson' => ['database' => mtgjsonDatabasePath(), 'refresh_interval' => 0, 'preload' => false],
+        ], fn ($option) => $option !== null));
 
         $e = null;
 

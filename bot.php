@@ -135,6 +135,10 @@ $mtg = new MTG([
     'useTransportCompression' => false, // Disable zlib-stream
     'usePayloadCompression' => true, // RFC1950 2.2
     'disableVoiceClient' => true, // Disable voice client
+    'mtgjson' => [
+        // MTGJSON's AllPrintings SQLite build (~700 MB), downloaded on first run and refreshed daily.
+        'database' => getenv('MTGJSON_DATABASE') ?: $baseDir.'/var/mtgjson/AllPrintings.sqlite',
+    ],
     //'disabledEvents' => [Event::GUILD_CREATE],
     //'loadAllMembers' => true,
     /*
@@ -296,6 +300,15 @@ $func = function (MTG $mtg) {
                             ])
                         )
                     );
+                }, function (\Throwable $e) use ($mtg, $interaction): PromiseInterface {
+                    // A bad filter (unknown format, non-numeric cmc, …) is the user's to fix; anything else is logged.
+                    if (! $e instanceof \InvalidArgumentException) {
+                        $mtg->logger->warning('card_search failed: '.$e->getMessage());
+                    }
+
+                    return $interaction->updateOriginalResponse(MTG::createBuilder(true)->setContent(
+                        $e instanceof \InvalidArgumentException ? 'Invalid search: '.$e->getMessage() : 'The card search failed. Please try again later.'
+                    ));
                 })
             );
 
@@ -306,21 +319,21 @@ $func = function (MTG $mtg) {
                 /** @var Option $option_name */
                 $option_name
                     ->setName('name')
-                    ->setDescription('nissa, worldwaker|jace|ajani, caller.')
+                    ->setDescription('Part of a name; | for alternatives, "quotes" for exact: nissa, worldwaker|jace')
                     ->setType(Option::STRING);
 
                 $option_cmc = $mtg->getFactory()->part(Option::class);
                 /** @var Option $option_cmc */
                 $option_cmc
                     ->setName('cmc')
-                    ->setDescription('Converted mana cost.')
+                    ->setDescription('Mana value.')
                     ->setType(Option::INTEGER);
-                
+
                 $option_colorIdentity = $mtg->getFactory()->part(Option::class);
                 /** @var Option $option_colorIdentity */
                 $option_colorIdentity
                     ->setName('color_identity')
-                    ->setDescription('W, U, B, R, G.')
+                    ->setDescription('W, U, B, R, G or C; comma for and, | for or: U,R|G.')
                     ->setType(Option::STRING);
 
                 $option_types = $mtg->getFactory()->part(Option::class);
@@ -341,14 +354,14 @@ $func = function (MTG $mtg) {
                 /** @var Option $options_gameFormat */
                 $options_gameFormat
                     ->setName('game_format')
-                    ->setDescription('Standard, Modern, Legacy, Vintage, Commander.')
+                    ->setDescription('Standard, Pioneer, Modern, Legacy, Vintage, Pauper, Commander, …')
                     ->setType(Option::STRING);
 
                 $options_contains = $mtg->getFactory()->part(Option::class);
                 /** @var Option $options_contains */
                 $options_contains
                     ->setName('contains')
-                    ->setDescription('Filter cards based on whether or not they have a specific field available (like imageUrl).')
+                    ->setDescription('Only cards with these fields, e.g. flavorText,power or imageUrl.')
                     ->setType(Option::STRING);
 
                 $options_multiverseid = $mtg->getFactory()->part(Option::class);
@@ -368,7 +381,7 @@ $func = function (MTG $mtg) {
                 $builder = CommandBuilder::new()
                     ->setName($name)
                     ->setType(Command::CHAT_INPUT)
-                    ->setDescription('Search for a card. See docs.magicthegathering.io/#api_v1cards_list for details.')
+                    ->setDescription('Search for a Magic: The Gathering card (data from MTGJSON).')
                     ->setContext([Interaction::CONTEXT_TYPE_GUILD, Interaction::CONTEXT_TYPE_BOT_DM, Interaction::CONTEXT_TYPE_PRIVATE_CHANNEL])
                     ->addIntegrationType(Application::INTEGRATION_TYPE_GUILD_INSTALL)
                     ->addIntegrationType(Application::INTEGRATION_TYPE_USER_INSTALL)

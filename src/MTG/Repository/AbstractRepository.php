@@ -15,15 +15,17 @@ namespace MTG\Repository;
 
 use Discord\Discord;
 use Discord\Repository\AbstractRepository as DiscordAbstractRepository;
+use MTG\Database\Database;
 use MTG\Http\Http;
 use MTG\MTG;
 
 /**
  * Base class for the MTG read-only repositories: DiscordPHP's
  * {@see DiscordAbstractRepository} behaviour (keyed, cached collection of
- * Parts) backed by {@see \MTG\Http\Http} and MTG {@see \MTG\Http\Endpoint}s
- * instead of the Discord API. Concrete repositories ({@see CardRepository},
- * {@see SetRepository}) declare their endpoint map and Part class.
+ * Parts) backed by MTGJSON — the {@see \MTG\Http\Http} client for the small
+ * API files, and the local {@see Database} build for cards and sets.
+ * Concrete repositories ({@see CardRepository}, {@see SetRepository},
+ * {@see DeckRepository}) declare their endpoint map and Part class.
  *
  * @see \Discord\Repository\AbstractRepository The upstream this extends
  *
@@ -43,6 +45,13 @@ abstract class AbstractRepository extends DiscordAbstractRepository
     protected $mtg_http;
 
     /**
+     * The local MTGJSON build.
+     *
+     * @var Database
+     */
+    protected $database;
+
+    /**
      * AbstractRepository constructor.
      *
      * @param MTG|Discord $discord
@@ -52,5 +61,6 @@ abstract class AbstractRepository extends DiscordAbstractRepository
     {
         parent::__construct($discord, $vars);
         $this->mtg_http = $discord->getMtgHttpClient();
+        $this->database = $discord->getDatabase();
     }
 }

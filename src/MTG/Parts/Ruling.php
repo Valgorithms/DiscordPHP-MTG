@@ -16,16 +16,15 @@ namespace MTG\Parts;
 use Discord\Parts\Part;
 
 /**
- * One entry from a {@see Card}'s `rulings` array — an official clarification,
- * with the date it was issued. Not a standalone endpoint; it only appears
- * inside the card response.
+ * One entry from a {@see Card}'s `rulings` — an official clarification,
+ * with the date it was issued.
  *
- * @link https://docs.magicthegathering.io/#api_v1cards_get Card object (see the `rulings` field)
+ * @link https://mtgjson.com/data-models/rulings/ Rulings model
  *
  * @see \MTG\Parts\Card The parent object
  *
- * @property string $date The date the ruling was issued.
- * @property string $text The text content of the ruling.
+ * @property string $date The release date in ISO 8601 format for the rule.
+ * @property string $text The text ruling of the card.
  *
  * @since 0.3.0
  */

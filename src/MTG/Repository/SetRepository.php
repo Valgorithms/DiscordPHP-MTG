@@ -14,41 +14,40 @@ declare(strict_types=1);
 namespace MTG\Repository;
 
 use Discord\Helpers\ExCollectionInterface;
-use Discord\Http\Endpoint;
-use MTG\Http\Endpoint as HttpEndpoint;
+use MTG\Database\Booster;
+use MTG\Database\SetQuery;
+use MTG\MTG;
 use MTG\Parts\Card;
 use MTG\Parts\Set;
 use React\Promise\PromiseInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use WeakReference;
 
-use function Discord\studly;
 use function React\Promise\reject;
 
 /**
- * Reads the API's `sets` endpoint — list sets, fetch one by code, and
- * generate a booster pack from a set — hydrating {@see Set} parts.
+ * Sets from MTGJSON's AllPrintings build — search them, fetch one by code,
+ * and open booster packs from their booster configurations — hydrating
+ * {@see Set} parts with their name translations.
  *
- * @link https://docs.magicthegathering.io/#api_v1sets_list List sets
- * @link https://docs.magicthegathering.io/#api_v1sets_get Fetch one set by code
- * @link https://docs.magicthegathering.io/#api_v1booster_get Generate a booster pack
+ * @link https://mtgjson.com/data-models/set/ Set model
+ * @link https://mtgjson.com/data-models/booster/ Booster models
  *
  * @since 0.3.0
  */
 class SetRepository extends AbstractRepository
 {
-    /**
-     * @inheritDoc
-     */
-    protected $discrim = 'name';
+    use DatabaseRepositoryTrait;
 
     /**
      * @inheritDoc
      */
-    protected $endpoints = [
-        'all' => HttpEndpoint::SETS,
-        'get' => HttpEndpoint::SET,
-    ];
+    protected $discrim = 'code';
+
+    /**
+     * MTGJSON has no per-set route that fits in memory; see {@see DatabaseRepositoryTrait}.
+     *
+     * @inheritDoc
+     */
+    protected $endpoints = [];
 
     /**
      * @inheritDoc
@@ -56,116 +55,159 @@ class SetRepository extends AbstractRepository
     protected $class = Set::class;
 
     /**
-     * Returns the id attribute.
+     * Searches sets. See {@see SetQuery} for every filter; the common ones
+     * are `name` and `block` (partial), `code` and `type` (exact), with
+     * `orderBy` (default `-releaseDate`), `page` and `pageSize` (1-100,
+     * default 100).
      *
-     * @return string The id attribute.
-     */
-    protected function getIdAttribute(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * Fetch card information by query parameters.
+     * @param Card|Set|array $params Filters, or the Card or Set whose set to find.
      *
-     * @param Card|Set|array $params
-     * @param array          $params['name']  The full name of the set, e.g. "Masters 25".
-     *                                        This is the same as the `setName` attribute of the Card.
-     * @param array          $params['block'] The block name, e.g. "Core Set".
-     *
-     * @return PromiseInterface<ExCollectionInterface<Set>|Set[]>
+     * @return PromiseInterface<ExCollectionInterface<Set>> Keyed by code. Rejects with \InvalidArgumentException on a bad filter.
      *
      * @since 0.5.0
      */
-    public function getSets($params = []): PromiseInterface
+    public function getSets(Card|Set|array $params = []): PromiseInterface
     {
         if ($params instanceof Card) {
-            $params = ['name' => $params->setName];
+            $params = ['code' => (string) $params->setCode];
         } elseif ($params instanceof Set) {
-            $params = $params->jsonSerialize();
-        } else {
-            // Convert underscore_case keys to camelCase
-            foreach ($params as $key => $value) {
-                $newKey = lcfirst(studly($key));
-                unset($params[$key]);
-                $params[$newKey] = $value;
-            }
-
-            $resolver = new OptionsResolver();
-            $resolver
-                ->setDefined([
-                    'name',
-                    'block',
-                ])
-                ->setAllowedTypes('name', ['string'])
-                ->setAllowedTypes('block', ['string']);
-
-            $params = $resolver->resolve($params);
+            $params = ['code' => (string) $params->code];
         }
 
-        $endpoint = new Endpoint($this->endpoints['all']);
+        return $this->database->ready()->then(
+            fn () => $this->hydrate((new SetQuery($this->database))->filter($params)->get())
+        );
+    }
 
-        foreach ($params as $key => $value) {
-            if ($value === null || $value === '') {
-                continue;
-            }
-            $endpoint->addQuery($key, $value);
-        }
+    /**
+     * Loads every set into the repository.
+     *
+     * @param array $queryparams Unused.
+     *
+     * @return PromiseInterface<static>
+     */
+    public function freshen(array $queryparams = []): PromiseInterface
+    {
+        return $this->database->ready()->then(function () {
+            $this->hydrate(array_map(
+                fn (array $row) => $this->database->decode('sets', $row),
+                $this->database->select('SELECT * FROM "sets"')
+            ));
 
-        return $this->mtg_http->get($endpoint)->then(function ($response) {
-            $response = $response->sets;
-
-            $collection = ($this->discord->getCollectionClass())::for($this->class, $this->discrim);
-
-            foreach ($response as $setData) {
-                $set = $this->factory->create($this->class, array_merge($this->vars, (array) $setData), true);
-                $set->created = true;
-                $this->items[$set->{$this->discrim}] = WeakReference::create($set);
-                $this->cache->set($set->{$this->discrim}, $set);
-                $collection->pushItem($set);
-            }
-
-            return $collection;
+            return $this;
         });
     }
 
     /**
-     * Opens a booster pack for a set (`GET /sets/:id/booster`): the API rolls a
-     * pack against that set's booster configuration and returns the cards.
-     *
-     * Note: the public `api.magicthegathering.io` host currently answers this
-     * route with HTTP 400 (its dataset no longer carries booster configs); the
-     * call is correct and works against a self-hosted mtg-api instance.
+     * The booster types a set can open (`play`, `draft`, `collector`, …),
+     * the one {@see generateBooster()} picks by default first.
      *
      * @param Set|string $set A {@see Set} or a set code (e.g. `"KTK"`).
      *
-     * @return PromiseInterface<ExCollectionInterface<Card>> The rolled cards. Never cached — a pack is random.
+     * @return PromiseInterface<string[]> Empty when MTGJSON has no booster data for the set.
      *
-     * @link https://docs.magicthegathering.io/#api_v1booster_get
-     *
-     * @since 1.1.0
+     * @since 1.0.0
      */
-    public function generateBooster(Set|string $set): PromiseInterface
+    public function getBoosterTypes(Set|string $set): PromiseInterface
     {
-        $code = $set instanceof Set ? (string) $set->code : $set;
+        $code = strtoupper($set instanceof Set ? (string) $set->code : $set);
+
+        return $this->database->ready()->then(fn () => (new Booster($this->database))->types($code));
+    }
+
+    /**
+     * Opens a booster pack for a set: a pack layout is rolled against the
+     * set's MTGJSON booster configuration and each slot is filled from its
+     * weighted sheet. Cards from foil sheets have `isFoil` set.
+     *
+     * @param Set|string  $set  A {@see Set} or a set code (e.g. `"KTK"`).
+     * @param string|null $type The booster type (see {@see getBoosterTypes()}); defaults to the set's play, draft or default booster.
+     *
+     * @return PromiseInterface<ExCollectionInterface<Card>> The pack. Not keyed — a pack can hold the same card twice. Never cached.
+     *
+     * @link https://mtgjson.com/data-models/booster/
+     *
+     * @since 0.10.1
+     */
+    public function generateBooster(Set|string $set, ?string $type = null): PromiseInterface
+    {
+        $code = strtoupper($set instanceof Set ? (string) $set->code : $set);
 
         if ($code === '') {
             return reject(new \InvalidArgumentException('A set code is required to generate a booster.'));
         }
 
-        $endpoint = new HttpEndpoint(HttpEndpoint::SETS_BOOSTER);
-        $endpoint->bindAssoc(['id' => $code]);
+        /** @var MTG $mtg */
+        $mtg = $this->discord;
 
-        return $this->mtg_http->get($endpoint)->then(function ($response): ExCollectionInterface {
-            // No discriminator: a pack can contain duplicate cards (basic lands),
-            // and keying by `id` would silently collapse them.
-            $collection = ($this->discord->getCollectionClass())::for(Card::class, null);
+        return $this->database->ready()->then(function () use ($code, $type, $mtg) {
+            $booster = new Booster($this->database);
+            $type ??= $booster->types($code)[0] ?? throw new \InvalidArgumentException("Set {$code} has no booster configuration in MTGJSON.");
+            $pack = $booster->open($code, $type);
 
-            foreach ($response->cards ?? [] as $cardData) {
-                $collection->pushItem($this->factory->create(Card::class, array_merge($this->vars, (array) $cardData), true));
+            return $mtg->cards->getCardsByUuid(array_column($pack, 'uuid'))->then(function (ExCollectionInterface $cards) use ($pack) {
+                $collection = ($this->discord->getCollectionClass())::for(Card::class, null);
+
+                foreach ($pack as ['uuid' => $uuid, 'foil' => $foil]) {
+                    if ($card = $cards->get('uuid', $uuid)) {
+                        $card = clone $card;
+                        if ($foil) {
+                            $card->isFoil = true;
+                        }
+                        $collection->pushItem($card);
+                    }
+                }
+
+                return $collection;
+            });
+        });
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function lookup(string $id): ?Set
+    {
+        $rows = $this->database->select('SELECT * FROM "sets" WHERE "code" = ?', [strtoupper($id)]);
+
+        return $rows ? $this->hydrate([$this->database->decode('sets', $rows[0])], false)->first() : null;
+    }
+
+    /**
+     * Builds Set parts from decoded `sets` rows, attaching their name
+     * translations.
+     *
+     * @param array[] $rows  Decoded rows.
+     * @param bool    $cache Whether to cache the parts.
+     *
+     * @return ExCollectionInterface<Set> Keyed by code.
+     */
+    protected function hydrate(array $rows, bool $cache = true): ExCollectionInterface
+    {
+        $collection = ($this->discord->getCollectionClass())::for(Set::class, 'code');
+
+        $translations = [];
+        if ($codes = array_column($rows, 'code')) {
+            foreach ($this->database->select(
+                'SELECT "code", "language", "translation" FROM "setTranslations" WHERE "code" IN ('.implode(', ', array_fill(0, count($codes), '?')).')',
+                $codes
+            ) as $row) {
+                if ($row['translation'] !== null && $row['translation'] !== '') {
+                    $translations[$row['code']][$row['language']] = $row['translation'];
+                }
+            }
+        }
+
+        foreach ($rows as $row) {
+            $set = $this->factory->part(Set::class, $row + ['translations' => $translations[$row['code']] ?? []], true);
+
+            if ($cache) {
+                $this->cache->set($row['code'], $set);
             }
 
-            return $collection;
-        });
+            $collection->pushItem($set);
+        }
+
+        return $collection;
     }
 }

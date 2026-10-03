@@ -16,16 +16,16 @@ namespace MTG\Parts;
 use Discord\Parts\Part;
 
 /**
- * One entry from a {@see Card}'s `legalities` array — whether the card is
- * `Legal` / `Banned` / `Restricted` in a given format. Not a standalone
- * endpoint; it only appears inside the card response.
+ * One entry of a {@see Card}'s `legalities` — its status in one format.
+ * MTGJSON keys legalities by format (`{"commander": "Legal"}`); each pair
+ * becomes one of these. Formats where the card has no status are left out.
  *
- * @link https://docs.magicthegathering.io/#api_v1cards_get Card object (see the `legalities` field)
+ * @link https://mtgjson.com/data-models/legalities/ Legalities model
  *
  * @see \MTG\Parts\Card The parent object
  *
- * @property string $format   The format of the card.
- * @property string $legality The legality status of the card in the format.
+ * @property string $format   The format, as MTGJSON names it (`commander`, `paupercommander`, `standard`, …).
+ * @property string $legality The card's status in the format (`Legal`, `Banned`, `Restricted`, `Not Legal`).
  *
  * @since 0.3.0
  */

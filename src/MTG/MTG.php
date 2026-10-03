@@ -13,30 +13,38 @@ declare(strict_types=1);
 
 namespace MTG;
 
-use Discord\Discord;
 use Discord\MessageCommandClient;
 use Discord\Http\Drivers\React;
+use Discord\Parts\User\Client as DiscordClient;
 use Discord\Stats;
+use MTG\Database\Database;
 use MTG\Http\Endpoint;
 use MTG\Http\Http;
 use MTG\Repository\CardRepository;
+use MTG\Repository\DeckRepository;
 use MTG\Repository\SetRepository;
-use Psr\Log\NullLogger;
+use React\Http\Browser;
 use React\Promise\PromiseInterface;
+use React\Socket\Connector;
 
 /**
- * The MTG client class — a DiscordPHP {@see MessageCommandClient} extended with
- * an async HTTP client for the "Magic: The Gathering Developers" REST API and
- * the card / set repositories that read it.
+ * The MTG client class — a DiscordPHP {@see MessageCommandClient} extended
+ * with MTGJSON: an async HTTP client for the MTGJSON v5 API, a local copy of
+ * its AllPrintings SQLite build for card and set searches, and the card, set
+ * and deck repositories that read them.
+ *
+ * @link https://mtgjson.com/
  *
  * @see \Discord\MessageCommandClient The DiscordPHP client this extends
  * @see CardRepository
  * @see SetRepository
+ * @see DeckRepository
  *
  * @version 1.0.0
  *
  * @property CardRepository $cards
  * @property SetRepository  $sets
+ * @property DeckRepository $decks
  */
 class MTG extends MessageCommandClient
 {
@@ -54,6 +62,13 @@ class MTG extends MessageCommandClient
     protected $mtg_http;
 
     /**
+     * The local MTGJSON build.
+     *
+     * @var Database
+     */
+    protected $database;
+
+    /**
      * The extended Client class.
      *
      * @var Client Extended Discord client.
@@ -61,74 +76,185 @@ class MTG extends MessageCommandClient
     protected $client;
 
     /**
-     * @param array $options Options passed straight to the DiscordPHP client, plus
-     *                       `socket_options` for the HTTP driver and an optional
-     *                       `mtg_api_key` (`X-Api-Key`, raises the MTG API rate
-     *                       limit). After the parent boots, the MTG HTTP client,
-     *                       the {@see Client} part and the {@see Stats} tracker
-     *                       are wired up.
+     * @param array $options Options passed straight to the DiscordPHP client
+     *                       (`socket_options` also configures the MTGJSON
+     *                       connections), plus an optional `mtgjson` array:
+     *                       - `database` (string): where the AllPrintings
+     *                       build is kept; defaults to
+     *                       `{sys_get_temp_dir()}/mtgjson/AllPrintings.sqlite`.
+     *                       About 700 MB; the first run downloads ~250 MB.
+     *                       - `refresh_interval` (int): seconds between
+     *                       checks for a new build; default one day, `0`
+     *                       never refreshes.
+     *                       - `preload` (bool): open (or download) the build
+     *                       at startup rather than on the first search;
+     *                       default true.
      */
     public function __construct(array $options = [])
     {
+        $mtgjson = (array) ($options['mtgjson'] ?? []);
+        unset($options['mtgjson']);
+
         parent::__construct($options);
 
+        $socketOptions = $options['socket_options'] ?? [];
+
         $this->mtg_http = new Http(
-            '', // The MTG API is unauthenticated — never forward the Discord bot token to it.
+            '', // MTGJSON is unauthenticated — never forward the Discord bot token to it.
             $this->loop,
-            $this->options['logger'] ?? new NullLogger(),
-            new React($this->loop, $options['socket_options'] ?? []),
-            $options['mtg_api_key'] ?? null,
+            $this->logger,
+            new React($this->loop, $socketOptions),
+        );
+        $this->database = new Database(
+            $this->loop,
+            $this->logger,
+            $this->mtg_http,
+            new Browser(new Connector($socketOptions, $this->loop), $this->loop),
+            (string) ($mtgjson['database'] ?? sys_get_temp_dir().DIRECTORY_SEPARATOR.'mtgjson'.DIRECTORY_SEPARATOR.Database::FILE),
+            (int) ($mtgjson['refresh_interval'] ?? Database::DEFAULT_REFRESH_INTERVAL),
         );
         $this->client = $this->factory->part(Client::class, (array) $this->client);
         $this->stats = Stats::new($this);
+
+        if ($mtgjson['preload'] ?? true) {
+            $this->loop->futureTick(fn () => $this->database->ready()->then(null, function (\Throwable $e): void {
+                $this->logger->error('The MTGJSON build is not available: '.$e->getMessage());
+            }));
+        }
     }
 
     /**
-     * Fetches the API's list of all card types (e.g. `Creature`, `Instant`).
+     * Fetches every card type with its valid subtypes and supertypes, keyed
+     * by lower-case type (`artifact`, `creature`, …).
      *
-     * @link https://docs.magicthegathering.io/#api_v1types_list
+     * @link https://mtgjson.com/data-models/card-types/
+     *
+     * @return PromiseInterface<array<string, array{subTypes: string[], superTypes: string[]}>>
+     *
+     * @since 1.0.0
+     */
+    public function getCardTypes(): PromiseInterface
+    {
+        return $this->mtg_http->get(new Endpoint(Endpoint::CARD_TYPES))->then(
+            static fn ($response) => json_decode(json_encode($response->data ?? []), true)
+        );
+    }
+
+    /**
+     * Fetches the list of all card types (e.g. `Creature`, `Instant`).
+     *
+     * @link https://mtgjson.com/data-models/card-types/
      *
      * @return PromiseInterface<string[]>
      */
     public function getTypes(): PromiseInterface
     {
-        return $this->mtg_http->get(new Endpoint(Endpoint::TYPES))->then(static fn ($response) => (array) ($response->types ?? []));
+        return $this->getCardTypes()->then(static fn (array $types) => array_map('ucfirst', array_keys($types)));
     }
 
     /**
-     * Fetches the API's list of all card subtypes (e.g. `Elf`, `Equipment`).
+     * Fetches the list of all card subtypes (e.g. `Elf`, `Equipment`).
      *
-     * @link https://docs.magicthegathering.io/#api_v1subtypes_list
+     * @link https://mtgjson.com/data-models/card-types/
      *
      * @return PromiseInterface<string[]>
      */
     public function getSubtypes(): PromiseInterface
     {
-        return $this->mtg_http->get(new Endpoint(Endpoint::SUBTYPES))->then(static fn ($response) => (array) ($response->subtypes ?? []));
+        return $this->getCardTypes()->then(static fn (array $types) => self::mergeTypes($types, 'subTypes'));
     }
 
     /**
-     * Fetches the API's list of all card supertypes (e.g. `Legendary`, `Snow`).
+     * Fetches the list of all card supertypes (e.g. `Legendary`, `Snow`).
      *
-     * @link https://docs.magicthegathering.io/#api_v1supertypes_list
+     * @link https://mtgjson.com/data-models/card-types/
      *
      * @return PromiseInterface<string[]>
      */
     public function getSupertypes(): PromiseInterface
     {
-        return $this->mtg_http->get(new Endpoint(Endpoint::SUPERTYPES))->then(static fn ($response) => (array) ($response->supertypes ?? []));
+        return $this->getCardTypes()->then(static fn (array $types) => self::mergeTypes($types, 'superTypes'));
     }
 
     /**
-     * Fetches the API's list of all game formats (e.g. `Standard`, `Commander`).
+     * Lists the game formats MTGJSON tracks legality for, as it names them
+     * (e.g. `standard`, `commander`, `paupercommander`) — the values the
+     * `gameFormat` card filter takes.
      *
-     * @link https://docs.magicthegathering.io/#api_v1formats_list
+     * @link https://mtgjson.com/data-models/legalities/
      *
      * @return PromiseInterface<string[]>
      */
     public function getFormats(): PromiseInterface
     {
-        return $this->mtg_http->get(new Endpoint(Endpoint::FORMATS))->then(static fn ($response) => (array) ($response->formats ?? []));
+        return $this->database->ready()->then(
+            fn () => array_values(array_diff(array_keys($this->database->getColumns('cardLegalities')), ['uuid']))
+        );
+    }
+
+    /**
+     * Fetches the keyword lists: `abilityWords`, `keywordAbilities` and
+     * `keywordActions`.
+     *
+     * @link https://mtgjson.com/data-models/keywords/
+     *
+     * @return PromiseInterface<array<string, string[]>>
+     *
+     * @since 1.0.0
+     */
+    public function getKeywords(): PromiseInterface
+    {
+        return $this->mtg_http->get(new Endpoint(Endpoint::KEYWORDS))->then(
+            static fn ($response) => json_decode(json_encode($response->data ?? []), true)
+        );
+    }
+
+    /**
+     * Fetches every value MTGJSON's enumerated properties can hold, keyed by
+     * model then property (e.g. `card` → `rarity`).
+     *
+     * @link https://mtgjson.com/data-models/enum-values/
+     *
+     * @return PromiseInterface<array<string, array<string, string[]>>>
+     *
+     * @since 1.0.0
+     */
+    public function getEnumValues(): PromiseInterface
+    {
+        return $this->mtg_http->get(new Endpoint(Endpoint::ENUM_VALUES))->then(
+            static fn ($response) => json_decode(json_encode($response->data ?? []), true)
+        );
+    }
+
+    /**
+     * Fetches the current MTGJSON build's version and date.
+     *
+     * @link https://mtgjson.com/data-models/meta/
+     *
+     * @return PromiseInterface<array{date: string, version: string}>
+     *
+     * @since 1.0.0
+     */
+    public function getMeta(): PromiseInterface
+    {
+        return $this->mtg_http->get(new Endpoint(Endpoint::META))->then(
+            static fn ($response) => (array) ($response->data ?? [])
+        );
+    }
+
+    /**
+     * Sets the client part, but never back to a plain DiscordPHP one: the
+     * client DiscordPHP builds before this constructor swaps in
+     * {@see Client} re-installs itself once its application has loaded,
+     * which would drop the MTG repositories.
+     *
+     * @param DiscordClient $client The client part.
+     */
+    public function setClient(DiscordClient $client): void
+    {
+        if ($client instanceof Client || ! $this->client instanceof Client) {
+            parent::setClient($client);
+        }
     }
 
     /**
@@ -142,6 +268,34 @@ class MTG extends MessageCommandClient
     }
 
     /**
+     * Gets the local MTGJSON build.
+     *
+     * @return Database
+     *
+     * @since 1.0.0
+     */
+    public function getDatabase(): Database
+    {
+        return $this->database;
+    }
+
+    /**
+     * Merges one list out of every card type, sorted and unique.
+     *
+     * @param array  $types The card types.
+     * @param string $key   `subTypes` or `superTypes`.
+     *
+     * @return string[]
+     */
+    protected static function mergeTypes(array $types, string $key): array
+    {
+        $merged = array_unique(array_merge(...array_values(array_map(static fn (array $type) => $type[$key] ?? [], $types)) ?: [[]]));
+        sort($merged);
+
+        return $merged;
+    }
+
+    /**
      * Handles dynamic get calls to the client.
      *
      * @param string $name Variable name.
@@ -150,7 +304,7 @@ class MTG extends MessageCommandClient
      */
     public function __get(string $name)
     {
-        static $allowed = ['loop', 'options', 'logger', 'http', 'mtg_http', 'application_commands'];
+        static $allowed = ['loop', 'options', 'logger', 'http', 'mtg_http', 'database', 'application_commands'];
 
         if (in_array($name, $allowed)) {
             return $this->{$name};

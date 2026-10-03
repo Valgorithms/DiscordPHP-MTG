@@ -1,6 +1,6 @@
 {
     "name": "discord-php-extended/discordphp-mtg",
-    "description": "API Library for api.magicthegathering.io built on top of DiscordPHP.",
+    "description": "Magic: The Gathering library and bot for Discord, built on DiscordPHP, with card data from MTGJSON (mtgjson.com).",
     "license": "MIT",
     "authors": [
         {
@@ -9,8 +9,12 @@
         }
     ],
     "require": {
+        "php": "^8.3",
+        "ext-pdo_sqlite": "*",
+        "ext-zlib": "*",
         "team-reflex/discord-php": "* || dev-master",
-        "discord-php/http": "dev-master as 10.9.8"
+        "discord-php/http": "dev-master as 10.9.8",
+        "react/http": "^1.9"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3",

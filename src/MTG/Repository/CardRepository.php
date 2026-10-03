@@ -14,35 +14,60 @@ declare(strict_types=1);
 namespace MTG\Repository;
 
 use Discord\Helpers\ExCollectionInterface;
-use Discord\Http\Endpoint;
-use MTG\Http\Endpoint as HttpEndpoint;
+use MTG\Database\CardQuery;
 use MTG\Parts\Card;
 use React\Promise\PromiseInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use WeakReference;
-
-use function Discord\studly;
-use function React\Promise\reject;
-use function React\Promise\resolve;
 
 /**
- * Reads the API's `cards` endpoint — list/search with query filters and
- * pagination, and fetch a single card by id — hydrating {@see Card} parts.
+ * Card printings from MTGJSON's AllPrintings build — search with any
+ * {@see CardQuery} filter, and fetch one by its MTGJSON `uuid` — hydrating
+ * {@see Card} parts with their identifiers, legalities, rulings, foreign
+ * data and purchase URLs.
  *
- * @link https://docs.magicthegathering.io/#api_v1cards_list List / search cards
- * @link https://docs.magicthegathering.io/#api_v1cards_get Fetch one card by id
+ * MTGJSON serves cards only inside bulk files, so these are answered from
+ * the local {@see \MTG\Database\Database} copy rather than over HTTP.
+ *
+ * @link https://mtgjson.com/data-models/card/card-set/ Card (Set) model
  *
  * @since 0.3.0
  */
 class CardRepository extends AbstractRepository
 {
+    use DatabaseRepositoryTrait;
+
+    /**
+     * Tables holding one row of extra card data per uuid, by Card attribute.
+     *
+     * @var array<string, string>
+     */
+    public const ONE_PER_CARD = [
+        'identifiers' => 'cardIdentifiers',
+        'legalities' => 'cardLegalities',
+        'purchaseUrls' => 'cardPurchaseUrls',
+    ];
+
+    /**
+     * Tables holding a list of extra card data per uuid, by Card attribute,
+     * with their ordering.
+     *
+     * @var array<string, array{0: string, 1: string}>
+     */
+    public const MANY_PER_CARD = [
+        'rulings' => ['cardRulings', '"date", rowid'],
+        'foreignData' => ['cardForeignData', '"language", rowid'],
+    ];
+
     /**
      * @inheritDoc
      */
-    protected $endpoints = [
-        'all' => HttpEndpoint::CARDS,
-        'get' => HttpEndpoint::CARD,
-    ];
+    protected $discrim = 'uuid';
+
+    /**
+     * MTGJSON has no per-card route; see {@see DatabaseRepositoryTrait}.
+     *
+     * @inheritDoc
+     */
+    protected $endpoints = [];
 
     /**
      * @inheritDoc
@@ -50,177 +75,172 @@ class CardRepository extends AbstractRepository
     protected $class = Card::class;
 
     /**
-     * Fetch card information by query parameters.
+     * Searches card printings. See {@see CardQuery} for every filter;
+     * the common ones are `name`, `manaValue` (or `cmc`), `colors`,
+     * `colorIdentity`, `type`, `types`, `subtypes`, `rarity`, `setCode` (or
+     * `set`), `text`, `gameFormat` + `legality`, `multiverseId`, `contains`,
+     * `orderBy`, `random`, `page` and `pageSize` (1-100, default 1).
      *
-     * @param Card|array $params
+     * @param Card|array $params Filters, or a Card whose scalar and list attributes are used as filters.
      *
-     * @return PromiseInterface<ExCollectionInterface<Card>|Card[]>
+     * @return PromiseInterface<ExCollectionInterface<Card>> Keyed by uuid. Rejects with \InvalidArgumentException on a bad filter.
+     *
+     * @since 0.3.0
      */
     public function getCards(Card|array $params = []): PromiseInterface
     {
         if ($params instanceof Card) {
-            $params = $params->jsonSerialize();
-        } else {
-            // Convert underscore_case keys to camelCase
-            foreach ($params as $key => $value) {
-                $newKey = lcfirst(studly($key));
-                unset($params[$key]);
-                $params[$newKey] = $value;
-            }
-
-            $resolver = new OptionsResolver();
-            $resolver
-                ->setDefined([
-                    'name',
-                    'layout',
-                    'cmc',
-                    'colors',
-                    'colorIdentity',
-                    'type',
-                    'supertypes',
-                    'types',
-                    'subtypes',
-                    'rarity',
-                    'set',
-                    'setName',
-                    'text',
-                    'flavor',
-                    'artist',
-                    'number',
-                    'power',
-                    'toughness',
-                    'loyalty',
-                    'language',
-                    'gameFormat',
-                    'legality',
-                    'page',
-                    'pageSize',
-                    'orderBy',
-                    'random',
-                    'contains',
-                    'id',
-                    'multiverseid',
-                ])
-                ->setAllowedTypes('name', ['string'])
-                ->setAllowedTypes('layout', ['string'])
-                ->setAllowedTypes('colors', ['string'])
-                ->setAllowedTypes('colorIdentity', ['string'])
-                ->setAllowedTypes('supertypes', ['string'])
-                ->setAllowedTypes('types', ['string'])
-                ->setAllowedTypes('subtypes', ['string'])
-                ->setAllowedTypes('rarity', ['string'])
-                ->setAllowedTypes('set', ['string'])
-                ->setAllowedTypes('text', ['string'])
-                ->setAllowedTypes('artist', ['string'])
-                ->setAllowedTypes('number', ['string'])
-                ->setAllowedTypes('page', ['int'])
-                ->setAllowedTypes('pageSize', ['int'])
-                ->setAllowedTypes('orderBy', ['string'])
-                ->setDefaults([
-                    'pageSize' => 1,
-                ])
-                ->setAllowedValues('pageSize', fn ($value) => $value >= 1 && $value <= 100);
-
-            $params = $resolver->resolve($params);
+            $params = self::filtersFrom($params);
         }
 
-        $endpoint = new Endpoint($this->endpoints['all']);
+        return $this->database->ready()->then(
+            fn () => $this->hydrate((new CardQuery($this->database))->filter($params)->get())
+        );
+    }
 
-        foreach ($params as $key => $value) {
-            if ($value === null || $value === '') {
+    /**
+     * Gets card printings by their MTGJSON uuids. Unknown uuids are skipped.
+     *
+     * @param string[] $uuids
+     *
+     * @return PromiseInterface<ExCollectionInterface<Card>> One card per distinct uuid, keyed by uuid.
+     *
+     * @since 1.0.0
+     */
+    public function getCardsByUuid(array $uuids): PromiseInterface
+    {
+        return $this->database->ready()->then(fn () => $this->hydrate($this->rows(array_values(array_unique($uuids)))));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function lookup(string $id): ?Card
+    {
+        $rows = $this->rows([$id]);
+
+        return $rows ? $this->hydrate($rows, false)->first() : null;
+    }
+
+    /**
+     * Reads `cards` rows by uuid, with the set name.
+     *
+     * @param string[] $uuids
+     *
+     * @return array[] Decoded rows.
+     */
+    protected function rows(array $uuids): array
+    {
+        if (! $uuids) {
+            return [];
+        }
+
+        $rows = $this->database->select(
+            'SELECT "cards".*, "sets"."name" AS "setName" FROM "cards" LEFT JOIN "sets" ON "sets"."code" = "cards"."setCode"'
+            .' WHERE "cards"."uuid" IN ('.implode(', ', array_fill(0, count($uuids), '?')).')',
+            $uuids
+        );
+
+        return array_map(fn (array $row) => $this->database->decode('cards', $row), $rows);
+    }
+
+    /**
+     * Builds Card parts from decoded `cards` rows, attaching their extra data.
+     *
+     * @param array[] $rows  Decoded rows.
+     * @param bool    $cache Whether to cache the parts.
+     *
+     * @return ExCollectionInterface<Card> Keyed by uuid.
+     */
+    protected function hydrate(array $rows, bool $cache = true): ExCollectionInterface
+    {
+        $collection = ($this->discord->getCollectionClass())::for(Card::class, 'uuid');
+        $related = $this->related(array_values(array_unique(array_column($rows, 'uuid'))));
+
+        foreach ($rows as $row) {
+            $card = $this->factory->part(Card::class, $row + ($related[$row['uuid']] ?? []), true);
+
+            if ($cache) {
+                $this->cache->set($row['uuid'], $card);
+            }
+
+            $collection->pushItem($card);
+        }
+
+        return $collection;
+    }
+
+    /**
+     * Reads the identifiers, legalities, purchase URLs, rulings and foreign
+     * data of a set of cards.
+     *
+     * @param string[] $uuids
+     *
+     * @return array<string, array> Card attributes, by uuid.
+     */
+    protected function related(array $uuids): array
+    {
+        if (! $uuids) {
+            return [];
+        }
+
+        $in = '('.implode(', ', array_fill(0, count($uuids), '?')).')';
+        $related = [];
+
+        foreach (self::ONE_PER_CARD as $attribute => $table) {
+            foreach ($this->database->select("SELECT * FROM \"{$table}\" WHERE \"uuid\" IN {$in}", $uuids) as $row) {
+                $uuid = $row['uuid'];
+                $row = $this->database->decode($table, $row);
+                unset($row['uuid']);
+
+                if ($row) {
+                    $related[$uuid][$attribute] = $row;
+                }
+            }
+        }
+
+        foreach (self::MANY_PER_CARD as $attribute => [$table, $order]) {
+            foreach ($this->database->select("SELECT * FROM \"{$table}\" WHERE \"uuid\" IN {$in} ORDER BY {$order}", $uuids) as $row) {
+                $uuid = $row['uuid'];
+                $row = $this->database->decode($table, $row);
+                unset($row['uuid']);
+
+                $related[$uuid][$attribute][] = $row;
+            }
+        }
+
+        return $related;
+    }
+
+    /**
+     * Turns a Card's attributes into filters: scalars as they are, lists
+     * as `,`-joined terms that must all match. Nested data is skipped.
+     *
+     * @param Card $card
+     *
+     * @return array
+     */
+    protected static function filtersFrom(Card $card): array
+    {
+        $filters = [];
+
+        foreach ($card->getRawAttributes() as $key => $value) {
+            if (in_array($key, ['count', 'isFoil', 'isEtched'], true)) {
                 continue;
             }
-            $endpoint->addQuery($key, $value);
-        }
 
-        return $this->mtg_http->get($endpoint)->then(function ($response) {
-            $response = $response->cards;
-
-            $collection = ($this->discord->getCollectionClass())::for($this->class);
-
-            foreach ($response as $cardData) {
-                $card = $this->factory->create($this->class, array_merge($this->vars, (array) $cardData), true);
-                $card->created = true;
-                $this->items[$card->{$this->discrim}] = WeakReference::create($card);
-                $this->cache->set($card->{$this->discrim}, $card);
-                $collection->pushItem($card);
-            }
-
-            return $collection;
-        });
-    }
-
-    /**
-     * @param object $response
-     *
-     * @return PromiseInterface<static>
-     */
-    protected function cacheFreshen($response): PromiseInterface
-    {
-        foreach ($response as $value) {
-            foreach ($value as $value) {
-                $value = array_merge($this->vars, (array) $value);
-                $part = $this->factory->create($this->class, $value, true);
-                $items[$part->{$this->discrim}] = $part;
-            }
-        }
-
-        if (empty($items)) {
-            return resolve($this);
-        }
-
-        return $this->cache->setMultiple($items)->then(fn ($success) => $this);
-    }
-
-    /**
-     * Gets a part from the repository or Discord servers.
-     *
-     * @param string $id    The ID to search for.
-     * @param bool   $fresh Whether we should skip checking the cache.
-     *
-     * @throws \Exception
-     *
-     * @return PromiseInterface<Part>
-     */
-    public function fetch(string $id, bool $fresh = false): PromiseInterface
-    {
-        if (! $fresh) {
-            if (isset($this->items[$id])) {
-                $part = $this->items[$id];
-                if ($part instanceof WeakReference) {
-                    $part = $part->get();
+            if (is_array($value)) {
+                if (! array_is_list($value) || array_filter($value, fn ($item) => ! is_scalar($item))) {
+                    continue;
                 }
-
-                if ($part) {
-                    $this->items[$id] = $part;
-
-                    return resolve($part);
-                }
-            } else {
-                return $this->cache->get($id)->then(function ($part) use ($id) {
-                    if ($part === null) {
-                        return $this->fetch($id, true);
-                    }
-
-                    return $part;
-                });
+                $value = implode(',', $value);
+            } elseif (! is_scalar($value)) {
+                continue;
             }
+
+            $filters[$key] = $value;
         }
 
-        if (! isset($this->endpoints['get'])) {
-            return reject(new \Exception('You cannot get this part.'));
-        }
-
-        $part = $this->factory->part($this->class, [$this->discrim => $id]);
-        $endpoint = new Endpoint($this->endpoints['get']);
-        $endpoint->bindAssoc(array_merge($part->getRepositoryAttributes(), $this->vars));
-
-        return $this->mtg_http->get($endpoint)->then(function ($response) use ($part, $id) {
-            $response = $response->card;
-            $part->created = true;
-            $part->fill(array_merge($this->vars, (array) $response));
-
-            return $this->cache->set($id, $part)->then(fn ($success) => $part);
-        });
+        return $filters;
     }
 }
