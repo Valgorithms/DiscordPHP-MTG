@@ -194,7 +194,17 @@ class MTG extends MessageCommandClient
         $this->suggestions = new Suggestions($this->database);
         $this->searchCache = new SearchCache();
         $this->startedAt = time();
-        $this->client = $this->factory->part(Client::class, (array) $this->client);
+        // Swap in the client that carries the MTG repositories. DiscordPHP's own
+        // client part is already loading the application and may announce
+        // `application-init` before this one has it, so hand its application
+        // over — before the modules boot on the same event.
+        $bootstrap = $this->client;
+        $this->client = $this->factory->part(Client::class, []);
+        $this->once('application-init', function () use ($bootstrap): void {
+            if (($this->client->application->id ?? null) === null && ($application = $bootstrap->application ?? null)) {
+                $this->client->application = $application;
+            }
+        });
         $this->stats = Stats::new($this);
 
         if ($mtgjson['preload'] ?? true) {
